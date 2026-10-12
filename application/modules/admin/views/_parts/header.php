@@ -10,6 +10,7 @@
         <link href="<?= base_url('assets/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
         <link rel="stylesheet" href="<?= base_url('assets/bootstrap-select-1.12.1/bootstrap-select.min.css') ?>">
         <link href="<?= base_url('assets/css/custom-admin.css') ?>" rel="stylesheet">
+        <link href="<?= base_url('assets/buyora/buyora-auth.css') ?>" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
         <!--[if lt IE 9]>
@@ -17,7 +18,13 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body class="<?= $this->session->userdata('logged_in') ? '' : 'buyora-auth-page' ?>">
+        <?php if (!$this->session->userdata('logged_in')) { ?>
+            <header class="buyora-auth-topbar">
+                <span><i class="fa fa-shopping-bag" aria-hidden="true"></i> BuyOra Admin/Vendor Access</span>
+                <a href="#auth-help"><i class="fa fa-question-circle" aria-hidden="true"></i> Help</a>
+            </header>
+        <?php } ?>
         <div id="wrapper">
             <div id="content">
                 <?php if ($this->session->userdata('logged_in')) { ?>
@@ -107,6 +114,7 @@
                                         <li><a href="<?= base_url('admin/brands') ?>" <?= urldecode(uri_string()) == 'admin/brands' ? 'class="active"' : '' ?>><i class="fa fa-registered" aria-hidden="true"></i> <?= lang('brands') ?></a></li>
                                     <?php } ?>
                                     <li><a href="<?= base_url('admin/shopcategories') ?>" <?= urldecode(uri_string()) == 'admin/shopcategories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> <?= lang('shop_categories') ?></a></li>
+                                    <li><a href="<?= base_url('admin/homebanners') ?>" <?= strpos(urldecode(uri_string()), 'admin/homebanners') === 0 ? 'class="active"' : '' ?>><i class="fa fa-picture-o" aria-hidden="true"></i> Homepage banners</a></li>
                                     <li>
                                         <a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>>
                                             <i class="fa fa-money" aria-hidden="true"></i> <?= lang('orders') ?> 
@@ -169,4 +177,3 @@
                                 ?>
                                 <div>
                                 <?php } ?>
-

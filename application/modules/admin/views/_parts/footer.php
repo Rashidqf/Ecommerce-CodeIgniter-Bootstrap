@@ -4,6 +4,11 @@
 </div>
 <?php if ($this->session->userdata('logged_in')) { ?>
 <footer>Powered by <a href="https://github.com/kirilkirkov">Kiril Kirkov</a></footer>
+<?php } else { ?>
+<footer class="buyora-auth-footer">
+    <span>&copy; 2023 Buyora Admin &amp; Vendor Portal.</span>
+    <span id="auth-help" class="buyora-auth-footer-help">Authorized personnel only. Keep your login details secure.</span>
+</footer>
 <?php } ?>
 </div>
 <!-- Modal Calculator -->

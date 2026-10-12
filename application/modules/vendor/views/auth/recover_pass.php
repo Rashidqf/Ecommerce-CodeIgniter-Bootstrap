@@ -1,13 +1,20 @@
-<div class="auth-page">
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4"> 
-            <div class="vendor-login">
-                <h1><?= lang('user_forgotten_page') ?></h1><br>
-                <form method="POST" action="">
-                    <input type="text" name="u_email" placeholder="<?= lang('email') ?>"> 
-                    <input type="submit" name="login" class="login submit" value="<?= lang('send_me_new_pass') ?>">
-                </form>
+<main class="buyora-auth-stage">
+    <section class="buyora-auth-card" aria-labelledby="buyora-vendor-recover-title">
+        <img class="buyora-auth-brand" src="<?= base_url('assets/buyora/buyora-logo.png') ?>" alt="BUYORA">
+        <h1 id="buyora-vendor-recover-title"><?= htmlspecialchars(lang('user_forgotten_page'), ENT_QUOTES, 'UTF-8') ?></h1>
+        <form method="POST" action="">
+            <div class="buyora-auth-field">
+                <label for="vendor-recover-email"><?= htmlspecialchars(lang('email'), ENT_QUOTES, 'UTF-8') ?></label>
+                <div class="buyora-auth-input-wrap">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <input id="vendor-recover-email" type="email" name="u_email" placeholder="<?= htmlspecialchars(lang('email'), ENT_QUOTES, 'UTF-8') ?>" autocomplete="email" required>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+            <button type="submit" name="login" class="buyora-auth-submit"><?= htmlspecialchars(lang('send_me_new_pass'), ENT_QUOTES, 'UTF-8') ?></button>
+        </form>
+        <nav class="buyora-auth-links" aria-label="Account links">
+            <a href="<?= LANG_URL . '/vendor/login' ?>">Return to Vendor Login</a>
+        </nav>
+        <p class="buyora-auth-security"><i class="fa fa-lock" aria-hidden="true"></i>We'll send recovery instructions to your registered email.</p>
+    </section>
+</main>

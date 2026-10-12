@@ -3,6 +3,8 @@ Created on : Mar 21, 2016, 3:20:16 PM
 Author     : Kiril Kirkov
 Gitgub     : https://github.com/kirilkirkov
 */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
 html, body { height: 100%;}
 body { color:#6b6b6b; font-size: 13px; }
 #wrapper { min-height: 100%; position: relative;}
@@ -143,6 +145,216 @@ a.orders-referral {display:block; word-break:break-all;}
     .sidebar-menu {display: block !important;}
 }
 
+/* BUYORA colors for the existing admin dashboard; layout remains unchanged. */
+body:not(.buyora-auth-page) nav.navbar {
+    background-color: #06294d;
+    border-color: #052748;
+}
+
+body:not(.buyora-auth-page) nav.navbar a,
+body:not(.buyora-auth-page) nav.navbar .navbar-brand {
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) nav.navbar li a:hover,
+body:not(.buyora-auth-page) nav.navbar li a:focus,
+body:not(.buyora-auth-page) nav.navbar li a:active {
+    color: #ff7a32;
+}
+
+body:not(.buyora-auth-page) div.left-side {
+    background-color: #fff;
+    border-right-color: #e6eaf0;
+}
+
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li {
+    border-bottom-color: #e6eaf0;
+}
+
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li a {
+    color: #092b50;
+}
+
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li a:hover,
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li a.active {
+    background-color: #f1f5f8;
+    border-left-color: #ff5b00;
+    color: #06294d;
+}
+
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li.header {
+    color: #637184;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-primary,
+body:not(.buyora-auth-page) .home-page .panel-primary > .panel-heading,
+body:not(.buyora-auth-page) .home-page .panel-green,
+body:not(.buyora-auth-page) .home-page .panel-green > .panel-heading {
+    border-color: #06294d;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-primary > .panel-heading,
+body:not(.buyora-auth-page) .home-page .panel-green > .panel-heading {
+    background-color: #06294d;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-yellow,
+body:not(.buyora-auth-page) .home-page .panel-yellow > .panel-heading,
+body:not(.buyora-auth-page) .home-page .panel-red,
+body:not(.buyora-auth-page) .home-page .panel-red > .panel-heading {
+    border-color: #ff5b00;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-yellow > .panel-heading,
+body:not(.buyora-auth-page) .home-page .panel-red > .panel-heading {
+    background-color: #ff5b00;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-footer {
+    background-color: #f1f5f8;
+    color: #092b50;
+}
+
+body:not(.buyora-auth-page) .home-page a {
+    color: #092b50;
+}
+
+body:not(.buyora-auth-page) .home-page a:hover,
+body:not(.buyora-auth-page) .home-page a:focus {
+    color: #ff5b00;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-default,
+body:not(.buyora-auth-page) .home-page .panel-default > .panel-heading {
+    border-color: #e6eaf0;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-default > .panel-heading,
+body:not(.buyora-auth-page) .home-page .breadcrumb {
+    background-color: #f1f5f8;
+    color: #092b50;
+}
+
+body:not(.buyora-auth-page) .home-page .panel-default > .panel-heading .panel-title,
+body:not(.buyora-auth-page) h1 {
+    color: #06294d;
+}
+
+body:not(.buyora-auth-page) #wrapper > footer {
+    background-color: #06294d;
+    border-top-color: #052748;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) #wrapper > footer a {
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) {
+    color: #26384b;
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body:not(.buyora-auth-page) h1 {
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: none;
+}
+
+body:not(.buyora-auth-page) nav.navbar,
+body:not(.buyora-auth-page) div.left-side {
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    text-transform: none;
+}
+
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li.header {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li a {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body:not(.buyora-auth-page) nav.navbar a {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body:not(.buyora-auth-page) .navbar-nav li a i,
+body:not(.buyora-auth-page) div.left-side ul.sidebar-menu li a i {
+    width: 20px;
+    margin-right: 7px;
+    color: inherit;
+    text-align: center;
+    vertical-align: -1px;
+}
+
+body:not(.buyora-auth-page) input.form-control,
+body:not(.buyora-auth-page) select.form-control,
+body:not(.buyora-auth-page) textarea.form-control,
+body:not(.buyora-auth-page) .table,
+body:not(.buyora-auth-page) .btn {
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+}
+
+body:not(.buyora-auth-page) .table {
+    color: #26384b;
+    font-size: 13px;
+}
+
+body:not(.buyora-auth-page) .table thead th {
+    color: #06294d;
+    font-weight: 700;
+}
+
+body:not(.buyora-auth-page) .btn-primary,
+body:not(.buyora-auth-page) .btn-info {
+    border-color: #e65300;
+    background-color: #ff5b00;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) .btn-primary:hover,
+body:not(.buyora-auth-page) .btn-primary:focus,
+body:not(.buyora-auth-page) .btn-info:hover,
+body:not(.buyora-auth-page) .btn-info:focus {
+    border-color: #c94700;
+    background-color: #e65300;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) .btn-default {
+    border-color: #d4dce5;
+    color: #092b50;
+}
+
+body:not(.buyora-auth-page) .btn-default:hover,
+body:not(.buyora-auth-page) .btn-default:focus {
+    border-color: #aebdca;
+    background-color: #f1f5f8;
+    color: #06294d;
+}
+
+body:not(.buyora-auth-page) .panel-default > .panel-heading,
+body:not(.buyora-auth-page) .breadcrumb {
+    color: #092b50;
+}
+
+body:not(.buyora-auth-page) .panel-title {
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-weight: 700;
+}
+
 @media screen and (max-width: 767px) {
     .left-side {position:relative !important; top:0 !important; margin-bottom: 20px;}
     nav.navbar {margin-bottom:0;}
@@ -151,4 +363,3 @@ a.orders-referral {display:block; word-break:break-all;}
     .show-menu {display: block; padding:0 10px !important;}
     .sidebar-menu {display: none;}
 }
-

@@ -31,15 +31,68 @@ class ShopCategories extends ADMIN_Controller
         $data['languages'] = $this->Languages_model->getLanguages();
         $rowscount = $this->Categories_model->categoriesCount();
         $data['links_pagination'] = pagination('admin/shopcategories', $rowscount, $this->num_rows, 3);
+        if (isset($_POST['update_category_image'])) {
+            $categoryId = $this->input->post('category_id');
+            if (!ctype_digit((string) $categoryId) || (int) $categoryId < 1 || !$this->Categories_model->categoryIdExists($categoryId)) {
+                show_error('A valid category must be selected.', 400);
+            }
+            $image = $this->uploadCategoryImage();
+            if ($image !== false) {
+                if (!$this->Categories_model->updateCategoryImage($categoryId, $image)) {
+                    show_error('The category image could not be saved.');
+                }
+                $this->session->set_flashdata('result_add', 'Category image updated.');
+                $this->saveHistory('Update category image id - ' . (int) $categoryId);
+            }
+            redirect('admin/shopcategories');
+        }
         if (isset($_GET['delete'])) {
+            if (!ctype_digit((string) $_GET['delete']) || (int) $_GET['delete'] < 1
+                || !$this->Categories_model->categoryIdExists($_GET['delete'])) {
+                show_404();
+            }
             $this->saveHistory('Delete a shop categorie');
-            $this->Categories_model->deleteShopCategorie($_GET['delete']);
+            if (!$this->Categories_model->deleteShopCategorie($_GET['delete'])) {
+                show_error('The category could not be deleted.');
+            }
             $this->session->set_flashdata('result_delete', 'Shop Categorie is deleted!');
             redirect('admin/shopcategories');
         }
         if (isset($_POST['submit'])) {
-            $this->Categories_model->setShopCategorie($_POST);
-            $this->session->set_flashdata('result_add', 'Shop categorie is added!');
+            $translations = $this->input->post('translations');
+            $names = $this->input->post('categorie_name');
+            $englishName = '';
+            if (is_array($translations) && is_array($names)) {
+                foreach ($translations as $index => $language) {
+                    if ($language === MY_DEFAULT_LANGUAGE_ABBR && isset($names[$index])) {
+                        $englishName = trim($names[$index]);
+                        break;
+                    }
+                }
+            }
+            if ($englishName === '') {
+                $this->session->set_flashdata('result_add', 'Enter a category name in the default language.');
+                redirect('admin/shopcategories');
+            }
+            if ($this->Categories_model->categoryExists($englishName)) {
+                $this->session->set_flashdata('result_add', 'A category with that name already exists.');
+                redirect('admin/shopcategories');
+            }
+            $image = '';
+            if (!empty($_FILES['category_image']['name'])) {
+                $image = $this->uploadCategoryImage();
+                if ($image === false) {
+                    redirect('admin/shopcategories');
+                }
+            }
+            $parentId = $this->input->post('sub_for');
+            if (!ctype_digit((string) $parentId) || ((int) $parentId > 0 && !$this->Categories_model->categoryIdExists($parentId))) {
+                $this->session->set_flashdata('result_add', 'Select an available parent category.');
+                redirect('admin/shopcategories');
+            }
+            $_POST['sub_for'] = (int) $parentId;
+            $this->Categories_model->setShopCategorie($_POST, $image);
+            $this->session->set_flashdata('result_add', 'Shop category added.');
             redirect('admin/shopcategories');
         }
         if (isset($_POST['editSubId'])) {
@@ -58,6 +111,31 @@ class ShopCategories extends ADMIN_Controller
         $this->saveHistory('Go to shop categories');
     }
 
+    private function uploadCategoryImage()
+    {
+        $uploadPath = './attachments/shop_images/';
+        if (!is_dir($uploadPath) && !mkdir($uploadPath, 0755, true) && !is_dir($uploadPath)) {
+            $this->session->set_flashdata('result_add', 'The category image directory is unavailable.');
+            return false;
+        }
+
+        $config = array(
+            'upload_path' => $uploadPath,
+            'allowed_types' => 'jpg|jpeg|png|webp',
+            'max_size' => 5120,
+            'encrypt_name' => true,
+            'file_ext_tolower' => true
+        );
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('category_image')) {
+            $this->session->set_flashdata('result_add', trim(strip_tags($this->upload->display_errors())));
+            return false;
+        }
+
+        return $this->upload->data('file_name');
+    }
+
     /*
      * Called from ajax
      */
@@ -65,8 +143,23 @@ class ShopCategories extends ADMIN_Controller
     public function editShopCategorie()
     {
         $this->login_check();
-        $result = $this->Categories_model->editShopCategorie($_POST);
-        $this->saveHistory('Edit shop categorie to ' . $_POST['name']);
+        $categoryId = $this->input->post('for_id');
+        $language = $this->input->post('abbr');
+        $name = trim((string) $this->input->post('name', TRUE));
+        if (!ctype_digit((string) $categoryId) || (int) $categoryId < 1
+            || !$this->Categories_model->categoryIdExists($categoryId)
+            || !is_string($language) || $language === ''
+            || $name === '' || strlen($name) > 255) {
+            show_error('Enter a valid category and name.', 400);
+        }
+        if (!$this->Categories_model->editShopCategorie(array(
+            'for_id' => (int) $categoryId,
+            'abbr' => $language,
+            'name' => $name
+        ))) {
+            show_error('A category with that name already exists in this language.', 409);
+        }
+        $this->saveHistory('Edit shop categorie to ' . $name);
     }
 
     /*

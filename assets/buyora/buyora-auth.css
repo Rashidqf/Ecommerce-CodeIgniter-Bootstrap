@@ -1,0 +1,308 @@
+body.buyora-auth-page {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    background: #eef0f1;
+    color: #172b40;
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 14px;
+}
+
+.buyora-auth-page *,
+.buyora-auth-page *::before,
+.buyora-auth-page *::after {
+    box-sizing: border-box;
+}
+
+.buyora-auth-page #wrapper,
+.buyora-auth-page #content {
+    display: flex;
+    min-height: 0;
+    flex: 1 0 auto;
+    flex-direction: column;
+    padding: 0;
+}
+
+.buyora-auth-page .buyora-auth-topbar,
+.buyora-auth-page .buyora-auth-footer {
+    z-index: 1;
+    display: flex;
+    min-height: 28px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    background: #06294d;
+    color: #fff;
+    font-size: 12px;
+}
+
+.buyora-auth-page .buyora-auth-topbar {
+    box-shadow: 0 2px 8px rgba(5, 26, 47, 0.2);
+}
+
+.buyora-auth-page .buyora-auth-topbar a,
+.buyora-auth-page .buyora-auth-footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.buyora-auth-page .buyora-auth-topbar a:hover,
+.buyora-auth-page .buyora-auth-footer a:hover {
+    color: #ff7a32;
+}
+
+.buyora-auth-page .buyora-auth-stage,
+.buyora-auth-page .container-fluid,
+.buyora-auth-page .container-fluid > .row,
+.buyora-auth-page .container-fluid > .row > div {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
+
+.buyora-auth-page .container-fluid {
+    width: 100%;
+    padding: 0;
+}
+
+.buyora-auth-page .container-fluid > .row {
+    margin: 0;
+}
+
+.buyora-auth-page .container-fluid > .row > div {
+    width: 100%;
+    padding: 0;
+}
+
+.buyora-auth-page .buyora-auth-stage {
+    position: relative;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 30px 18px;
+    background:
+        radial-gradient(ellipse at 50% 48%, rgba(255, 255, 255, 0.62) 0, rgba(238, 240, 241, 0) 60%),
+        #eef0f1;
+}
+
+.buyora-auth-page .buyora-auth-card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 440px);
+    padding: 24px 34px 20px;
+    border: 1px solid rgba(6, 41, 77, 0.08);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 14px 36px rgba(20, 37, 52, 0.15);
+}
+
+.buyora-auth-page .buyora-auth-brand {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 0 auto 10px;
+}
+
+.buyora-auth-page .buyora-auth-card h1 {
+    margin: 4px 0 18px;
+    color: #18212b;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+    text-transform: none;
+}
+
+.buyora-auth-page .buyora-auth-field {
+    margin: 0 0 12px;
+}
+
+.buyora-auth-page .buyora-auth-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #222;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.buyora-auth-page .buyora-auth-input-wrap {
+    position: relative;
+}
+
+.buyora-auth-page .buyora-auth-input-wrap > .fa {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    width: 16px;
+    color: #637184;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.buyora-auth-page .buyora-auth-field input[type="text"],
+.buyora-auth-page .buyora-auth-field input[type="email"],
+.buyora-auth-page .buyora-auth-field input[type="password"] {
+    display: block;
+    width: 100%;
+    height: 42px;
+    margin: 0;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid #cbd2d9;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: none;
+    color: #1d2935;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.buyora-auth-page .buyora-auth-field input:focus {
+    border-color: #54799d;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(6, 41, 77, 0.1);
+}
+
+.buyora-auth-page .buyora-auth-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 12px;
+    color: #25313d;
+    font-size: 13px;
+}
+
+.buyora-auth-page .buyora-auth-options label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-weight: 400;
+}
+
+.buyora-auth-page .buyora-auth-options input {
+    margin: 0;
+}
+
+.buyora-auth-page .buyora-auth-card a {
+    color: #06294d;
+    text-decoration: none;
+}
+
+.buyora-auth-page .buyora-auth-card a:hover {
+    color: #ff5b00;
+    text-decoration: underline;
+}
+
+.buyora-auth-page .buyora-auth-submit {
+    display: block;
+    width: 100%;
+    min-height: 42px;
+    margin: 4px 0 12px;
+    border: 0;
+    border-radius: 5px;
+    background: #f05a00;
+    box-shadow: 0 2px 4px rgba(140, 55, 0, 0.18);
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.buyora-auth-page .buyora-auth-submit:hover {
+    background: #d94f00;
+}
+
+.buyora-auth-page .buyora-auth-submit:active {
+    transform: translateY(1px);
+}
+
+.buyora-auth-page .buyora-auth-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px 14px;
+    margin: 8px 0 10px;
+    text-align: center;
+}
+
+.buyora-auth-page .buyora-auth-security {
+    margin: 10px 0 0;
+    color: #36414c;
+    font-size: 12px;
+    text-align: center;
+}
+
+.buyora-auth-page .buyora-auth-security .fa {
+    margin-right: 4px;
+}
+
+.buyora-auth-page .buyora-auth-alert {
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    border: 1px solid #ebc5c5;
+    border-radius: 4px;
+    background: #fff3f3;
+    color: #8a2020;
+    font-size: 13px;
+}
+
+.buyora-auth-page .buyora-auth-alert ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.buyora-auth-page #output {
+    position: static;
+    width: auto;
+    color: inherit;
+}
+
+.buyora-auth-page .buyora-auth-footer {
+    min-height: 28px;
+    margin-top: auto;
+    font-size: 11px;
+}
+
+.buyora-auth-page .buyora-auth-footer-help {
+    max-width: 60%;
+    text-align: right;
+}
+
+@media (max-width: 480px) {
+    .buyora-auth-page .buyora-auth-stage {
+        padding: 20px 14px;
+    }
+
+    .buyora-auth-page .buyora-auth-card {
+        padding: 22px 20px 18px;
+    }
+
+    .buyora-auth-page .buyora-auth-brand {
+        width: 132px;
+    }
+
+    .buyora-auth-page .buyora-auth-card h1 {
+        font-size: 17px;
+    }
+
+    .buyora-auth-page .buyora-auth-topbar,
+    .buyora-auth-page .buyora-auth-footer {
+        padding-right: 10px;
+        padding-left: 10px;
+        font-size: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .buyora-auth-page *,
+    .buyora-auth-page *::before,
+    .buyora-auth-page *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

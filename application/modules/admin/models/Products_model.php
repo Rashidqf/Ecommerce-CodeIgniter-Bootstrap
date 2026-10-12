@@ -105,8 +105,12 @@ class Products_model extends CI_Model
         return $result;
     }
 
-    public function setProduct($post, $id = 0)
+    public function setProduct($post, $id = 0, $allowDuplicateTitle = false)
     {
+        if (!isset($post['position']) || trim((string) $post['position']) === '') {
+            $post['position'] = 0;
+        }
+        $this->validateProductInput($post, $id, $allowDuplicateTitle);
         if (!isset($post['brand_id'])) {
             $post['brand_id'] = null;
         }
@@ -176,6 +180,77 @@ class Products_model extends CI_Model
             show_error(lang('database_error'));
         } else {
             $this->db->trans_commit();
+        }
+    }
+
+    private function validateProductInput($post, $id, $allowDuplicateTitle)
+    {
+        $quantity = isset($post['quantity']) ? trim((string) $post['quantity']) : '';
+        $categoryId = isset($post['shop_categorie']) ? trim((string) $post['shop_categorie']) : '';
+        if (!ctype_digit($quantity) || (int) $quantity > 2147483647
+            || !ctype_digit($categoryId) || (int) $categoryId < 1
+            || !$this->db->where('id', (int) $categoryId)->count_all_results('shop_categories')) {
+            show_error('Choose a valid category and enter a non-negative whole-number stock quantity.', 400);
+        }
+        if (!isset($post['position']) || !ctype_digit(trim((string) $post['position']))
+            || (float) $post['position'] > 4294967295
+            || !isset($post['in_slider']) || !in_array((string) $post['in_slider'], array('0', '1'), true)) {
+            show_error('Enter a valid display position and featured setting.', 400);
+        }
+
+        if (!isset($post['translations'], $post['price'], $post['old_price'], $post['title'])
+            || !is_array($post['translations']) || !is_array($post['price'])
+            || !is_array($post['old_price']) || !is_array($post['title'])) {
+            show_error('Product names and prices are required for each language.', 400);
+        }
+
+        $defaultLanguageIsValid = false;
+        foreach ($post['translations'] as $index => $language) {
+            $title = isset($post['title'][$index]) ? trim((string) $post['title'][$index]) : '';
+            $price = isset($post['price'][$index]) ? str_replace(',', '.', trim((string) $post['price'][$index])) : '';
+            $oldPrice = isset($post['old_price'][$index]) ? str_replace(',', '.', trim((string) $post['old_price'][$index])) : '';
+            if ($language !== MY_DEFAULT_LANGUAGE_ABBR && $title === '' && $price === '' && $oldPrice === '') {
+                continue;
+            }
+            $validPrice = preg_match('/^(?:\d+(?:\.\d*)?|\.\d+)$/', $price) === 1;
+            $validOldPrice = $oldPrice === '' || preg_match('/^(?:\d+(?:\.\d*)?|\.\d+)$/', $oldPrice) === 1;
+            if ($title === '' || !$validPrice || strlen($price) > 20) {
+                show_error('Enter a product name and a valid non-negative price for every language.', 400);
+            }
+            if (!$validOldPrice || ($oldPrice !== '' && (float) $oldPrice <= (float) $price)
+                || strlen($oldPrice) > 20) {
+                show_error('A previous price must be greater than the current price.', 400);
+            }
+            if ($language === MY_DEFAULT_LANGUAGE_ABBR) {
+                $defaultLanguageIsValid = true;
+            }
+        }
+        if (!$defaultLanguageIsValid) {
+            show_error('The default-language product name and price are required.', 400);
+        }
+
+        $defaultTitle = '';
+        foreach ($post['translations'] as $index => $language) {
+            if ($language === MY_DEFAULT_LANGUAGE_ABBR && isset($post['title'][$index])) {
+                $defaultTitle = trim((string) $post['title'][$index]);
+                break;
+            }
+        }
+        if (!$allowDuplicateTitle) {
+            $this->db->join('products_translations', 'products_translations.for_id = products.id', 'inner');
+            $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
+            $this->db->where('products_translations.title', $defaultTitle);
+            $this->db->where('products.shop_categorie', (int) $categoryId);
+            if ($id > 0) {
+                $this->db->where('products.id !=', (int) $id);
+            }
+            if ($this->db->count_all_results('products') > 0) {
+                show_error('A product with this name already exists in the selected category.', 400);
+            }
+        }
+
+        if (isset($post['visibility']) && !in_array((string) $post['visibility'], array('0', '1', '2'), true)) {
+            show_error('Choose a valid product publication status.', 400);
         }
     }
 

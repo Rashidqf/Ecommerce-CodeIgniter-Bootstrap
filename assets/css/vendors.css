@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
 html, body { height: 100%; color:#131313; background-color: #eef5f9;}
 
 #wrapper { min-height : 100%; position : relative; }
@@ -75,3 +77,136 @@ table.table td, table.table th {padding: 20px !important;}
 
 .locale-container {display: none;}
 footer {width:100%; position:absolute;bottom:0;left:0; }
+
+body:not(.buyora-auth-page) {
+    color: #26384b;
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body:not(.buyora-auth-page) .navbar-blue {
+    background-color: #06294d;
+    border-color: #052748;
+}
+
+body:not(.buyora-auth-page) .navbar-blue li a {
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body:not(.buyora-auth-page) .navbar-blue li a:hover,
+body:not(.buyora-auth-page) .navbar-blue li a:focus {
+    color: #ff7a32;
+}
+
+body:not(.buyora-auth-page) .left-side {
+    border-right: 1px solid #e6eaf0;
+}
+
+body:not(.buyora-auth-page) .left-side ul li a {
+    color: #092b50;
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body:not(.buyora-auth-page) .left-side ul li a:hover {
+    color: #ff5b00;
+}
+
+body:not(.buyora-auth-page) .left-side ul li.active a {
+    background-color: #06294d;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) .left-side ul li a i {
+    color: inherit;
+    text-align: center;
+}
+
+body:not(.buyora-auth-page) .page-titles h2 {
+    color: #06294d;
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-weight: 700;
+    text-transform: none;
+}
+
+body:not(.buyora-auth-page) .content {
+    color: #26384b;
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+}
+
+body:not(.buyora-auth-page) .content h1,
+body:not(.buyora-auth-page) .content h2,
+body:not(.buyora-auth-page) .content h3,
+body:not(.buyora-auth-page) .content h4,
+body:not(.buyora-auth-page) .content label {
+    color: #092b50;
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+}
+
+body:not(.buyora-auth-page) .btn-green,
+body:not(.buyora-auth-page) .left-side ul li.active .btn-green {
+    border-color: #e65300;
+    background-color: #ff5b00;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) .btn-green:hover,
+body:not(.buyora-auth-page) .btn-green:focus {
+    border-color: #c94700;
+    background-color: #e65300;
+    color: #fff;
+}
+
+body:not(.buyora-auth-page) .content .btn-default {
+    border-color: #d4dce5;
+    color: #092b50;
+}
+
+body:not(.buyora-auth-page) .content .btn-default:hover,
+body:not(.buyora-auth-page) .content .btn-default:focus {
+    border-color: #aebdca;
+    background-color: #f1f5f8;
+}
+
+body:not(.buyora-auth-page) .content table.table {
+    color: #26384b;
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+}
+
+body:not(.buyora-auth-page) .content table.table th {
+    color: #06294d;
+    font-weight: 700;
+}
+
+body:not(.buyora-auth-page) .content .blue-grey.lighten-4 {
+    background-color: #f1f5f8;
+}
+
+body:not(.buyora-auth-page) .product-list .product-body h4,
+body:not(.buyora-auth-page) .product-list .product-body h4 a {
+    color: #092b50;
+    font-weight: 600;
+}
+
+body:not(.buyora-auth-page) .orders-page .tr-more .product .name {
+    color: #26384b;
+    font-size: 13px;
+}
+
+body:not(.buyora-auth-page) .mdi,
+body:not(.buyora-auth-page) .fa,
+body:not(.buyora-auth-page) .glyphicon {
+    vertical-align: middle;
+}
+
+body:not(.buyora-auth-page) .right-side input.form-control,
+body:not(.buyora-auth-page) .right-side select.form-control,
+body:not(.buyora-auth-page) .right-side textarea.form-control,
+body:not(.buyora-auth-page) .right-side .btn {
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+}

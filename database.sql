@@ -179,8 +179,22 @@ CREATE TABLE IF NOT EXISTS `shop_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sub_for` int(11) NOT NULL,
   `position` int(10) UNSIGNED NOT NULL,
+  `image` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `home_banners` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `placement` enum('hero','promo') NOT NULL DEFAULT 'promo',
+  `image` varchar(255) NOT NULL,
+  `mobile_image` varchar(255) DEFAULT NULL,
+  `alt_text` varchar(255) NOT NULL DEFAULT '',
+  `target_url` varchar(500) NOT NULL DEFAULT '#featured',
+  `position` int(10) unsigned NOT NULL DEFAULT '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `placement_visible_position` (`placement`,`visible`,`position`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS `subscribed` (

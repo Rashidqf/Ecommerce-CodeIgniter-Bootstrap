@@ -22,21 +22,33 @@ class Home extends MY_Controller
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $all_categories = $this->Public_model->getShopCategories();
+        $head['buyora_categories'] = $all_categories;
         $data['home_categories'] = $this->getHomeCategories($all_categories);
         $data['all_categories'] = $all_categories;
         $data['countQuantities'] = $this->Public_model->getCountQuantities();
         $data['bestSellers'] = $this->Public_model->getbestSellers();
         $data['newProducts'] = $this->Public_model->getNewProducts();
-        $data['sliderProducts'] = $this->Public_model->getSliderProducts();
+        $data['sliderProducts'] = $this->Public_model->getSliderProducts(6);
+        $data['dealProducts'] = $this->Public_model->getHomeDealProducts();
+        $this->load->model('admin/Home_banners_model');
+        $data['homeBanners'] = $this->Home_banners_model->getVisibleBanners();
         $data['lastBlogs'] = $this->Public_model->getLastBlogs();
-        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET);
-        $rowscount = $this->Public_model->productsCount($_GET);
+        $catalogFilters = array('search_in_title', 'search_in_body', 'category', 'brand_id', 'in_stock', 'price_from', 'price_to', 'quantity_more', 'added_after', 'added_before', 'order_new', 'order_price', 'order_procurement');
+        $includeFeatured = false;
+        foreach ($catalogFilters as $filterName) {
+            if (isset($_GET[$filterName]) && is_scalar($_GET[$filterName]) && trim((string) $_GET[$filterName]) !== '') {
+                $includeFeatured = true;
+                break;
+            }
+        }
+        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET, false, $includeFeatured);
+        $rowscount = $this->Public_model->productsCount($_GET, $includeFeatured);
         $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
         $data['showOutOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
         $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
         $data['brands'] = $this->Brands_model->getBrands();
         $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
-        $this->render('home', $head, $data);
+        $this->render('buyora-home', $head, $data);
     }
 
     /*
@@ -52,6 +64,7 @@ class Home extends MY_Controller
         $head['title'] = @$arrSeo['title'];
         $head['description'] = @$arrSeo['description'];
         $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
+        $head['vendor_url'] = LANG_URL . '/shop';
         $all_categories = $this->Public_model->getShopCategories();
         $data['home_categories'] = $this->getHomeCategories($all_categories);
         $data['countQuantities'] = $this->Public_model->getCountQuantities();
@@ -60,10 +73,10 @@ class Home extends MY_Controller
         $data['brands'] = $this->Brands_model->getBrands();
         $data['showOutOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
         $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
-        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET);
-        $rowscount = $this->Public_model->productsCount($_GET);
-        $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
-        $this->render('shop', $head, $data);
+        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET, false, true);
+        $rowscount = $this->Public_model->productsCount($_GET, true);
+        $data['links_pagination'] = pagination('shop', $rowscount, $this->num_rows);
+        $this->render('buyora-shop', $head, $data);
     }
 
     private function getHomeCategories($categories)
@@ -135,10 +148,14 @@ class Home extends MY_Controller
         $data = array();
         $head = array();
         $data['product'] = $this->Public_model->getOneProduct($id);
-        $data['sameCagegoryProducts'] = $this->Public_model->sameCagegoryProducts($data['product']['shop_categorie'], $id);
-        if ($data['product'] === null) {
+        if (empty($data['product'])) {
             show_404();
         }
+        $data['sameCagegoryProducts'] = $this->Public_model->sameCagegoryProducts(
+            $data['product']['shop_categorie'],
+            $id,
+            (int) $data['product']['vendor_id'] > 0 ? (int) $data['product']['vendor_id'] : false
+        );
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
         $head['title'] = $data['product']['title'];
@@ -150,7 +167,7 @@ class Home extends MY_Controller
         if(isset($data['product']['image'])) {
             $head['image'] = base_url('/attachments/shop_images/' . $data['product']['image']);
         }
-        $this->render('view_product', $head, $data);
+        $this->render('buyora-product', $head, $data);
     }
 
     public function confirmLink($md5)

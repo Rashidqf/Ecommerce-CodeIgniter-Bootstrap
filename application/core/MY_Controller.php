@@ -27,6 +27,8 @@ class MY_Controller extends MX_Controller
         $head['cartItems'] = $this->shoppingcart->getCartItems();
         $head['sumOfItems'] = $this->shoppingcart->sumValues;
         $vars = $this->loadVars();
+        $vars['cartItems'] = $head['cartItems'];
+        $vars['sumOfItems'] = $head['sumOfItems'];
         $this->load->vars($vars);
         $all_categories = $this->Public_model->getShopCategories();
 
@@ -46,6 +48,23 @@ class MY_Controller extends MX_Controller
         }
 
         $head['nav_categories'] = $tree = buildTree1($all_categories);
+        $buyoraViews = array(
+            'buyora-home',
+            'buyora-product',
+            'buyora-cart',
+            'buyora-checkout',
+            'buyora-shop',
+            'buyora-vendor',
+            'buyora-product'
+        );
+        if (in_array($view, $buyoraViews, true)) {
+            $head['buyora_categories'] = $all_categories;
+            $this->load->view('templates/buyora/_parts/header', $head);
+            $this->load->view('templates/buyora/' . $view, $data);
+            $this->load->view('templates/buyora/_parts/footer', $footer);
+            return;
+        }
+
         $this->load->view($this->template . '_parts/header', $head);
         $this->load->view($this->template . $view, $data);
         $this->load->view($this->template . '_parts/footer', $footer);

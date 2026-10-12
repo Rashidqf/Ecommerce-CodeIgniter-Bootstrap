@@ -7,16 +7,19 @@ if (isset($_SERVER['SERVER_PORT']))
 	| Base URL
 	|--------------------------------------------------------------------------
 	*/
+	$serverProtocol = $_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http';
+	$serverName = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
+	$serverPort = in_array((int) $_SERVER['SERVER_PORT'], array(80, 443), TRUE) ? '' : ':' . (int) $_SERVER['SERVER_PORT'];
+	$serverBasePath = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
 	define('BASE_URL',
-		(!empty($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']==443?'https':'http':FALSE).
-		"://".(!empty($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:FALSE).str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
+		$serverProtocol . '://' . $serverName . $serverPort . $serverBasePath);
 
 	/*
 	|--------------------------------------------------------------------------
 	| Current URL
 	|--------------------------------------------------------------------------
 	*/
-	define('CURRENT_URL', (!empty($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']==443?'https':'http':FALSE)."://".(!empty($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:FALSE).str_replace('//', '/', $_SERVER['REQUEST_URI']));
+	define('CURRENT_URL', $serverProtocol . '://' . $serverName . $serverPort . str_replace('//', '/', $_SERVER['REQUEST_URI']));
 }
 
 defined('BASEPATH') OR exit('No direct script access allowed');

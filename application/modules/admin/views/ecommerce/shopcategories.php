@@ -30,6 +30,7 @@
                     <tr>
                         <th>#ID</th>
                         <th>Name</th>
+                        <th>Image</th>
                         <th>Subcategory for</th>
                         <th>Position</th>
                         <th class="text-center">Action</th>
@@ -54,6 +55,16 @@
                     <tr>
                         <td><?= $key_cat ?></td>
                         <td><?= $catName ?></td>
+                        <td>
+                            <?php if (!empty($shop_categorie['image']) && is_file('attachments/shop_images/' . basename($shop_categorie['image']))) { ?>
+                                <img src="<?= base_url('attachments/shop_images/' . rawurlencode(basename($shop_categorie['image']))) ?>" alt="" style="max-width:70px;max-height:45px;">
+                            <?php } ?>
+                            <form action="<?= base_url('admin/shopcategories') ?>" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="category_id" value="<?= (int) $key_cat ?>">
+                                <input type="file" name="category_image" accept=".jpg,.jpeg,.png,.webp" required>
+                                <button type="submit" name="update_category_image" value="1" class="btn btn-default btn-xs">Upload / Change</button>
+                            </form>
+                        </td>
                         <td> 
                             <a href="javascript:void(0);" class="editCategorieSub" data-sub-for-id="<?= $key_cat ?>">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -89,7 +100,7 @@
     <div class="modal fade" id="add_edit_articles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">Add Category</h4>
@@ -100,9 +111,14 @@
                         <?php } foreach ($languages as $language) { ?>
                             <div class="form-group">
                                 <label>Name (<?= htmlspecialchars($language->name !== null ? $language->name : '') ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-                                <input type="text" name="categorie_name[]" class="form-control">
+                                <input type="text" name="categorie_name[]" class="form-control" <?= $language->abbr === MY_DEFAULT_LANGUAGE_ABBR ? 'required' : '' ?>>
                             </div>
                         <?php } ?>
+                        <div class="form-group">
+                            <label>Category image</label>
+                            <input type="file" name="category_image" accept=".jpg,.jpeg,.png,.webp">
+                            <p class="help-block">Optional. JPG, PNG, or WebP, up to 5 MB.</p>
+                        </div>
                         <div class="form-group">
                             <label>Parent <sup>this categorie will be subcategorie of parent</sup>:</label>
                             <select class="form-control" name="sub_for">

@@ -60,6 +60,15 @@ Notes:
 - The installer writes credentials into <code>application/config/database.php</code>, so the file must be writable by PHP.
 - After successful install, a lock file <code>application/config/installed.lock</code> is created (delete it if you need to re-run the installer).
 
+## BUYORA homepage catalog
+For an existing installation, apply `database/migrations/20261010_buyora_dynamic_homepage.sql` once before using the BUYORA category-image or banner tools. The change adds the category image field and homepage banner table without replacing existing catalog records. Fresh installations already receive these fields from `database.sql`.
+
+To populate an empty store with the sample BUYORA catalog, run `php database/seeds/buyora_sample.php` from the project root after configuring the database. The seeder can be run repeatedly; it keeps matching records and does not replace existing product or category details. It adds nine categories, six products, and three homepage banners using the supplied BUYORA assets.
+
+Administrators manage categories and their images at `/admin/shopcategories`, products and their prices, stock, visibility, and featured status at `/admin/publish`, and hero/promotional banners at `/admin/homebanners`.
+
+The BUYORA theme also covers product details, the product catalogue, the shopping cart, and checkout. When Multi-Vendor Support is enabled in Administration, vendor product links open a BUYORA shop page filtered to that vendor; only approved vendors and their visible products are shown. Product details link to the corresponding vendor shop.
+
 ## Available Languages
 - ![CodeIgniter Ecommerce English](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/en.jpg "English Translation CodeIgniter") English
 - ![CodeIgniter Ecommerce Greece](https://raw.githubusercontent.com/kirilkirkov/Shopping-Cart-Solution-CodeIgniter/master/attachments/lang_flags/gr.png "Greece Translation CodeIgniter") Greece
