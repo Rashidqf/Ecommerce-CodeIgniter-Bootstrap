@@ -81,7 +81,10 @@ class MY_Controller extends MX_Controller
             'checkout_parts/payment_success_bank',
             'checkout_parts/paypal_payment',
             'checkout_parts/paypal_success',
-            'checkout_parts/paypal_cancel'
+            'checkout_parts/paypal_cancel',
+            'checkout_parts/safepay_success',
+            'checkout_parts/safepay_pending',
+            'checkout_parts/safepay_cancel'
         );
         if (in_array($view, $buyoraViews, true)) {
             $head['buyora_categories'] = $all_categories;

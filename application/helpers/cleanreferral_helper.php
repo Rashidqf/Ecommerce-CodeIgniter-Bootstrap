@@ -11,9 +11,16 @@ if (!defined('BASEPATH')) {
 
 function cleanReferral($url)
 {
-    $urlClean = implode('.', array_slice(explode('.', parse_url($url, PHP_URL_HOST)), -2));
-    if ($urlClean == null) {
-        return $url;
+    if ($url === null || $url === '') {
+        return '';
+    }
+    $host = parse_url((string) $url, PHP_URL_HOST);
+    if ($host === null || $host === false || $host === '') {
+        return (string) $url;
+    }
+    $urlClean = implode('.', array_slice(explode('.', $host), -2));
+    if ($urlClean == null || $urlClean === '') {
+        return (string) $url;
     }
     return $urlClean;
 }

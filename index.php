@@ -49,6 +49,29 @@ if (!ob_get_level()) {
 	ob_start();
 }
 
+$buyoraEnvFile = __DIR__ . DIRECTORY_SEPARATOR . '.env';
+if (is_file($buyoraEnvFile)) {
+	$buyoraEnvLines = file($buyoraEnvFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+	if (is_array($buyoraEnvLines)) {
+		foreach ($buyoraEnvLines as $buyoraEnvLine) {
+			$buyoraEnvLine = trim($buyoraEnvLine);
+			if ($buyoraEnvLine === '' || $buyoraEnvLine[0] === '#' || strpos($buyoraEnvLine, '=') === false) {
+				continue;
+			}
+			list($buyoraEnvKey, $buyoraEnvValue) = explode('=', $buyoraEnvLine, 2);
+			$buyoraEnvKey = trim($buyoraEnvKey);
+			$buyoraEnvValue = trim($buyoraEnvValue);
+			if (strlen($buyoraEnvValue) >= 2 && $buyoraEnvValue[0] === '"' && substr($buyoraEnvValue, -1) === '"') {
+				$buyoraEnvValue = substr($buyoraEnvValue, 1, -1);
+			}
+			if ($buyoraEnvKey !== '' && getenv($buyoraEnvKey) === false) {
+				putenv($buyoraEnvKey . '=' . $buyoraEnvValue);
+				$_ENV[$buyoraEnvKey] = $buyoraEnvValue;
+			}
+		}
+	}
+}
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

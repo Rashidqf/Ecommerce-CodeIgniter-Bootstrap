@@ -143,8 +143,17 @@ class Products_model extends CI_Model
         return $this->db->count_all_results('products');
     }
 
-    public function deleteProduct($id)
+    public function deleteProduct($id, $vendor_id)
     {
+        $id = (int) $id;
+        $vendor_id = (int) $vendor_id;
+        if ($id < 1 || $vendor_id < 1) {
+            return false;
+        }
+        $owned = $this->db->where('id', $id)->where('vendor_id', $vendor_id)->count_all_results('products');
+        if ($owned < 1) {
+            return false;
+        }
         $this->db->trans_begin();
 
         $this->db->where('id', $id);
@@ -163,6 +172,7 @@ class Products_model extends CI_Model
         } else {
             $this->db->trans_commit();
         }
+        return true;
     }
 
 }

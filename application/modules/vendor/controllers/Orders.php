@@ -41,7 +41,7 @@ class Orders extends VENDOR_Controller
 
     public function changeOrdersOrderStatus()
     {
-        $result = $this->Orders_model->changeOrderStatus($_POST['the_id'], $_POST['to_status']);
+        $result = $this->Orders_model->changeOrderStatus($_POST['the_id'], $_POST['to_status'], $this->vendor_id);
         if ($result == false) {
             echo '0';
         } else {

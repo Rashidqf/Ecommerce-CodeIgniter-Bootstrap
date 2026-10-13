@@ -63,6 +63,12 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="<?= LANG_URL . '/vendor/finance' ?>" aria-expanded="false">
+                                        <i class="mdi mdi-cash"></i>
+                                        <span class="hide-menu">Earnings</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="<?= LANG_URL . '/vendor/orders' ?>" aria-expanded="false">
                                         <i class="mdi mdi-cart-plus"></i>
                                         <span class="hide-menu"><?= lang('vendor_orders') ?></span>

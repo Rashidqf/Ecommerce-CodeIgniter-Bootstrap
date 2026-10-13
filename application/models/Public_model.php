@@ -379,7 +379,7 @@ class Public_model extends CI_Model
             return false;
         } else {
             $this->db->trans_commit();
-            return $post['order_id'];
+            return array('id' => (int) $lastId, 'order_id' => (int) $post['order_id']);
         }
     }
     
@@ -398,69 +398,48 @@ class Public_model extends CI_Model
         }
     }
 
-    public function setVendorOrder($post)
+    public function setVendorOrder($post, $parentOrderNumber, array $items)
     {
-        $i = 0;
-        $post['products'] = array();
-        foreach ($post['id'] as $product) {
-            $post['products'][$product] = $post['quantity'][$i];
-            $i++;
-        }
-
-        /*
-         * Loop products and check if its from vendor - save order for him
-         */
-        foreach ($post['products'] as $product_id => $product_quantity) {
-            $productInfo = $this->getOneProduct($product_id);
-            if ($productInfo['vendor_id'] > 0) {
-
-                $q = $this->db->query('SELECT MAX(order_id) as order_id FROM vendors_orders');
-                $rr = $q->row_array();
-                if ($rr['order_id'] == 0) {
-                    $rr['order_id'] = 1233;
-                }
-                $post['order_id'] = $rr['order_id'] + 1;
-
-
-                unset($post['id'], $post['quantity']);
-                $post['date'] = time();
-                $post['products'] = serialize(array($product_id => $product_quantity));
-                $this->db->trans_begin();
-                if (!$this->db->insert('vendors_orders', array(
-                            'order_id' => $post['order_id'],
-                            'products' => $post['products'],
-                            'date' => $post['date'],
-                            'referrer' => $post['referrer'],
-                            'clean_referrer' => $post['clean_referrer'],
-                            'payment_type' => $post['payment_type'],
-                            'paypal_status' => @$post['paypal_status'],
-                            'discount_code' => @$post['discountCode'],
-                            'vendor_id' => $productInfo['vendor_id']
-                        ))) {
-                    log_message('error', print_r($this->db->error(), true));
-                }
-                $lastId = $this->db->insert_id();
-                if (!$this->db->insert('vendors_orders_clients', array(
-                            'for_id' => $lastId,
-                            'first_name' => $this->encryption->encrypt($post['first_name']),
-                            'last_name' => $this->encryption->encrypt($post['last_name']),
-                            'email' => $this->encryption->encrypt($post['email']),
-                            'phone' => $this->encryption->encrypt($post['phone']),
-                            'address' => $this->encryption->encrypt($post['address']),
-                            'city' => $this->encryption->encrypt($post['city']),
-                            'post_code' => $this->encryption->encrypt($post['post_code']),
-                            'notes' => $this->encryption->encrypt($post['notes'])
-                        ))) {
-                    log_message('error', print_r($this->db->error(), true));
-                }
-                if ($this->db->trans_status() === FALSE) {
-                    $this->db->trans_rollback();
-                    return false;
-                } else {
-                    $this->db->trans_commit();
-                }
+        $byVendor = array();
+        foreach ($items as $item) {
+            if ((int) $item['vendor_id'] < 1) {
+                continue;
             }
+            $byVendor[(int) $item['vendor_id']][(int) $item['product_id']] = (int) $item['quantity'];
         }
+        foreach ($byVendor as $vendorId => $products) {
+            $q = $this->db->query('SELECT MAX(order_id) as order_id FROM vendors_orders');
+            $rr = $q->row_array();
+            $nextOrderId = (int) $rr['order_id'] > 0 ? (int) $rr['order_id'] + 1 : 1234;
+            if (!$this->db->insert('vendors_orders', array(
+                'order_id' => $nextOrderId,
+                'products' => serialize($products),
+                'date' => time(),
+                'referrer' => $post['referrer'],
+                'clean_referrer' => $post['clean_referrer'],
+                'payment_type' => $post['payment_type'],
+                'paypal_status' => null,
+                'discount_code' => isset($post['discountCode']) ? (string) $post['discountCode'] : '',
+                'vendor_id' => $vendorId,
+                'parent_order_id' => (int) $parentOrderNumber
+            ))) {
+                log_message('error', print_r($this->db->error(), true));
+                continue;
+            }
+            $lastId = $this->db->insert_id();
+            $this->db->insert('vendors_orders_clients', array(
+                'for_id' => $lastId,
+                'first_name' => $this->encryption->encrypt($post['first_name']),
+                'last_name' => $this->encryption->encrypt($post['last_name']),
+                'email' => $this->encryption->encrypt($post['email']),
+                'phone' => $this->encryption->encrypt($post['phone']),
+                'address' => $this->encryption->encrypt($post['address']),
+                'city' => $this->encryption->encrypt($post['city']),
+                'post_code' => $this->encryption->encrypt($post['post_code']),
+                'notes' => $this->encryption->encrypt($post['notes'])
+            ));
+        }
+        return true;
     }
 
     public function setActivationLink($link, $orderId)

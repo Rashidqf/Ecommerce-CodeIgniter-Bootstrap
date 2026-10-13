@@ -200,27 +200,7 @@ if (!isset($_GET['settings'])) {
 }
 if (isset($_GET['settings'])) {
     ?>
-    <h3>Cash On Delivery</h3>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Change visibility of this purchase option</div>
-                <div class="panel-body">
-                    <?php if ($this->session->flashdata('cashondelivery_visibility')) { ?>
-                        <div class="alert alert-info"><?= $this->session->flashdata('cashondelivery_visibility') ?></div>
-                    <?php } ?>
-                    <form method="POST" action="">
-                        <input type="hidden" name="cashondelivery_visibility" value="<?= htmlspecialchars($cashondelivery_visibility) ?>">
-                        <input <?= $cashondelivery_visibility == 1 ? 'checked' : '' ?> data-toggle="toggle" data-for-field="cashondelivery_visibility" class="toggle-changer" type="checkbox">
-                        <button class="btn btn-default" value="" type="submit">
-                            Save
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
+    <div class="alert alert-info">Cash on delivery and PayPal are turned off. Customers pay with Safepay, or by bank transfer after you confirm the money arrived. Payment settings are under Payments, Commission, Vendor balances, and Vendor payouts.</div>
     <h3>Paypal Account Settings</h3>
     <div class="row">
         <div class="col-sm-6">

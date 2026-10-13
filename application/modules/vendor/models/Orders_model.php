@@ -39,18 +39,24 @@ class Orders_model extends CI_Model
         return $result;
     }
 
-    public function changeOrderStatus($id, $to_status)
+    public function changeOrderStatus($id, $to_status, $vendor_id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('id', (int) $id);
+        $this->db->where('vendor_id', (int) $vendor_id);
         $this->db->select('processed');
         $result1 = $this->db->get('vendors_orders');
         $res = $result1->row_array();
+        if (empty($res)) {
+            return false;
+        }
 
         if ($res['processed'] != $to_status) {
-            $this->db->where('id', $id);
+            $this->db->where('id', (int) $id);
+            $this->db->where('vendor_id', (int) $vendor_id);
             $result = $this->db->update('vendors_orders', array('processed' => $to_status, 'viewed' => '1'));
             return $result;
         }
+        return true;
     }
 
 }
