@@ -153,12 +153,12 @@ $route['vendor/loadOthersImages'] = "vendor/AddProduct/loadOthersImages";
 $route['vendor/removeSecondaryImage'] = "vendor/AddProduct/removeSecondaryImage";
 $route['vendor/delete/product/(:num)'] = "vendor/products/deleteProduct/$1";
 $route['(\w{2})/vendor/delete/product/(:num)'] = "vendor/products/deleteProduct/$1";
-$route['vendor/view/(:any)'] = "Vendor/index/0/$1";
-$route['(\w{2})/vendor/view/(:any)'] = "Vendor/index/0/$2";
-$route['vendor/view/(:any)/(:num)'] = "Vendor/index/$2/$1";
-$route['(\w{2})/vendor/view/(:any)/(:num)'] = "Vendor/index/$3/$2";
-$route['(:any)/(:any)_(:num)'] = "Vendor/viewProduct/$1/$3";
-$route['(\w{2})/(:any)/(:any)_(:num)'] = "Vendor/viewProduct/$2/$4";
+$route['vendor/view/(:any)'] = "store/index/0/$1";
+$route['(\w{2})/vendor/view/(:any)'] = "store/index/0/$2";
+$route['vendor/view/(:any)/(:num)'] = "store/index/$2/$1";
+$route['(\w{2})/vendor/view/(:any)/(:num)'] = "store/index/$3/$2";
+$route['(:any)/(:any)_(:num)'] = "store/viewProduct/$1/$3";
+$route['(\w{2})/(:any)/(:any)_(:num)'] = "store/viewProduct/$2/$4";
 $route['vendor/changeOrderStatus'] = "vendor/orders/changeOrdersOrderStatus";
 
 // Site Multilanguage
@@ -179,6 +179,7 @@ $route['admin/productStatusChange'] = "admin/ecommerce/products/productStatusCha
 $route['admin/shopcategories'] = "admin/ecommerce/ShopCategories";
 $route['admin/shopcategories/(:num)'] = "admin/ecommerce/ShopCategories/index/$1";
 $route['admin/homebanners'] = "admin/ecommerce/HomeBanners";
+$route['admin/categorypins'] = "admin/ecommerce/CategoryPins";
 $route['admin/editshopcategorie'] = "admin/ecommerce/ShopCategories/editShopCategorie";
 $route['admin/orders'] = "admin/ecommerce/orders";
 $route['admin/orders/(:num)'] = "admin/ecommerce/orders/index/$1";

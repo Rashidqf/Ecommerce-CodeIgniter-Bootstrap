@@ -102,8 +102,8 @@ $config['admin_history'] = false;
  */
 $config['language'] = 'english';
 $config['language_abbr'] = 'en';
-$config['currency'] = '€';
-$config['currencyKey'] = 'EUR';
+$config['currency'] = 'Rs.';
+$config['currencyKey'] = 'PKR';
 
 /*
   |--------------------------------------------------------------------------

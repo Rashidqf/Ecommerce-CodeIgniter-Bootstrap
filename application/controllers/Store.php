@@ -5,7 +5,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Vendor extends MY_Controller
+class Store extends MY_Controller
 {
 
     private $num_rows = 20;
@@ -16,7 +16,7 @@ class Vendor extends MY_Controller
         $this->load->model('vendor/Vendorprofile_model');
     }
 
-    public function index($page = 0, $vendor)
+    public function index($page, $vendor)
     {
         if ((int) $this->Home_admin_model->getValueStore('multiVendor') !== 1) {
             show_404();
@@ -77,6 +77,7 @@ class Vendor extends MY_Controller
             show_404();
         }
         $data['sameCagegoryProducts'] = $this->Public_model->sameCagegoryProducts($data['product']['shop_categorie'], $id, $vendorInfo['id']);
+        $data['storeProducts'] = $this->Public_model->getProducts(8, 0, array(), (int) $vendorInfo['id'], true);
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
         $head['title'] = $vendorInfo['name'] . ' - ' . $data['product']['title'];

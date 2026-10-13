@@ -64,7 +64,7 @@ $storeUrl = LANG_URL . '/vendor/view/' . rawurlencode($vendorInfo['url']);
                         <a class="buyora-catalog-image" href="<?= htmlspecialchars($itemUrl, ENT_QUOTES, 'UTF-8') ?>"><img src="<?= htmlspecialchars($itemImage, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?>"></a>
                         <div class="buyora-catalog-info">
                             <a class="buyora-catalog-title" href="<?= htmlspecialchars($itemUrl, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?></a>
-                            <div class="buyora-catalog-price"><strong><?= htmlspecialchars($item['price'], ENT_QUOTES, 'UTF-8') . CURRENCY ?></strong><?php if ($discounted) { ?><del><?= htmlspecialchars($item['old_price'], ENT_QUOTES, 'UTF-8') . CURRENCY ?></del><?php } ?></div>
+                            <div class="buyora-catalog-price"><strong><?= trim(CURRENCY) ?> <?= htmlspecialchars(number_format((float) $item['price'], floor((float) $item['price']) === (float) $item['price'] ? 0 : 2), ENT_QUOTES, 'UTF-8') ?></strong><?php if ($discounted) { ?><del><?= trim(CURRENCY) ?> <?= htmlspecialchars(number_format((float) $item['old_price'], floor((float) $item['old_price']) === (float) $item['old_price'] ? 0 : 2), ENT_QUOTES, 'UTF-8') ?></del><?php } ?></div>
                             <?php if ((int) $item['quantity'] > 0) { ?>
                                 <a class="buyora-button buyora-button-primary buyora-card-cart add-to-cart" data-id="<?= (int) $item['id'] ?>" href="javascript:void(0);"><i class="fa fa-cart-plus" aria-hidden="true"></i> <?= htmlspecialchars(lang('add_to_cart'), ENT_QUOTES, 'UTF-8') ?></a>
                             <?php } else { ?>

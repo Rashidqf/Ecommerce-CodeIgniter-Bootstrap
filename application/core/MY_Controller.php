@@ -48,6 +48,19 @@ class MY_Controller extends MX_Controller
         }
 
         $head['nav_categories'] = $tree = buildTree1($all_categories);
+        $this->load->vars(array(
+            'buyora_category_tree' => $tree,
+            'buyora_header_categories' => $this->categoriesForPins(
+                $all_categories,
+                $this->pinnedCategoryIds(isset($vars['pin_header_categories']) ? $vars['pin_header_categories'] : null),
+                6
+            ),
+            'buyora_footer_categories' => $this->categoriesForPins(
+                $all_categories,
+                $this->pinnedCategoryIds(isset($vars['pin_footer_categories']) ? $vars['pin_footer_categories'] : null),
+                6
+            )
+        ));
         $buyoraViews = array(
             'buyora-home',
             'buyora-product',
@@ -55,7 +68,20 @@ class MY_Controller extends MX_Controller
             'buyora-checkout',
             'buyora-shop',
             'buyora-vendor',
-            'buyora-product'
+            'login',
+            'signup',
+            'user',
+            'contacts',
+            'blog',
+            'view_blog_post',
+            'dynPage',
+            'confirmed',
+            'checkout_parts/order_error',
+            'checkout_parts/payment_success_cash',
+            'checkout_parts/payment_success_bank',
+            'checkout_parts/paypal_payment',
+            'checkout_parts/paypal_success',
+            'checkout_parts/paypal_cancel'
         );
         if (in_array($view, $buyoraViews, true)) {
             $head['buyora_categories'] = $all_categories;
@@ -68,6 +94,49 @@ class MY_Controller extends MX_Controller
         $this->load->view($this->template . '_parts/header', $head);
         $this->load->view($this->template . $view, $data);
         $this->load->view($this->template . '_parts/footer', $footer);
+    }
+
+    private function pinnedCategoryIds($raw)
+    {
+        if ($raw === null) {
+            return null;
+        }
+        $ids = array();
+        foreach (explode(',', (string) $raw) as $part) {
+            if (ctype_digit($part) && (int) $part > 0) {
+                $ids[] = (int) $part;
+            }
+        }
+        return $ids;
+    }
+
+    private function categoriesForPins($categories, $ids, $fallbackLimit)
+    {
+        if ($ids === null) {
+            $picked = array();
+            foreach ($categories as $category) {
+                if ((int) $category['sub_for'] !== 0) {
+                    continue;
+                }
+                $picked[] = $category;
+                if (count($picked) >= $fallbackLimit) {
+                    break;
+                }
+            }
+            return $picked;
+        }
+
+        $byId = array();
+        foreach ($categories as $category) {
+            $byId[(int) $category['id']] = $category;
+        }
+        $picked = array();
+        foreach ($ids as $id) {
+            if (isset($byId[$id])) {
+                $picked[] = $byId[$id];
+            }
+        }
+        return $picked;
     }
 
     /*

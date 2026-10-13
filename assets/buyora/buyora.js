@@ -11,6 +11,21 @@
         });
     }
 
+    var categoryMenu = document.querySelector('.all-categories-menu');
+    var categoryButton = categoryMenu ? categoryMenu.querySelector('.all-categories') : null;
+    if (categoryMenu && categoryButton) {
+        categoryButton.addEventListener('click', function () {
+            var isOpen = categoryMenu.classList.toggle('is-open');
+            categoryButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', function (event) {
+            if (!categoryMenu.contains(event.target)) {
+                categoryMenu.classList.remove('is-open');
+                categoryButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
     var tabs = document.querySelectorAll('.product-tab');
     var products = document.querySelectorAll('.product-card');
     function showCollection(tab) {

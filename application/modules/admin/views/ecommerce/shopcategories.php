@@ -19,6 +19,7 @@
         <?php
     }
     ?>
+    <a href="<?= base_url('admin/categorypins') ?>" class="btn btn-default btn-xs pull-right" style="margin-bottom:10px;margin-left:8px;">Pin header / footer</a>
     <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add shop categorie</a>
     <div class="clearfix"></div>
     <?php

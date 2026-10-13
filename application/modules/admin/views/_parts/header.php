@@ -114,7 +114,8 @@
                                         <li><a href="<?= base_url('admin/brands') ?>" <?= urldecode(uri_string()) == 'admin/brands' ? 'class="active"' : '' ?>><i class="fa fa-registered" aria-hidden="true"></i> <?= lang('brands') ?></a></li>
                                     <?php } ?>
                                     <li><a href="<?= base_url('admin/shopcategories') ?>" <?= urldecode(uri_string()) == 'admin/shopcategories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> <?= lang('shop_categories') ?></a></li>
-                                    <li><a href="<?= base_url('admin/homebanners') ?>" <?= strpos(urldecode(uri_string()), 'admin/homebanners') === 0 ? 'class="active"' : '' ?>><i class="fa fa-picture-o" aria-hidden="true"></i> Homepage banners</a></li>
+                                    <li><a href="<?= base_url('admin/homebanners') ?>" <?= strpos(urldecode(uri_string()), 'admin/homebanners') === 0 ? 'class="active"' : '' ?>><i class="fa fa-picture-o" aria-hidden="true"></i> Banner management</a></li>
+                                    <li><a href="<?= base_url('admin/categorypins') ?>" <?= strpos(urldecode(uri_string()), 'admin/categorypins') === 0 ? 'class="active"' : '' ?>><i class="fa fa-thumb-tack" aria-hidden="true"></i> Pin categories</a></li>
                                     <li>
                                         <a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>>
                                             <i class="fa fa-money" aria-hidden="true"></i> <?= lang('orders') ?> 

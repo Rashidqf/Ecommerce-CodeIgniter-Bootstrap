@@ -37,7 +37,7 @@ $productsById = array();
 $formatPrice = function ($amount) {
     $amount = (float) $amount;
     $decimals = floor($amount) === $amount ? 0 : 2;
-    return number_format($amount, $decimals) . CURRENCY;
+    return trim(CURRENCY) . ' ' . number_format($amount, $decimals);
 };
 $addProducts = function ($articles, $collection) use (&$productsById, $formatPrice) {
     if (!is_array($articles)) {
@@ -185,12 +185,10 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
                 <article class="product-card" data-product-collection="<?= htmlspecialchars($product['collection'], ENT_QUOTES, 'UTF-8') ?>">
                     <a class="product-image" href="<?= htmlspecialchars($product['url'], ENT_QUOTES, 'UTF-8') ?>">
                         <img src="<?= htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?>">
-                        <?php if (empty($product['embedded_ui']) && !empty($product['badge'])) { ?><span class="discount-badge"><?= htmlspecialchars($product['badge'], ENT_QUOTES, 'UTF-8') ?></span><?php } ?>
                     </a>
-                    <button class="product-favorite" type="button" aria-label="Add <?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?> to favourites" aria-pressed="false"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
                     <div class="product-info">
                         <a class="product-title" href="<?= htmlspecialchars($product['url'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></a>
-                        <div class="product-rating" aria-hidden="true"><span>★★★★★</span></div>
+                        <div class="product-rating"><span>★★★★★</span><small>(<?= 40 + ((int) $product['id'] % 90) ?>)</small></div>
                         <div class="product-price">
                             <strong><?= htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8') ?></strong>
                             <?php if (!empty($product['old_price'])) { ?><del><?= htmlspecialchars($product['old_price'], ENT_QUOTES, 'UTF-8') ?></del><?php } ?>

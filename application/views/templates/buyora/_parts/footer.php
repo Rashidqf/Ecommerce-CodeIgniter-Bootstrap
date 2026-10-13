@@ -12,6 +12,17 @@
                         <a href="<?= LANG_URL . '/contacts' ?>">Contact</a>
                     </div>
                     <div class="footer-column">
+                        <h2>Categories</h2>
+                        <?php
+                        $footerCategories = isset($buyora_footer_categories) && is_array($buyora_footer_categories) ? $buyora_footer_categories : array();
+                        if (empty($footerCategories)) { ?>
+                            <span>No categories pinned</span>
+                        <?php }
+                        foreach ($footerCategories as $footerCategory) { ?>
+                            <a href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $footerCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
+                        <?php } ?>
+                    </div>
+                    <div class="footer-column">
                         <h2>Customer Service</h2>
                         <a href="<?= LANG_URL . '/contacts' ?>">Help Center</a>
                         <a href="<?= LANG_URL . '/checkout' ?>">Track Order</a>

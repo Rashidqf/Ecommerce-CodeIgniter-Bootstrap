@@ -59,23 +59,35 @@
             </header>
             <nav class="buyora-navigation" id="primary-navigation" aria-label="Main navigation">
                 <div class="buyora-container nav-inner">
-                    <a class="all-categories" href="<?= htmlspecialchars(base_url() . '#categories', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-bars" aria-hidden="true"></i> All Categories <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    <div class="all-categories-menu">
+                        <button class="all-categories" type="button" aria-expanded="false" aria-controls="all-categories-list">
+                            <i class="fa fa-bars" aria-hidden="true"></i> All Categories <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="categories-dropdown" id="all-categories-list">
+                            <?php
+                            $categoryTree = isset($buyora_category_tree) && is_array($buyora_category_tree) ? $buyora_category_tree : array();
+                            if (empty($categoryTree)) { ?>
+                                <p class="categories-dropdown-empty">No categories yet.</p>
+                            <?php }
+                            foreach ($categoryTree as $parentCategory) { ?>
+                                <div class="categories-dropdown-group">
+                                    <a href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $parentCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($parentCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
+                                    <?php if (!empty($parentCategory['children'])) { ?>
+                                        <?php foreach ($parentCategory['children'] as $childCategory) { ?>
+                                            <a class="is-child" href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $childCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($childCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
                     <a class="nav-link is-current" href="<?= base_url() ?>">Home</a>
                     <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">Shop</a>
                     <a class="nav-link" href="<?= htmlspecialchars(base_url() . '#featured', ENT_QUOTES, 'UTF-8') ?>">Deals</a>
                     <a class="nav-link" href="<?= htmlspecialchars(base_url() . '#featured', ENT_QUOTES, 'UTF-8') ?>">New Arrivals</a>
-                    <?php
-                    $navCategoryCount = 0;
-                    foreach (isset($buyora_categories) && is_array($buyora_categories) ? $buyora_categories : array() as $navCategory) {
-                        if ((int) $navCategory['sub_for'] !== 0 || $navCategoryCount >= 6) {
-                            continue;
-                        }
-                        ?>
+                    <?php foreach (isset($buyora_header_categories) && is_array($buyora_header_categories) ? $buyora_header_categories : array() as $navCategory) { ?>
                         <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $navCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($navCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
-                        <?php
-                        $navCategoryCount++;
-                    }
-                    ?>
+                    <?php } ?>
                     <a class="nav-link" href="<?= LANG_URL . '/contacts' ?>">Contact</a>
                 </div>
             </nav>

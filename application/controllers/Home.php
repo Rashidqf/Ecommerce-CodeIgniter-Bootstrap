@@ -156,6 +156,9 @@ class Home extends MY_Controller
             $id,
             (int) $data['product']['vendor_id'] > 0 ? (int) $data['product']['vendor_id'] : false
         );
+        $data['storeProducts'] = (int) $data['product']['vendor_id'] > 0
+            ? $this->Public_model->getProducts(8, 0, array(), (int) $data['product']['vendor_id'], true)
+            : array();
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
         $head['title'] = $data['product']['title'];

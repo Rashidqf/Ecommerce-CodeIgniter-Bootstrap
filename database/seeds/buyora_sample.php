@@ -77,8 +77,8 @@ try {
 
     $imageDirectory = $root . '/attachments/shop_images';
     $categories = array(
-        array('Fashion', 'category-fashion.jpg'),
         array('Electronics', 'category-electronics.jpg'),
+        array('Fashion', 'category-fashion.jpg'),
         array('Beauty & Health', 'category-beauty.jpg'),
         array('Home & Living', 'category-home.jpg'),
         array('Toys & Games', 'category-toys.jpg'),
@@ -106,6 +106,12 @@ try {
         if ($lookup->fetch()) {
             $categoryIds[$category[0]] = (int) $categoryId;
             $lookup->close();
+            buyoraSeedStatement(
+                $store,
+                'UPDATE shop_categories SET position = ?, image = ? WHERE id = ?',
+                'isi',
+                array($position + 1, $imageName, $categoryIds[$category[0]])
+            )->close();
             foreach ($languages as $languageAbbr) {
                 buyoraSeedStatement(
                     $store,
@@ -137,6 +143,43 @@ try {
         $categoryIds[$category[0]] = $categoryId;
     }
 
+    $stores = array(
+        'Electronics' => array('TechNest', 'technest', 'technest@buyora.test'),
+        'Fashion' => array('StepStyle', 'stepstyle', 'stepstyle@buyora.test'),
+        'Beauty & Health' => array('GlowHouse', 'glowhouse', 'glowhouse@buyora.test'),
+        'Home & Living' => array('LumaHome', 'lumahome', 'lumahome@buyora.test')
+    );
+    $vendorPassword = password_hash('vendor123', PASSWORD_DEFAULT);
+    $vendorIds = array();
+    foreach ($stores as $categoryName => $storeInfo) {
+        $lookup = buyoraSeedStatement(
+            $store,
+            'SELECT id FROM vendors WHERE email = ? LIMIT 1',
+            's',
+            array($storeInfo[2])
+        );
+        $lookup->bind_result($vendorId);
+        if ($lookup->fetch()) {
+            $vendorIds[$categoryName] = (int) $vendorId;
+            $lookup->close();
+            buyoraSeedStatement(
+                $store,
+                'UPDATE vendors SET name = ?, url = ?, status = 1 WHERE id = ?',
+                'ssi',
+                array($storeInfo[0], $storeInfo[1], $vendorIds[$categoryName])
+            )->close();
+            continue;
+        }
+        $lookup->close();
+        buyoraSeedStatement(
+            $store,
+            'INSERT INTO vendors (name, url, email, status, password) VALUES (?, ?, ?, 1, ?)',
+            'ssss',
+            array($storeInfo[0], $storeInfo[1], $storeInfo[2], $vendorPassword)
+        )->close();
+        $vendorIds[$categoryName] = (int) $store->insert_id;
+    }
+
     $products = array(
         array('Wireless Earbuds', 'Electronics', 'product-earbuds.jpg', '3999.00', '4999.00', 124, 0, 1, 'Compact wireless earbuds with clear sound, a charging case and all-day comfort.'),
         array('Men’s Running Shoes', 'Fashion', 'product-shoes.jpg', '5499.00', '6999.00', 89, 0, 1, 'Lightweight running shoes with breathable uppers and cushioned everyday support.'),
@@ -165,14 +208,16 @@ try {
             array($categoryId, 'en', $product[0])
         );
         $lookup->bind_result($productId);
+        $vendorId = $vendorIds[$product[1]];
         if ($lookup->fetch()) {
             $productId = (int) $productId;
             $lookup->close();
+            $slug = strtolower(trim(preg_replace('/[^a-z0-9]+/i', '_', $product[0]), '_'));
             buyoraSeedStatement(
                 $store,
-                'UPDATE products SET procurement = 0 WHERE id = ? AND image LIKE ?',
-                'is',
-                array($productId, 'buyora-product-%')
+                'UPDATE products SET vendor_id = ?, visibility = 1, url = ?, quantity = IF(quantity < 1, ?, quantity), image = IF(image IS NULL OR image = \'\' OR image LIKE \'buyora-product-%\', ?, image) WHERE id = ?',
+                'isisi',
+                array($vendorId, $slug, $product[5], $imageName, $productId)
             )->close();
             continue;
         }
@@ -181,9 +226,9 @@ try {
         $created = time();
         buyoraSeedStatement(
             $store,
-            'INSERT INTO products (folder, image, time, time_update, visibility, shop_categorie, quantity, procurement, in_slider, url, virtual_products, brand_id, position, vendor_id) VALUES (NULL, ?, ?, ?, 1, ?, ?, ?, ?, ?, NULL, NULL, ?, 0)',
-            'siiiiiisi',
-            array($imageName, $created, $created, $categoryId, $product[5], $product[6], $product[7], '', $position + 1)
+            'INSERT INTO products (folder, image, time, time_update, visibility, shop_categorie, quantity, procurement, in_slider, url, virtual_products, brand_id, position, vendor_id) VALUES (NULL, ?, ?, ?, 1, ?, ?, ?, ?, ?, NULL, NULL, ?, ?)',
+            'siiiiiiisi',
+            array($imageName, $created, $created, $categoryId, $product[5], $product[6], $product[7], '', $position + 1, $vendorId)
         )->close();
 
         $productId = (int) $store->insert_id;
@@ -192,7 +237,7 @@ try {
             $store,
             'UPDATE products SET url = ? WHERE id = ?',
             'si',
-            array($slug . '_' . $productId, $productId)
+            array($slug, $productId)
         )->close();
 
         foreach ($languages as $languageAbbr) {
@@ -233,8 +278,13 @@ try {
         )->close();
     }
 
+    buyoraSeedStatement(
+        $store,
+        'UPDATE value_store SET value = \'1\' WHERE thekey = \'multiVendor\''
+    )->close();
+
     echo "Sample store is ready. Existing matching records were kept unchanged.\n";
-    echo count($categories) . " categories and " . count($products) . " sample products are available.\n";
+    echo count($categories) . " categories, " . count($stores) . " stores and " . count($products) . " sample products are available.\n";
 } catch (Throwable $error) {
     fwrite(STDERR, 'Sample data was not completed: ' . $error->getMessage() . "\n");
     exit(1);

@@ -1,5 +1,5 @@
 <div id="home-banners">
-    <h1><i class="fa fa-picture-o" aria-hidden="true"></i> Homepage banners</h1>
+    <h1><i class="fa fa-picture-o" aria-hidden="true"></i> Banner management</h1>
     <hr>
     <?php if ($this->session->flashdata('result')) { ?>
         <div class="alert alert-success"><?= htmlspecialchars($this->session->flashdata('result'), ENT_QUOTES, 'UTF-8') ?></div>

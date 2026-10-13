@@ -49,18 +49,22 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
             <div class="buyora-eyebrow"><?= htmlspecialchars($product['categorie_name'], ENT_QUOTES, 'UTF-8') ?></div>
             <h1><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></h1>
             <?php if ((int) $product['vendor_id'] > 0 && $vendorUrl !== '') { ?>
-                <a class="buyora-seller-link" href="<?= htmlspecialchars($vendorUrl, ENT_QUOTES, 'UTF-8') ?>">
-                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    Sold by <strong><?= htmlspecialchars($product['vendor_name'], ENT_QUOTES, 'UTF-8') ?></strong>
-                    <span>Visit shop <i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                <a class="buyora-store-card" href="<?= htmlspecialchars($vendorUrl, ENT_QUOTES, 'UTF-8') ?>">
+                    <span class="buyora-store-mark"><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
+                    <span>
+                        <small>Sold by</small>
+                        <strong><?= htmlspecialchars($product['vendor_name'], ENT_QUOTES, 'UTF-8') ?></strong>
+                        <em>Visit store for details and more products</em>
+                    </span>
+                    <span class="buyora-store-go">Visit Store <i class="fa fa-angle-right" aria-hidden="true"></i></span>
                 </a>
             <?php } else { ?>
                 <div class="buyora-seller-link buyora-official-seller"><i class="fa fa-check-circle" aria-hidden="true"></i> Sold by <strong><?= htmlspecialchars(isset($navitext) && $navitext !== '' ? $navitext : 'BUYORA', ENT_QUOTES, 'UTF-8') ?></strong></div>
             <?php } ?>
             <div class="buyora-product-price">
-                <strong><?= htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8') ?><?= CURRENCY ?></strong>
+                <strong><?= trim(CURRENCY) ?> <?= htmlspecialchars(number_format((float) $product['price'], floor((float) $product['price']) === (float) $product['price'] ? 0 : 2), ENT_QUOTES, 'UTF-8') ?></strong>
                 <?php if (isset($product['old_price']) && is_numeric($product['old_price']) && (float) $product['old_price'] > (float) $product['price']) { ?>
-                    <del><?= htmlspecialchars($product['old_price'], ENT_QUOTES, 'UTF-8') ?><?= CURRENCY ?></del>
+                    <del><?= trim(CURRENCY) ?> <?= htmlspecialchars(number_format((float) $product['old_price'], floor((float) $product['old_price']) === (float) $product['old_price'] ? 0 : 2), ENT_QUOTES, 'UTF-8') ?></del>
                     <span class="buyora-discount-badge">-<?= (int) round(((float) $product['old_price'] - (float) $product['price']) / (float) $product['old_price'] * 100) ?>%</span>
                 <?php } ?>
             </div>
@@ -84,6 +88,36 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
         </section>
     </div>
 
+    <?php if ((int) $product['vendor_id'] > 0 && !empty($storeProducts)) { ?>
+        <section class="buyora-related-products">
+            <div class="buyora-page-heading">
+                <h2>More from <?= htmlspecialchars($product['vendor_name'], ENT_QUOTES, 'UTF-8') ?></h2>
+                <?php if ($vendorUrl !== '') { ?><a href="<?= htmlspecialchars($vendorUrl, ENT_QUOTES, 'UTF-8') ?>">Visit store <i class="fa fa-angle-right" aria-hidden="true"></i></a><?php } ?>
+            </div>
+            <div class="buyora-catalog-grid">
+                <?php foreach ($storeProducts as $item) {
+                    if ((int) $item['id'] === (int) $product['id']) {
+                        continue;
+                    }
+                    $itemImage = !empty($item['image']) && is_file('attachments/shop_images/' . $item['image'])
+                        ? base_url('attachments/shop_images/' . rawurlencode($item['image']))
+                        : base_url('attachments/no-image-frontend.png');
+                    $itemUrl = $vendorUrl !== ''
+                        ? $vendorUrl . '/' . $item['url'] . '_' . (int) $item['id']
+                        : LANG_URL . '/' . $item['url'] . '_' . (int) $item['id'];
+                    ?>
+                    <article class="buyora-catalog-card">
+                        <a class="buyora-catalog-image" href="<?= htmlspecialchars($itemUrl, ENT_QUOTES, 'UTF-8') ?>"><img src="<?= htmlspecialchars($itemImage, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?>"></a>
+                        <div class="buyora-catalog-info">
+                            <a class="buyora-catalog-title" href="<?= htmlspecialchars($itemUrl, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?></a>
+                            <strong><?= trim(CURRENCY) ?> <?= htmlspecialchars(number_format((float) $item['price'], floor((float) $item['price']) === (float) $item['price'] ? 0 : 2), ENT_QUOTES, 'UTF-8') ?></strong>
+                        </div>
+                    </article>
+                <?php } ?>
+            </div>
+        </section>
+    <?php } ?>
+
     <section class="buyora-related-products">
         <div class="buyora-page-heading"><h2><?= htmlspecialchars(lang('oder_from_category'), ENT_QUOTES, 'UTF-8') ?></h2></div>
         <?php if (!empty($sameCagegoryProducts)) { ?>
@@ -100,7 +134,7 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
                         <a class="buyora-catalog-image" href="<?= htmlspecialchars($itemUrl, ENT_QUOTES, 'UTF-8') ?>"><img src="<?= htmlspecialchars($itemImage, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?>"></a>
                         <div class="buyora-catalog-info">
                             <a class="buyora-catalog-title" href="<?= htmlspecialchars($itemUrl, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?></a>
-                            <strong><?= htmlspecialchars($item['price'], ENT_QUOTES, 'UTF-8') ?><?= CURRENCY ?></strong>
+                            <strong><?= trim(CURRENCY) ?> <?= htmlspecialchars(number_format((float) $item['price'], floor((float) $item['price']) === (float) $item['price'] ? 0 : 2), ENT_QUOTES, 'UTF-8') ?></strong>
                         </div>
                     </article>
                 <?php } ?>

@@ -107,6 +107,38 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-picture-o" aria-hidden="true"></i> Banner management
+                </div>
+                <div class="panel-body">Change the homepage hero and promotion banners.</div>
+                <a href="<?= base_url('admin/homebanners') ?>">
+                    <div class="panel-footer">
+                        <span class="pull-left">Open banner management</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-thumb-tack" aria-hidden="true"></i> Pin categories
+                </div>
+                <div class="panel-body">Choose which existing categories appear in the header and footer.</div>
+                <a href="<?= base_url('admin/categorypins') ?>">
+                    <div class="panel-footer">
+                        <span class="pull-left">Open pinned categories</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
