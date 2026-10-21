@@ -1,9 +1,9 @@
 :root {
     --buyora-navy: #06294d;
     --buyora-navy-deep: #052748;
-    --buyora-orange: #ff5b00;
+    --buyora-orange: #c2410c;
     --buyora-ink: #092b50;
-    --buyora-muted: #637184;
+    --buyora-muted: #4b5563;
     --buyora-pale: #f1f5f8;
     --buyora-border: #e6eaf0;
     --buyora-font: "Manrope", Arial, sans-serif;
@@ -618,12 +618,12 @@ body.buyora-site {
     place-items: center;
     border-radius: 12px;
     background: #fff;
-    color: #ff6a00;
+    color: var(--buyora-orange);
     font-size: 22px;
 }
 
 .buyora-store-go {
-    color: #ff6a00;
+    color: var(--buyora-orange);
     font-size: 13px;
     font-weight: 700;
 }
@@ -730,7 +730,7 @@ body.buyora-site {
 
 .product-add-button:hover,
 .product-add-button:focus-visible {
-    background: #e95100;
+    background: #9a3412;
     color: #fff;
 }
 
@@ -2140,7 +2140,7 @@ body.buyora-site {
     .hero-section {
         min-height: 250px;
         margin: 8px 8px 0;
-        background-image: linear-gradient(90deg, rgba(248, 229, 211, .98) 0%, rgba(248, 229, 211, .9) 46%, rgba(248, 229, 211, .08) 100%), var(--buyora-hero-mobile-image, url("buyora-hero-photo.jpg"));
+        background-image: linear-gradient(90deg, rgba(248, 229, 211, .98) 0%, rgba(248, 229, 211, .9) 46%, rgba(248, 229, 211, .08) 100%), var(--buyora-hero-mobile-image, url("buyora-hero-photo.webp"));
         background-position: center, 64% center;
         background-size: cover, auto 100%;
     }
@@ -2422,7 +2422,7 @@ body.buyora-site {
 }
 
 .buyora-inline-links a {
-    color: #ff6a00;
+    color: var(--buyora-orange);
     font-weight: 700;
     text-decoration: none;
 }

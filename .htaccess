@@ -1,6 +1,12 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
- 
+
+# Serve WebP automatically if accepted by browser and .webp exists
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{REQUEST_FILENAME} (.+)\.(jpe?g|png)$
+RewriteCond %1.webp -f
+RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?/$1 [L]

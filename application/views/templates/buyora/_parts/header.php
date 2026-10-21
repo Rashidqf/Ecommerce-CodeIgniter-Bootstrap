@@ -96,12 +96,13 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="<?= base_url('assets/fonts/fontawesome-webfont.woff2?v=4.7.0') ?>" as="font" type="font/woff2" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>"></noscript>
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/buyora/buyora.css') ?>">
-    <script src="<?= base_url('assets/js/jquery.min.js') ?>" defer></script>
-    <script src="<?= base_url('assets/buyora/lang.js') ?>" defer></script>
 </head>
 <body class="buyora-site">
     <a class="buyora-skip-link" href="#main-content">Skip to content</a>

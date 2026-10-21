@@ -19,12 +19,16 @@ $bannerImageUrl = function ($path, $fallback) {
         || !is_file($path)) {
         $path = $fallback;
     }
+    $webpPath = preg_replace('~\.(jpe?g|png)$~i', '.webp', $path);
+    if (is_file($webpPath)) {
+        $path = $webpPath;
+    }
     return base_url($path);
 };
-$heroImageUrl = $bannerImageUrl($heroBanner ? $heroBanner['image'] : '', 'assets/buyora/buyora-hero.jpg');
+$heroImageUrl = $bannerImageUrl($heroBanner ? $heroBanner['image'] : '', 'assets/buyora/buyora-hero.webp');
 $heroMobileImageUrl = $heroBanner && !empty($heroBanner['mobile_image'])
-    ? $bannerImageUrl($heroBanner['mobile_image'], 'assets/buyora/buyora-hero-photo.jpg')
-    : '';
+    ? $bannerImageUrl($heroBanner['mobile_image'], 'assets/buyora/buyora-hero-photo.webp')
+    : base_url('assets/buyora/buyora-hero-photo.webp');
 $catalogFilters = array('search_in_title', 'search_in_body', 'category', 'brand_id', 'in_stock', 'price_from', 'price_to', 'quantity_more', 'added_after', 'added_before', 'order_new', 'order_price', 'order_procurement');
 $hasCatalogFilters = false;
 foreach ($catalogFilters as $filterName) {
@@ -129,7 +133,7 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
                 $categoryImageName = isset($category['image']) ? basename($category['image']) : '';
                 $categoryImagePath = $categoryImageName !== '' && strpos($categoryImageName, '..') === false && is_file('attachments/shop_images/' . $categoryImageName)
                     ? base_url('attachments/shop_images/' . rawurlencode($categoryImageName))
-                    : base_url('assets/buyora/category-home.jpg');
+                    : base_url('assets/buyora/category-home.webp');
                 $categorySlug = !empty($category['name']) ? url_title($category['name'], 'dash', true) : 'all';
                 $categoryLink = base_url('category/' . (int) $category['id'] . '/' . $categorySlug);
                 $categoryCount = isset($category['product_count']) ? (int) $category['product_count'] : 0;
