@@ -1,0 +1,215 @@
+{
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"result\": {\n    \"done\": true,\n    \"report\": {\n      \"crawl_gateway_address\": \"68.183.60.80\",\n      \"extended_status\": \"no_errors\",\n      \"ip_pool_for_scan\": \"us\",\n      \"issues_per_category\": {\n        \"errors\": {\n          \"count\": 26,\n          \"issues\": [\n            {\n              \"count\": 0,\n              \"difficulty\": \"moderate\",\n              \"id\": \"have_sitemap\",\n              \"level\": \"domain\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"moderate\",\n              \"id\": \"ssl_certificate_valid\",\n              \"level\": \"domain\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 17,\n              \"difficulty\": \"moderate\",\n              \"id\": \"content_count_words\",\n              \"level\": \"page\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 2,\n              \"difficulty\": \"moderate\",\n              \"id\": \"duplicate_meta_descriptions\",\n              \"level\": \"page\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 2,\n              \"difficulty\": \"moderate\",\n              \"id\": \"have_title_duplicates\",\n              \"level\": \"page\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 5,\n              \"difficulty\": \"moderate\",\n              \"id\": \"page_allowed\",\n              \"level\": \"page\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"hard\",\n              \"id\": \"time_load_high\",\n              \"level\": \"page\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"title_duplicate_tag\",\n              \"level\": \"page\",\n              \"seo_impact\": \"high\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"title_empty\",\n              \"level\": \"page\",\n              \"seo_impact\": \"high\"\n            }\n          ]\n        },\n        \"recommendations\": {\n          \"count\": 0,\n          \"issues\": [\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"ssl_certificate_expiration\",\n              \"level\": \"domain\",\n              \"seo_impact\": \"low\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"moderate\",\n              \"id\": \"absent_doctype\",\n              \"level\": \"page\",\n              \"seo_impact\": \"low\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"moderate\",\n              \"id\": \"absent_encoding_meta_tag\",\n              \"level\": \"page\",\n              \"seo_impact\": \"low\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"moderate\",\n              \"id\": \"temporary_redirects\",\n              \"level\": \"page\",\n              \"seo_impact\": \"low\"\n            }\n          ]\n        },\n        \"warnings\": {\n          \"count\": 24,\n          \"issues\": [\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"absent_h1_tags\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"hard\",\n              \"id\": \"compression_disabled\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"duplicate_meta_description_tags\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"have_broken_links_anchor\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"moderate\",\n              \"id\": \"meta_description_empty\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 12,\n              \"difficulty\": \"moderate\",\n              \"id\": \"response_code_4xx\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"title_long\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 1,\n              \"difficulty\": \"easy\",\n              \"id\": \"title_short\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 11,\n              \"difficulty\": \"easy\",\n              \"id\": \"seo_non_friendly_url\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            },\n            {\n              \"count\": 0,\n              \"difficulty\": \"easy\",\n              \"id\": \"seo_friendly_url_relative_length_check\",\n              \"level\": \"page\",\n              \"seo_impact\": \"medium\"\n            }\n          ]\n        }\n      },\n      \"overview\": {\n        \"crawled\": 56,\n        \"health_check\": {\n          \"blocked\": 5,\n          \"broken\": 12,\n          \"redirected\": 1,\n          \"successful\": 38\n        },\n        \"overall_score\": 74,\n        \"total_issues_count\": 50,\n        \"previous_overall_score\": 86\n      },\n      \"task_id\": \"10212345-1221-0216-0000-bf83873d23fd\",\n      \"last_crawled\": 1792626477643,\n      \"partial_allowed\": true\n    }\n  }\n}"
+      }
+    ],
+    "structuredContent": {
+      "result": {
+        "done": true,
+        "report": {
+          "crawl_gateway_address": "68.183.60.80",
+          "extended_status": "no_errors",
+          "ip_pool_for_scan": "us",
+          "issues_per_category": {
+            "errors": {
+              "count": 26,
+              "issues": [
+                {
+                  "count": 0,
+                  "difficulty": "moderate",
+                  "id": "have_sitemap",
+                  "level": "domain",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "moderate",
+                  "id": "ssl_certificate_valid",
+                  "level": "domain",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 17,
+                  "difficulty": "moderate",
+                  "id": "content_count_words",
+                  "level": "page",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 2,
+                  "difficulty": "moderate",
+                  "id": "duplicate_meta_descriptions",
+                  "level": "page",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 2,
+                  "difficulty": "moderate",
+                  "id": "have_title_duplicates",
+                  "level": "page",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 5,
+                  "difficulty": "moderate",
+                  "id": "page_allowed",
+                  "level": "page",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "hard",
+                  "id": "time_load_high",
+                  "level": "page",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "title_duplicate_tag",
+                  "level": "page",
+                  "seo_impact": "high"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "title_empty",
+                  "level": "page",
+                  "seo_impact": "high"
+                }
+              ]
+            },
+            "recommendations": {
+              "count": 0,
+              "issues": [
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "ssl_certificate_expiration",
+                  "level": "domain",
+                  "seo_impact": "low"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "moderate",
+                  "id": "absent_doctype",
+                  "level": "page",
+                  "seo_impact": "low"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "moderate",
+                  "id": "absent_encoding_meta_tag",
+                  "level": "page",
+                  "seo_impact": "low"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "moderate",
+                  "id": "temporary_redirects",
+                  "level": "page",
+                  "seo_impact": "low"
+                }
+              ]
+            },
+            "warnings": {
+              "count": 24,
+              "issues": [
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "absent_h1_tags",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "hard",
+                  "id": "compression_disabled",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "duplicate_meta_description_tags",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "have_broken_links_anchor",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "moderate",
+                  "id": "meta_description_empty",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 12,
+                  "difficulty": "moderate",
+                  "id": "response_code_4xx",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "title_long",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 1,
+                  "difficulty": "easy",
+                  "id": "title_short",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 11,
+                  "difficulty": "easy",
+                  "id": "seo_non_friendly_url",
+                  "level": "page",
+                  "seo_impact": "medium"
+                },
+                {
+                  "count": 0,
+                  "difficulty": "easy",
+                  "id": "seo_friendly_url_relative_length_check",
+                  "level": "page",
+                  "seo_impact": "medium"
+                }
+              ]
+            }
+          },
+          "overview": {
+            "crawled": 56,
+            "health_check": {
+              "blocked": 5,
+              "broken": 12,
+              "redirected": 1,
+              "successful": 38
+            },
+            "overall_score": 74,
+            "total_issues_count": 50,
+            "previous_overall_score": 86
+          },
+          "task_id": "10212345-1221-0216-0000-bf83873d23fd",
+          "last_crawled": 1792626477643,
+          "partial_allowed": true
+        }
+      }
+    }
+  },
+  "jsonrpc": "2.0",
+  "id": 1792626493817
+}

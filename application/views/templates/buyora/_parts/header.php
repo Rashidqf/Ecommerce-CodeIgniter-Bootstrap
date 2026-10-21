@@ -32,7 +32,8 @@ if (!empty($og_image)) {
     $shareImage = base_url('assets/buyora/buyora-og.jpg');
 }
 
-$canonicalUrl = function_exists('current_url') ? current_url() : LANG_URL;
+$canonicalUrl = !empty($canonical_url) ? $canonical_url : (function_exists('current_url') ? current_url() : LANG_URL);
+$canonicalUrl = str_replace('/index.php', '', $canonicalUrl);
 if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
     $canonicalUrl = rtrim(base_url(), '/') . '/';
 }
@@ -112,9 +113,9 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                 <div class="buyora-container utility-inner">
                     <span class="shipping-note"><i class="fa fa-truck" aria-hidden="true"></i> Free Shipping on Orders Above Rs. 2000</span>
                     <div class="utility-links">
-                        <a href="<?= LANG_URL . '/checkout' ?>"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Order</a>
+                        <a href="<?= LANG_URL . '/checkout' ?>" rel="nofollow"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Order</a>
                         <a href="<?= LANG_URL . '/contacts' ?>"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Help</a>
-                        <a href="<?= LANG_URL . '/login' ?>"><i class="fa fa-user" aria-hidden="true"></i> Login / Register</a>
+                        <a href="<?= LANG_URL . '/login' ?>" rel="nofollow"><i class="fa fa-user" aria-hidden="true"></i> Login / Register</a>
                     </div>
                 </div>
             </div>
@@ -130,8 +131,8 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                     </form>
                     <div class="header-actions">
                         <button class="icon-action favorite-header" type="button" aria-label="Your favourites"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
-                        <a class="icon-action account-action" href="<?= LANG_URL . '/myaccount' ?>" aria-label="Your account"><i class="fa fa-user-o" aria-hidden="true"></i></a>
-                        <a class="icon-action cart-action" href="<?= LANG_URL . '/shopping-cart' ?>" aria-label="Shopping cart">
+                        <a class="icon-action account-action" href="<?= LANG_URL . '/myaccount' ?>" rel="nofollow" aria-label="Your account"><i class="fa fa-user-o" aria-hidden="true"></i></a>
+                        <a class="icon-action cart-action" href="<?= LANG_URL . '/shopping-cart' ?>" rel="nofollow" aria-label="Shopping cart">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             <span class="cart-count sumOfItems"><?= is_numeric($cartItems) && (int) $cartItems === 0 ? 0 : (int) $sumOfItems ?></span>
                         </a>

@@ -216,4 +216,36 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
             </a>
         <?php } ?>
     </section>
+
+    <!-- Buyer Protection & Marketplace Trust Overview -->
+    <section class="buyora-container buyora-marketplace-trust" style="margin: 36px auto; padding: 32px 28px; background: #ffffff; border-radius: 16px; border: 1px solid #e5e7eb; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <h2 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 12px; letter-spacing: -0.02em;">Why Millions Choose BUYORA Marketplace</h2>
+            <p style="font-size: 15px; color: #4b5563; line-height: 1.7; margin-bottom: 28px;">
+                BUYORA is Pakistan's leading online shopping destination, uniting top certified brands, passionate artisans, and independent boutique sellers onto a unified digital storefront. Whether you are searching for the latest flagship smartphones, audio gear, seasonal fashion essentials, wellness cosmetics, or smart home accents, BUYORA ensures uncompromised authenticity, transparent seller ratings, and rapid fulfillment straight to your doorstep.
+            </p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 10px;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: left;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px;"><i class="fa fa-shield" aria-hidden="true"></i></div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">100% Genuine Guarantee</h3>
+                <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin: 0;">Every merchant undergoing our strict onboarding must provide verified documentation ensuring zero counterfeit inventory across all catalog departments.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: left;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; background: #dcfce7; color: #16a34a; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px;"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">Safepay Secure Checkout</h3>
+                <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin: 0;">Pay with total peace of mind using bank-grade Safepay debit/credit card gateway protection, direct bank transfer, or Cash on Delivery (COD).</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: left;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; background: #ffedd5; color: #c2410c; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px;"><i class="fa fa-truck" aria-hidden="true"></i></div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">Express Doorstep Delivery</h3>
+                <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin: 0;">Fast, fully trackable courier parcel transit across all provinces including Karachi, Lahore, Islamabad, Peshawar, Quetta, and Faisalabad.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: left;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; background: #f3e8ff; color: #9333ea; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px;"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">7-Day Easy Returns</h3>
+                <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin: 0;">Not completely thrilled with your order? Take advantage of our streamlined, dedicated resolution process with simple returns and swift replacements.</p>
+            </div>
+        </div>
+    </section>
 </main>

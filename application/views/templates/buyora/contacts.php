@@ -4,9 +4,18 @@
         <section class="buyora-panel">
             <h1><?= htmlspecialchars(lang('contact_us'), ENT_QUOTES, 'UTF-8') ?></h1>
             <div class="buyora-copy"><?= isset($contactspage) ? html_entity_decode($contactspage) : '' ?></div>
-            <p class="buyora-copy"><i class="fa fa-phone" aria-hidden="true"></i> <?= htmlspecialchars(isset($footerContactPhone) && $footerContactPhone !== '' ? $footerContactPhone : '+92 300 1234567', ENT_QUOTES, 'UTF-8') ?></p>
-            <p class="buyora-copy"><i class="fa fa-envelope" aria-hidden="true"></i> <?= htmlspecialchars(isset($footerContactEmail) && $footerContactEmail !== '' ? $footerContactEmail : 'support@shop.dev', ENT_QUOTES, 'UTF-8') ?></p>
-            <p class="buyora-copy"><i class="fa fa-map-marker" aria-hidden="true"></i> <?= htmlspecialchars(isset($footerContactAddr) && $footerContactAddr !== '' ? $footerContactAddr : 'Karachi, Pakistan', ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="buyora-copy" style="line-height:1.7;color:#4b5563;">Have a question about an active order, seller inquiries, delivery timelines, or payment verification? Our dedicated BUYORA customer support team is available Monday through Saturday from 9:00 AM to 9:00 PM PKT to assist you with prompt, friendly, and reliable solutions.</p>
+            <p class="buyora-copy"><i class="fa fa-phone" aria-hidden="true"></i> <strong>Helpline:</strong> <?= htmlspecialchars(isset($footerContactPhone) && $footerContactPhone !== '' ? $footerContactPhone : '+92 300 1234567', ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="buyora-copy"><i class="fa fa-envelope" aria-hidden="true"></i> <strong>Email Support:</strong> <?= htmlspecialchars(isset($footerContactEmail) && $footerContactEmail !== '' ? $footerContactEmail : 'support@buyoramarketplace.com', ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="buyora-copy"><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Headquarters:</strong> <?= htmlspecialchars(isset($footerContactAddr) && $footerContactAddr !== '' ? $footerContactAddr : 'Karachi, Sindh, Pakistan', ENT_QUOTES, 'UTF-8') ?></p>
+            <div style="margin-top:20px;padding:16px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0;font-size:13px;line-height:1.6;color:#4b5563;">
+                <strong>Frequently Asked Support Topics:</strong>
+                <ul style="margin:8px 0 0 16px;padding:0;">
+                    <li><strong>Order Tracking:</strong> Check real-time shipping progress via your order confirmation or account dashboard.</li>
+                    <li><strong>Returns &amp; Refunds:</strong> Requests submitted within 7 days of package delivery are reviewed within 48 business hours.</li>
+                    <li><strong>Merchant Partnerships:</strong> Interested in opening an official storefront? Reach our vendor onboarding department.</li>
+                </ul>
+            </div>
         </section>
         <section class="buyora-panel">
             <?php if ($this->session->flashdata('resultSend')) { ?>

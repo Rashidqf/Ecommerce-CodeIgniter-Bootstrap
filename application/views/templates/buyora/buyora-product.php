@@ -84,6 +84,16 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
                 <h2><?= htmlspecialchars(lang('description'), ENT_QUOTES, 'UTF-8') ?></h2>
                 <div><?= $product['description'] ?></div>
             </div>
+            <div class="buyora-buyer-assurance" style="margin-top: 24px; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 13px; line-height: 1.6; color: #4b5563;">
+                <h3 style="font-size: 15px; font-weight: 700; color: #0f172a; margin: 0 0 10px 0;"><i class="fa fa-shield" style="color: #0284c7; margin-right: 6px;"></i> BUYORA Buyer Protection &amp; Guarantees</h3>
+                <ul style="margin: 0 0 12px 18px; padding: 0;">
+                    <li><strong>Authenticity Guaranteed:</strong> Sourced directly from verified merchants. Zero tolerance policy for counterfeit products.</li>
+                    <li><strong>Safe Payment Processing:</strong> Transactions processed via Safepay 256-bit SSL encrypted card gateway or Cash on Delivery.</li>
+                    <li><strong>Expedited Courier Transit:</strong> Tracked shipping with SMS dispatch alerts across Karachi, Lahore, Islamabad, and nationwide.</li>
+                    <li><strong>7-Day Return Coverage:</strong> Eligible for simple exchange or full refund if damaged, defective, or noticeably different from description.</li>
+                </ul>
+                <p style="margin: 0; font-size: 12px; color: #64748b;">Need help with this item? Contact our 24/7 customer service helpline or reach the seller directly via their verified storefront.</p>
+            </div>
             <?php include rtrim(APPPATH, '/') . '/views/main/social_share.php'; ?>
         </section>
     </div>
@@ -102,9 +112,10 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
                     $itemImage = !empty($item['image']) && is_file('attachments/shop_images/' . $item['image'])
                         ? base_url('attachments/shop_images/' . rawurlencode($item['image']))
                         : base_url('attachments/no-image-frontend.png');
-                    $itemUrl = $vendorUrl !== ''
-                        ? $vendorUrl . '/' . $item['url'] . '_' . (int) $item['id']
-                        : LANG_URL . '/' . $item['url'] . '_' . (int) $item['id'];
+                    $itemVendorSlug = !empty($product['vendor_url']) ? $product['vendor_url'] : (!empty($vendorInfo['url']) ? $vendorInfo['url'] : '');
+                    $itemUrl = !empty($itemVendorSlug)
+                        ? base_url(rawurlencode($itemVendorSlug) . '/' . $item['url'] . '_' . (int) $item['id'])
+                        : base_url($item['url'] . '_' . (int) $item['id']);
                     ?>
                     <article class="buyora-catalog-card">
                         <a class="buyora-catalog-image" href="<?= htmlspecialchars($itemUrl, ENT_QUOTES, 'UTF-8') ?>"><img src="<?= htmlspecialchars($itemImage, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8') ?>"></a>

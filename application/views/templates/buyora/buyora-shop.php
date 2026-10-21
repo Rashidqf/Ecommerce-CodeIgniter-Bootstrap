@@ -90,4 +90,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php if (!empty($links_pagination)) { ?><div class="buyora-pagination"><?= $links_pagination ?></div><?php } ?>
         </section>
     </div>
+
+    <section class="buyora-shop-guide" style="margin-top: 36px; padding: 28px 24px; background: #ffffff; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
+        <h2 style="font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 10px;">Explore the BUYORA Online Shopping Catalog</h2>
+        <p style="font-size: 14px; color: #4b5563; line-height: 1.7; margin-bottom: 12px;">
+            Welcome to BUYORA Marketplace's full online catalog, featuring genuine electronics, trendy fashion apparel, beauty cosmetics, home appliances, toys, sports equipment, and daily living essentials. Refine your search using smart category filters, price sorting, and stock availability to pinpoint the exact products you need at unbeatable Pakistani rupee prices.
+        </p>
+        <p style="font-size: 14px; color: #4b5563; line-height: 1.7; margin: 0;">
+            Every listing comes with transparent seller profiles, verified buyer reviews, and guaranteed buyer protection. Complete your order seamlessly with Safepay debit/credit card security or Cash on Delivery, backed by expedited doorstep shipping and 7-day hassle-free returns.
+        </p>
+    </section>
 </main>

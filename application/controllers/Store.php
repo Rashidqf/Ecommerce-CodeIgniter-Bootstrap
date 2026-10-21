@@ -19,12 +19,13 @@ class Store extends MY_Controller
     public function index($page = 0, $vendor = null)
     {
         if (empty($vendor) || (int) $this->Home_admin_model->getValueStore('multiVendor') !== 1) {
-            redirect(base_url('shop'));
+            $target = base_url('shop' . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : ''));
+            redirect($target, 'location', 301);
             return;
         }
         $vendorInfo = $this->Vendorprofile_model->getVendorByUrlAddress($vendor);
         if ($vendorInfo == null || (int) $vendorInfo['status'] !== 1) {
-            redirect(base_url('shop'));
+            redirect(base_url('shop'), 'location', 301);
             return;
         }
         $data = array();
@@ -84,12 +85,13 @@ class Store extends MY_Controller
         $data['storeProducts'] = $this->Public_model->getProducts(8, 0, array(), (int) $vendorInfo['id'], true);
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
-        $head['title'] = $data['product']['title'] . ' | ' . $vendorInfo['name'] . ' — BUYORA';
+        $head['title'] = $data['product']['title'] . ' | ' . $vendorInfo['name'] . ' Store — Buy Online on BUYORA';
         $head['vendor_url'] = base_url('vendor/view/' . rawurlencode($vendorInfo['url']));
         $cleanDesc = trim(preg_replace('/\s+/', ' ', strip_tags($data['product']['description'])));
-        $head['description'] = character_limiter($cleanDesc, 160);
+        $head['description'] = !empty($cleanDesc) ? character_limiter($cleanDesc, 155) : 'Shop ' . $data['product']['title'] . ' from ' . $vendorInfo['name'] . ' on BUYORA Marketplace. Enjoy buyer protection and fast shipping.';
         $head['keywords'] = str_replace(" ", ",", $data['product']['title']);
         $head['image'] = !empty($data['product']['image']) ? $data['product']['image'] : null;
+        $head['canonical_url'] = base_url(rawurlencode($vendorInfo['url']) . '/' . $data['product']['url'] . '_' . (int) $data['product']['id']);
         $head['og_type'] = 'product';
         $data['vendorInfo'] = $vendorInfo;
         $this->render('buyora-product', $head, $data);

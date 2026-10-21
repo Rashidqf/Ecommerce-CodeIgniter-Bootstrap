@@ -179,18 +179,20 @@ class Home extends MY_Controller
             : array();
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
-        $head['title'] = $data['product']['title'];
-        $description = url_title(character_limiter(strip_tags($data['product']['description']), 130));
-        $description = str_replace("-", " ", $description) . '..';
-        $head['description'] = $description;
+        $vendorSuffix = !empty($data['product']['vendor_name']) ? ' | ' . $data['product']['vendor_name'] : '';
+        $head['title'] = $data['product']['title'] . $vendorSuffix . ' — Buy Online on BUYORA Marketplace';
+        $cleanDesc = trim(preg_replace('/\s+/', ' ', strip_tags($data['product']['description'])));
+        $head['description'] = !empty($cleanDesc)
+            ? character_limiter($cleanDesc, 155)
+            : 'Buy authentic ' . $data['product']['title'] . ' online on BUYORA Marketplace. Enjoy verified sellers, secure payment, fast shipping, and easy returns.';
         $head['keywords'] = str_replace(" ", ",", $data['product']['title']);
         $head['image'] = null;
         if(isset($data['product']['image'])) {
             $head['image'] = base_url('/attachments/shop_images/' . $data['product']['image']);
         }
         $head['canonical_url'] = !empty($data['product']['vendor_url'])
-            ? base_url($data['product']['vendor_url'] . '/' . $data['product']['url'])
-            : base_url($data['product']['url']);
+            ? base_url($data['product']['vendor_url'] . '/' . $data['product']['url'] . '_' . (int) $data['product']['id'])
+            : base_url($data['product']['url'] . '_' . (int) $data['product']['id']);
         $head['og_type'] = 'product';
         $this->render('buyora-product', $head, $data);
     }
@@ -598,5 +600,103 @@ class Home extends MY_Controller
     public function platform()
     {
         $this->load->view('main/platform/index');
+    }
+
+    public function handle404()
+    {
+        $uri = trim($this->uri->uri_string(), '/');
+
+        // 1. Strip index.php if reached directly
+        if (strpos($uri, 'index.php') === 0) {
+            $cleanUri = preg_replace('#^index\.php/?#', '', $uri);
+            redirect(base_url($cleanUri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '')), 'location', 301);
+            return;
+        }
+
+        $segments = array_values($this->uri->segment_array());
+        // Remove language prefix if present (e.g. 'en')
+        if (!empty($segments) && preg_match('/^[a-z]{2}$/i', $segments[0])) {
+            array_shift($segments);
+        }
+
+        $first = !empty($segments[0]) ? $segments[0] : '';
+        $second = !empty($segments[1]) ? $segments[1] : '';
+        $third = !empty($segments[2]) ? $segments[2] : '';
+
+        // 2. Handle /vendor or /vendor/view requests
+        if ($first === 'vendor') {
+            if (empty($second) || $second === 'view') {
+                if (!empty($third)) {
+                    redirect(base_url('vendor/view/' . rawurlencode($third) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '')), 'location', 301);
+                    return;
+                }
+                redirect(base_url('shop' . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '')), 'location', 301);
+                return;
+            }
+        }
+
+        // 3. Handle vendor slug at root (e.g. glowhouse, lumahome, stepstyle, technest)
+        if (!empty($first)) {
+            $this->load->model('vendor/Vendorprofile_model');
+            $vendor = $this->Vendorprofile_model->getVendorByUrlAddress($first);
+            if (!empty($vendor) && (int) $vendor['status'] === 1) {
+                // If there is a second segment (product slug)
+                if (!empty($second)) {
+                    $productId = 0;
+                    if (preg_match('/_(\d+)$/', $second, $m)) {
+                        $productId = (int) $m[1];
+                    } else {
+                        // Look up product by title/url slug for this vendor
+                        $this->db->where('vendor_id', $vendor['id']);
+                        $this->db->group_start();
+                        $this->db->where('url', $second);
+                        $this->db->or_like('url', str_replace('_', '-', $second));
+                        $this->db->or_like('url', str_replace('-', '_', $second));
+                        $this->db->group_end();
+                        $prod = $this->db->get('products')->row_array();
+                        if (!empty($prod)) {
+                            $productId = (int) $prod['id'];
+                        }
+                    }
+
+                    if ($productId > 0) {
+                        $prod = $this->Public_model->getOneProduct($productId);
+                        if (!empty($prod)) {
+                            redirect(base_url($first . '/' . $prod['url'] . '_' . $prod['id']), 'location', 301);
+                            return;
+                        }
+                    }
+
+                    // Fallback if product not found: redirect to vendor store
+                    redirect(base_url('vendor/view/' . $first), 'location', 301);
+                    return;
+                }
+
+                // If root vendor without second segment (e.g. /glowhouse or /glowhouse/?category=1)
+                $targetUrl = base_url('vendor/view/' . $first);
+                if (!empty($_SERVER['QUERY_STRING'])) {
+                    $targetUrl .= '?' . $_SERVER['QUERY_STRING'];
+                }
+                redirect($targetUrl, 'location', 301);
+                return;
+            }
+        }
+
+        // 4. Handle category parameter on unmatched paths
+        if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+            $catId = (int) $_GET['category'];
+            $allCats = $this->Public_model->getShopCategories();
+            foreach ($allCats as $cat) {
+                if ((int) $cat['id'] === $catId) {
+                    redirect(base_url('category/' . $catId . '/' . url_title($cat['name'], 'dash', true)), 'location', 301);
+                    return;
+                }
+            }
+            redirect(base_url('shop?category=' . $catId), 'location', 301);
+            return;
+        }
+
+        // 5. Default friendly fallback: 301 redirect unknown pages to catalog instead of cold 404
+        redirect(base_url('shop'), 'location', 301);
     }
 }

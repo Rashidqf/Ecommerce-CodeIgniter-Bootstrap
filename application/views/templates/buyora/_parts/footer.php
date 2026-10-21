@@ -25,7 +25,7 @@
                     <div class="footer-column">
                         <h2>Customer Service</h2>
                         <a href="<?= base_url('contacts') ?>">Help Center</a>
-                        <a href="<?= base_url('checkout') ?>">Track Order</a>
+                        <a href="<?= base_url('checkout') ?>" rel="nofollow">Track Order</a>
                         <a href="<?= base_url('contacts') ?>">Returns &amp; Refunds</a>
                         <a href="<?= base_url('contacts') ?>">Shipping Policy</a>
                         <a href="<?= base_url('contacts') ?>">Terms &amp; Conditions</a>
@@ -53,6 +53,10 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
+                    <div class="buyora-container footer-seo-copy" style="padding: 16px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.08); font-size: 13px; line-height: 1.6; color: #9ca3af;">
+                        <p style="margin: 0 0 6px 0;"><strong>BUYORA Online Marketplace</strong> is Pakistan's premier shopping platform connecting smart consumers with verified sellers across Karachi, Lahore, Islamabad, Rawalpindi, and nationwide. Browse thousands of authentic products across mobile electronics, trendy apparel, beauty essentials, home and living gadgets, sports gear, and daily essentials with transparent ratings and competitive pricing.</p>
+                        <p style="margin: 0;">Shop with complete peace of mind through Safepay SSL-encrypted card transactions, dependable Cash on Delivery (COD), rapid doorstep courier shipping, and comprehensive buyer protection including 7-day hassle-free returns. Experience modern, seamless, and customer-first digital commerce on BUYORA.</p>
+                    </div>
                     <div class="buyora-container footer-legal">
                         <span>&copy; 2026 Buyora. All rights reserved.</span>
                         <span>Secure Payments&nbsp; | &nbsp;100% Original Products&nbsp; | &nbsp;Fast &amp; Reliable Delivery</span>
