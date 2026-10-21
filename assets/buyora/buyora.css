@@ -365,12 +365,15 @@ body.buyora-site {
     overflow: hidden;
     border-radius: 4px;
     background: #f4ddc8;
+    aspect-ratio: 1250 / 230;
 }
 
 .hero-desktop {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 1250 / 230;
+    object-fit: cover;
 }
 
 .hero-mobile {
@@ -434,8 +437,9 @@ body.buyora-site {
 
 .category-card img {
     display: block;
-    width: 100%;
+    width: 82px;
     height: 82px;
+    aspect-ratio: 1 / 1;
     border-radius: 5px;
     object-fit: cover;
 }
@@ -566,6 +570,7 @@ body.buyora-site {
     position: relative;
     display: block;
     height: 150px;
+    aspect-ratio: 180 / 150;
     overflow: hidden;
     background: #fff;
 }
@@ -574,6 +579,7 @@ body.buyora-site {
     display: block;
     width: 100%;
     height: 100%;
+    aspect-ratio: 180 / 150;
     object-fit: contain;
 }
 
@@ -681,8 +687,8 @@ body.buyora-site {
 }
 
 .product-rating small {
-    color: #738096;
-    font-size: 8px;
+    color: #4a5568;
+    font-size: 9px;
     letter-spacing: 0;
 }
 
@@ -701,8 +707,8 @@ body.buyora-site {
 }
 
 .product-price del {
-    color: #7c8795;
-    font-size: 8px;
+    color: #4a5568;
+    font-size: 9px;
 }
 
 .product-add-button {
@@ -740,12 +746,15 @@ body.buyora-site {
     display: block;
     overflow: hidden;
     border-radius: 7px;
+    aspect-ratio: 615 / 165;
 }
 
 .promo-card img {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 615 / 165;
+    object-fit: cover;
 }
 
 .buyora-footer {
@@ -812,12 +821,29 @@ body.buyora-site {
 
 .footer-social .social-icons {
     display: flex;
-    gap: 14px;
-    margin-bottom: 7px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 .footer-social .social-icons a {
-    font-size: 16px;
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.footer-social .social-icons a:hover,
+.footer-social .social-icons a:focus {
+    background: var(--buyora-orange);
+    color: #fff;
 }
 
 .footer-social label {

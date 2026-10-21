@@ -365,6 +365,13 @@ class Home extends MY_Controller
                 $xml .= "    <priority>0.8</priority>\n";
                 $xml .= "  </url>\n";
             }
+        } else {
+            $xml .= "  <url>\n";
+            $xml .= "    <loc>" . htmlspecialchars(base_url('shop'), ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+            $xml .= "    <changefreq>daily</changefreq>\n";
+            $xml .= "    <priority>0.8</priority>\n";
+            $xml .= "  </url>\n";
         }
 
         $xml .= '</urlset>';
@@ -423,6 +430,15 @@ class Home extends MY_Controller
         $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
 
         $today = date('Y-m-d');
+
+        // Always include main blog index so sitemap is never empty
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>" . htmlspecialchars(base_url('blog'), ENT_XML1, 'UTF-8') . "</loc>\n";
+        $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+        $xml .= "    <changefreq>weekly</changefreq>\n";
+        $xml .= "    <priority>0.7</priority>\n";
+        $xml .= "  </url>\n";
+
         if ($blogPosts && $blogPosts->num_rows() > 0) {
             foreach ($blogPosts->result() as $row) {
                 $postUrl = base_url('blog/' . $row->url);

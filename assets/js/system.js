@@ -4,7 +4,10 @@
  */
 
 // Shopping Cart Manager
-$('a.add-to-cart').click(function () {
+$(document).on('click', 'a.add-to-cart, button.add-to-cart', function (e) {
+    if ($(this).is('a')) {
+        e.preventDefault();
+    }
     var reload = false;
     var article_id = $(this).data('id');
     var goto_site = $(this).data('goto');

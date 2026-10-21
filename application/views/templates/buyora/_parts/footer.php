@@ -1,14 +1,14 @@
             <footer class="buyora-footer">
                 <div class="buyora-container footer-main">
                     <a class="footer-brand" href="<?= base_url() ?>" aria-label="BUYORA home">
-                        <img src="<?= base_url('assets/buyora/buyora-logo.png') ?>" alt="BUYORA">
+                        <img src="<?= base_url('assets/buyora/buyora-logo.png') ?>" alt="BUYORA — Shop More, Live Better" width="138" height="38" loading="lazy" decoding="async">
                     </a>
                     <div class="footer-column">
                         <h2>Quick Links</h2>
                         <a href="<?= base_url() ?>">Home</a>
                         <a href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">Shop</a>
-                        <a href="<?= htmlspecialchars(base_url() . '#featured', ENT_QUOTES, 'UTF-8') ?>">Deals</a>
-                        <a href="<?= htmlspecialchars(base_url() . '#featured', ENT_QUOTES, 'UTF-8') ?>">New Arrivals</a>
+                        <a href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">Deals</a>
+                        <a href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">New Arrivals</a>
                         <a href="<?= LANG_URL . '/contacts' ?>">Contact</a>
                     </div>
                     <div class="footer-column">
@@ -33,11 +33,11 @@
                     <div class="footer-column footer-social">
                         <h2>Follow Us</h2>
                         <div class="social-icons" aria-label="Social media">
-                            <a href="<?= $footerSocialFacebook ?: '#' ?>" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="<?= $footerSocialTwitter ?: '#' ?>" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            <a href="<?= $footerSocialYoutube ?: '#' ?>" aria-label="YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            <a href="#" aria-label="TikTok"><i class="fa fa-music" aria-hidden="true"></i></a>
+                            <a href="<?= !empty($footerSocialFacebook) ? htmlspecialchars($footerSocialFacebook, ENT_QUOTES, 'UTF-8') : 'https://www.facebook.com' ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="<?= !empty($footerSocialTwitter) ? htmlspecialchars($footerSocialTwitter, ENT_QUOTES, 'UTF-8') : 'https://www.instagram.com' ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="<?= !empty($footerSocialYoutube) ? htmlspecialchars($footerSocialYoutube, ENT_QUOTES, 'UTF-8') : 'https://www.youtube.com' ?>" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa fa-music" aria-hidden="true"></i></a>
                         </div>
                         <label for="footer-email">Subscribe to our newsletter</label>
                         <form class="newsletter-form" method="post" id="subscribeForm">

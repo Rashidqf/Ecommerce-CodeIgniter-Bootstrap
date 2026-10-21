@@ -95,12 +95,13 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="<?= base_url('assets/fonts/fontawesome-webfont.woff2?v=4.7.0') ?>" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/buyora/buyora.css') ?>">
-    <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('assets/buyora/lang.js') ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.min.js') ?>" defer></script>
+    <script src="<?= base_url('assets/buyora/lang.js') ?>" defer></script>
 </head>
 <body class="buyora-site">
     <a class="buyora-skip-link" href="#main-content">Skip to content</a>
@@ -119,7 +120,7 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
             <header class="buyora-header">
                 <div class="buyora-container masthead">
                     <a class="buyora-brand" href="<?= base_url() ?>" aria-label="BUYORA home">
-                        <img src="<?= base_url('assets/buyora/buyora-logo.png') ?>" alt="BUYORA — Shop More, Live Better">
+                        <img src="<?= base_url('assets/buyora/buyora-logo.png') ?>" alt="BUYORA — Shop More, Live Better" width="138" height="38">
                     </a>
                     <form class="buyora-search" id="bigger-search" method="get" action="<?= htmlspecialchars(isset($vendor_url) && $vendor_url !== '' ? $vendor_url : LANG_URL, ENT_QUOTES, 'UTF-8') ?>" role="search">
                         <label class="sr-only" for="search_in_title">Search for products</label>
@@ -165,8 +166,8 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                     </div>
                     <a class="nav-link is-current" href="<?= base_url() ?>">Home</a>
                     <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">Shop</a>
-                    <a class="nav-link" href="<?= htmlspecialchars(base_url() . '#featured', ENT_QUOTES, 'UTF-8') ?>">Deals</a>
-                    <a class="nav-link" href="<?= htmlspecialchars(base_url() . '#featured', ENT_QUOTES, 'UTF-8') ?>">New Arrivals</a>
+                    <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">Deals</a>
+                    <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">New Arrivals</a>
                     <?php foreach (isset($buyora_header_categories) && is_array($buyora_header_categories) ? $buyora_header_categories : array() as $navCategory) { ?>
                         <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $navCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($navCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
                     <?php } ?>

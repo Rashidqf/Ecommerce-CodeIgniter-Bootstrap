@@ -105,20 +105,20 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
 ?>
 <main id="main-content" class="buyora-main">
     <section class="hero-section" aria-label="Trending products" <?= $heroMobileImageUrl !== '' ? 'style="--buyora-hero-mobile-image: url(\'' . htmlspecialchars($heroMobileImageUrl, ENT_QUOTES, 'UTF-8') . '\')"' : '' ?>>
-        <img class="hero-desktop" src="<?= htmlspecialchars($heroImageUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($heroBanner ? $heroBanner['alt_text'] : 'Everything you need in one place', ENT_QUOTES, 'UTF-8') ?>">
+        <img class="hero-desktop" src="<?= htmlspecialchars($heroImageUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($heroBanner ? $heroBanner['alt_text'] : 'Everything you need in one place', ENT_QUOTES, 'UTF-8') ?>" width="1250" height="230" fetchpriority="high" decoding="async">
         <div class="hero-mobile">
             <span class="hero-eyebrow">Trending Products</span>
             <h1>Everything You Need<br>In One Place</h1>
             <p>Fashion <span>|</span> Electronics <span>|</span> Home <span>|</span> Beauty</p>
-            <a href="<?= htmlspecialchars($heroBanner ? $heroBanner['target_url'] : '#featured', ENT_QUOTES, 'UTF-8') ?>" class="hero-shop-button">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            <a href="<?= htmlspecialchars($heroBanner ? $heroBanner['target_url'] : base_url('shop'), ENT_QUOTES, 'UTF-8') ?>" class="hero-shop-button">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
         </div>
-        <a class="hero-link" href="<?= htmlspecialchars($heroBanner ? $heroBanner['target_url'] : '#featured', ENT_QUOTES, 'UTF-8') ?>" aria-label="Shop trending products"></a>
+        <a class="hero-link" href="<?= htmlspecialchars($heroBanner ? $heroBanner['target_url'] : base_url('shop'), ENT_QUOTES, 'UTF-8') ?>" aria-label="Shop trending products"></a>
     </section>
 
     <section class="buyora-container categories-section" id="categories" aria-labelledby="categories-title">
         <div class="section-heading">
             <h2 id="categories-title">Shop By Category</h2>
-            <a href="#categories">View All <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            <a href="<?= base_url('shop') ?>">View All <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="category-grid">
             <?php if (empty($categories)) { ?>
@@ -130,11 +130,12 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
                 $categoryImagePath = $categoryImageName !== '' && strpos($categoryImageName, '..') === false && is_file('attachments/shop_images/' . $categoryImageName)
                     ? base_url('attachments/shop_images/' . rawurlencode($categoryImageName))
                     : base_url('assets/buyora/category-home.jpg');
-                $categoryLink = LANG_URL . '?category=' . (int) $category['id'];
+                $categorySlug = !empty($category['name']) ? url_title($category['name'], 'dash', true) : 'all';
+                $categoryLink = base_url('category/' . (int) $category['id'] . '/' . $categorySlug);
                 $categoryCount = isset($category['product_count']) ? (int) $category['product_count'] : 0;
                 ?>
                 <a class="category-card" href="<?= htmlspecialchars($categoryLink, ENT_QUOTES, 'UTF-8') ?>" title="<?= $categoryCount ?> products">
-                    <img src="<?= htmlspecialchars($categoryImagePath, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?= htmlspecialchars($categoryImagePath, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8') ?>" width="82" height="82" loading="lazy" decoding="async">
                     <span><?= htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8') ?></span>
                 </a>
             <?php } ?>
@@ -184,7 +185,7 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
             <?php foreach ($featuredProducts as $product) { ?>
                 <article class="product-card" data-product-collection="<?= htmlspecialchars($product['collection'], ENT_QUOTES, 'UTF-8') ?>">
                     <a class="product-image" href="<?= htmlspecialchars($product['url'], ENT_QUOTES, 'UTF-8') ?>">
-                        <img src="<?= htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?>">
+                        <img src="<?= htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?>" width="180" height="150" loading="lazy" decoding="async">
                     </a>
                     <div class="product-info">
                         <a class="product-title" href="<?= htmlspecialchars($product['url'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></a>
@@ -194,7 +195,7 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
                             <?php if (!empty($product['old_price'])) { ?><del><?= htmlspecialchars($product['old_price'], ENT_QUOTES, 'UTF-8') ?></del><?php } ?>
                         </div>
                         <?php if ($product['quantity'] > 0) { ?>
-                            <a class="add-to-cart product-add-button" data-goto="<?= base_url('checkout') ?>" data-id="<?= (int) $product['id'] ?>" href="javascript:void(0);"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
+                            <a class="add-to-cart product-add-button" data-goto="<?= base_url('checkout') ?>" data-id="<?= (int) $product['id'] ?>" href="<?= htmlspecialchars($product['url'], ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
                         <?php } else { ?>
                             <button class="product-add-button demo-product-button" type="button" disabled title="This product is out of stock" aria-label="<?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?> — out of stock"><i class="fa fa-cart-plus" aria-hidden="true"></i> Out of Stock</button>
                         <?php } ?>
@@ -207,7 +208,7 @@ $defaultCollection = $hasBestSellers ? 'bestsellers' : ($hasNewProducts ? 'new' 
     <section class="buyora-container promo-grid" aria-label="Current promotions">
         <?php foreach ($promoBanners as $index => $banner) { ?>
             <a class="promo-card <?= $index === 0 ? 'promo-electronics' : 'promo-beauty' ?>" href="<?= htmlspecialchars($banner['target_url'], ENT_QUOTES, 'UTF-8') ?>" aria-label="<?= htmlspecialchars($banner['alt_text'], ENT_QUOTES, 'UTF-8') ?>">
-                <img src="<?= htmlspecialchars($bannerImageUrl($banner['image'], 'assets/buyora/promo-electronics.jpg'), ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($banner['alt_text'], ENT_QUOTES, 'UTF-8') ?>">
+                <img src="<?= htmlspecialchars($bannerImageUrl($banner['image'], 'assets/buyora/promo-electronics.jpg'), ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($banner['alt_text'], ENT_QUOTES, 'UTF-8') ?>" width="615" height="165" loading="lazy" decoding="async">
             </a>
         <?php } ?>
     </section>
