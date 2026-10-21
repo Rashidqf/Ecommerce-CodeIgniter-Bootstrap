@@ -19,16 +19,16 @@
                             <span>No categories pinned</span>
                         <?php }
                         foreach ($footerCategories as $footerCategory) { ?>
-                            <a href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $footerCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
+                            <a href="<?= base_url('category/' . (int) $footerCategory['id'] . '/' . url_title($footerCategory['name'], 'dash', true)) ?>"><?= htmlspecialchars($footerCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
                         <?php } ?>
                     </div>
                     <div class="footer-column">
                         <h2>Customer Service</h2>
-                        <a href="<?= LANG_URL . '/contacts' ?>">Help Center</a>
-                        <a href="<?= LANG_URL . '/checkout' ?>">Track Order</a>
-                        <a href="<?= LANG_URL . '/contacts' ?>">Returns &amp; Refunds</a>
-                        <a href="<?= LANG_URL . '/contacts' ?>">Shipping Policy</a>
-                        <a href="<?= LANG_URL . '/contacts' ?>">Terms &amp; Conditions</a>
+                        <a href="<?= base_url('contacts') ?>">Help Center</a>
+                        <a href="<?= base_url('checkout') ?>">Track Order</a>
+                        <a href="<?= base_url('contacts') ?>">Returns &amp; Refunds</a>
+                        <a href="<?= base_url('contacts') ?>">Shipping Policy</a>
+                        <a href="<?= base_url('contacts') ?>">Terms &amp; Conditions</a>
                     </div>
                     <div class="footer-column footer-social">
                         <h2>Follow Us</h2>

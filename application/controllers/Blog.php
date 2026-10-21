@@ -30,9 +30,9 @@ class Blog extends MY_Controller
         $data = array();
         $head = array();
         $arrSeo = $this->Public_model->getSeo('blog');
-        $head['title'] = @$arrSeo['title'];
-        $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
+        $head['title'] = !empty($arrSeo['title']) ? $arrSeo['title'] : 'Shopping Guides, Tech Reviews & Trends | BUYORA Blog';
+        $head['description'] = !empty($arrSeo['description']) ? $arrSeo['description'] : 'Stay informed with the latest shopping tips, tech reviews, lifestyle trends, and buyer guides on the official BUYORA Marketplace blog.';
+        $head['keywords'] = !empty($arrSeo['keywords']) ? $arrSeo['keywords'] : 'buyora blog, shopping guides, tech reviews, fashion trends, ecommerce tips';
         if (isset($_GET['find'])) {
             $find = $_GET['find'];
         } else {

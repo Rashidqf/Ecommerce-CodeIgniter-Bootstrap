@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 Disallow: /admin/
+Disallow: /vendor/login
+Disallow: /vendor/register
+Disallow: /vendor/forgotten-password
 Disallow: /vendor/me
 Disallow: /vendor/finance
 Disallow: /vendor/orders

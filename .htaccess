@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
 
+# 301 Redirect index.php requests to clean URLs to avoid duplicate content
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php [NC]
+RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
+
 # Serve WebP automatically if accepted by browser and .webp exists
 RewriteCond %{HTTP_ACCEPT} image/webp
 RewriteCond %{REQUEST_FILENAME} (.+)\.(jpe?g|png)$

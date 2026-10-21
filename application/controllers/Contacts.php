@@ -27,9 +27,9 @@ class Contacts extends MY_Controller
         $data['googleMaps'] = $this->Home_admin_model->getValueStore('googleMaps');
         $data['googleApi'] = $this->Home_admin_model->getValueStore('googleApi');
         $arrSeo = $this->Public_model->getSeo('contacts');
-        $head['title'] = @$arrSeo['title'];
-        $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
+        $head['title'] = !empty($arrSeo['title']) ? $arrSeo['title'] : 'Contact Customer Support & Help Center | BUYORA';
+        $head['description'] = !empty($arrSeo['description']) ? $arrSeo['description'] : 'Get in touch with BUYORA Marketplace customer service. Reach our 24/7 support team for help with orders, shipping, returns, and merchant inquiries.';
+        $head['keywords'] = !empty($arrSeo['keywords']) ? $arrSeo['keywords'] : 'contact buyora, customer support, help center, ecommerce support';
         $this->render('contacts', $head, $data);
     }
 

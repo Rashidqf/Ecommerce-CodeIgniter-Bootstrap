@@ -147,31 +147,31 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                         <button class="all-categories" type="button" aria-expanded="false" aria-controls="all-categories-list">
                             <i class="fa fa-bars" aria-hidden="true"></i> All Categories <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </button>
-                        <div class="categories-dropdown" id="all-categories-list">
-                            <?php
-                            $categoryTree = isset($buyora_category_tree) && is_array($buyora_category_tree) ? $buyora_category_tree : array();
-                            if (empty($categoryTree)) { ?>
-                                <p class="categories-dropdown-empty">No categories yet.</p>
-                            <?php }
-                            foreach ($categoryTree as $parentCategory) { ?>
-                                <div class="categories-dropdown-group">
-                                    <a href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $parentCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($parentCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
-                                    <?php if (!empty($parentCategory['children'])) { ?>
-                                        <?php foreach ($parentCategory['children'] as $childCategory) { ?>
-                                            <a class="is-child" href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $childCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($childCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
-                                        <?php } ?>
+                    <div class="categories-dropdown" id="all-categories-list">
+                        <?php
+                        $categoryTree = isset($buyora_category_tree) && is_array($buyora_category_tree) ? $buyora_category_tree : array();
+                        if (empty($categoryTree)) { ?>
+                            <p class="categories-dropdown-empty">No categories yet.</p>
+                        <?php }
+                        foreach ($categoryTree as $parentCategory) { ?>
+                            <div class="categories-dropdown-group">
+                                <a href="<?= base_url('category/' . (int) $parentCategory['id'] . '/' . url_title($parentCategory['name'], 'dash', true)) ?>"><?= htmlspecialchars($parentCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
+                                <?php if (!empty($parentCategory['children'])) { ?>
+                                    <?php foreach ($parentCategory['children'] as $childCategory) { ?>
+                                        <a class="is-child" href="<?= base_url('category/' . (int) $childCategory['id'] . '/' . url_title($childCategory['name'], 'dash', true)) ?>"><?= htmlspecialchars($childCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
                                     <?php } ?>
-                                </div>
-                            <?php } ?>
-                        </div>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                     </div>
-                    <a class="nav-link is-current" href="<?= base_url() ?>">Home</a>
-                    <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">Shop</a>
-                    <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">Deals</a>
-                    <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '/shop', ENT_QUOTES, 'UTF-8') ?>">New Arrivals</a>
-                    <?php foreach (isset($buyora_header_categories) && is_array($buyora_header_categories) ? $buyora_header_categories : array() as $navCategory) { ?>
-                        <a class="nav-link" href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $navCategory['id'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($navCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
-                    <?php } ?>
-                    <a class="nav-link" href="<?= LANG_URL . '/contacts' ?>">Contact</a>
+                </div>
+                <a class="nav-link is-current" href="<?= base_url() ?>">Home</a>
+                <a class="nav-link" href="<?= base_url('shop') ?>">Shop</a>
+                <a class="nav-link" href="<?= base_url('shop') ?>">Deals</a>
+                <a class="nav-link" href="<?= base_url('shop') ?>">New Arrivals</a>
+                <?php foreach (isset($buyora_header_categories) && is_array($buyora_header_categories) ? $buyora_header_categories : array() as $navCategory) { ?>
+                    <a class="nav-link" href="<?= base_url('category/' . (int) $navCategory['id'] . '/' . url_title($navCategory['name'], 'dash', true)) ?>"><?= htmlspecialchars($navCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
+                <?php } ?>
+                <a class="nav-link" href="<?= base_url('contacts') ?>">Contact</a>
                 </div>
             </nav>

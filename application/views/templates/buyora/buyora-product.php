@@ -15,7 +15,7 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
 <main class="buyora-container buyora-page buyora-product-page">
     <nav class="buyora-breadcrumbs" aria-label="Breadcrumb">
         <a href="<?= base_url() ?>">Home</a><span>/</span>
-        <a href="<?= htmlspecialchars(LANG_URL . '?category=' . (int) $product['shop_categorie'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($product['categorie_name'], ENT_QUOTES, 'UTF-8') ?></a>
+        <a href="<?= base_url('category/' . (int) $product['shop_categorie'] . '/' . url_title($product['categorie_name'], 'dash', true)) ?>"><?= htmlspecialchars($product['categorie_name'], ENT_QUOTES, 'UTF-8') ?></a>
         <span>/</span><span><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></span>
     </nav>
     <div class="buyora-product-layout">

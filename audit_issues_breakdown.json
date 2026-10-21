@@ -1,0 +1,1411 @@
+{
+  "response_code_4xx": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": {\n    \"breakdown\": [\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/glowhouse/makeup_kit\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/lumahome/home_decor_lamp\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/backpack\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/stepstyle/men_s_running_shoes\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/smart_watch\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/technest/wireless_earbuds\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=7\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=8\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/?category=9\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/glowhouse/makeup_kit_4\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/lumahome/home_decor_lamp_6\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/stepstyle/backpack_5\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/stepstyle/men_s_running_shoes_2\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/technest/smart_watch_3\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/view/technest/wireless_earbuds_1\",\n        \"attachments\": {\n          \"response_code\": 404\n        }\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "result": {
+          "breakdown": [
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/glowhouse/makeup_kit",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/lumahome/home_decor_lamp",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/backpack",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/stepstyle/men_s_running_shoes",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/smart_watch",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/technest/wireless_earbuds",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=1",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=7",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=8",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/?category=9",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/glowhouse/makeup_kit_4",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/lumahome/home_decor_lamp_6",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/stepstyle/backpack_5",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/stepstyle/men_s_running_shoes_2",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/technest/smart_watch_3",
+              "attachments": {
+                "response_code": 404
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/view/technest/wireless_earbuds_1",
+              "attachments": {
+                "response_code": 404
+              }
+            }
+          ]
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 1792625535421
+  },
+  "have_broken_links_anchor": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": {\n    \"breakdown\": [\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/makeup_kit_4\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/glowhouse/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/home_decor_lamp_6\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/lumahome/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/backpack_5\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/men_s_running_shoes_2\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/stepstyle/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/smart_watch_3\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/wireless_earbuds_1\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/technest/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/glowhouse\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/lumahome\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/stepstyle\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/technest\",\n        \"attachments\": {\n          \"broken_links_anchor\": [\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=1\",\n              \"text\": \"Electronics\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=2\",\n              \"text\": \"Fashion\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=3\",\n              \"text\": \"Beauty & Health\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=4\",\n              \"text\": \"Home & Living\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=5\",\n              \"text\": \"Toys & Games\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=6\",\n              \"text\": \"Sports & Fitness\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=7\",\n              \"text\": \"Kids & Baby\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=8\",\n              \"text\": \"Groceries\"\n            },\n            {\n              \"link_to\": \"https://buyoramarketplace.com/index.php/vendor/view/?category=9\",\n              \"text\": \"Automotive\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "result": {
+          "breakdown": [
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/makeup_kit_4",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/glowhouse/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/home_decor_lamp_6",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/lumahome/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/backpack_5",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/men_s_running_shoes_2",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/stepstyle/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/smart_watch_3",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/wireless_earbuds_1",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/technest/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/glowhouse",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/lumahome",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/stepstyle",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/technest",
+              "attachments": {
+                "broken_links_anchor": [
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=1",
+                    "text": "Electronics"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=2",
+                    "text": "Fashion"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=3",
+                    "text": "Beauty & Health"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=4",
+                    "text": "Home & Living"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=5",
+                    "text": "Toys & Games"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=6",
+                    "text": "Sports & Fitness"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=7",
+                    "text": "Kids & Baby"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=8",
+                    "text": "Groceries"
+                  },
+                  {
+                    "link_to": "https://buyoramarketplace.com/index.php/vendor/view/?category=9",
+                    "text": "Automotive"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 1792625536777
+  },
+  "duplicate_meta_descriptions": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": {\n    \"breakdown\": [\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php\",\n        \"attachments\": {\n          \"meta_description\": \"Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.\",\n          \"have_meta_description_duplicates\": true\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/blog\",\n        \"attachments\": {\n          \"meta_description\": \"Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.\",\n          \"have_meta_description_duplicates\": true\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/contacts\",\n        \"attachments\": {\n          \"meta_description\": \"Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.\",\n          \"have_meta_description_duplicates\": true\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/shop\",\n        \"attachments\": {\n          \"meta_description\": \"Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.\",\n          \"have_meta_description_duplicates\": true\n        }\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "result": {
+          "breakdown": [
+            {
+              "url": "https://buyoramarketplace.com/index.php",
+              "attachments": {
+                "meta_description": "Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.",
+                "have_meta_description_duplicates": true
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/blog",
+              "attachments": {
+                "meta_description": "Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.",
+                "have_meta_description_duplicates": true
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/contacts",
+              "attachments": {
+                "meta_description": "Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.",
+                "have_meta_description_duplicates": true
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/shop",
+              "attachments": {
+                "meta_description": "Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.",
+                "have_meta_description_duplicates": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 1792625537158
+  },
+  "have_title_duplicates": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": {\n    \"breakdown\": [\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php\",\n        \"attachments\": {\n          \"title\": \"BUYORA | Shop More, Live Better — Online Marketplace\",\n          \"have_title_duplicates\": true\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/blog\",\n        \"attachments\": {\n          \"title\": \"BUYORA | Shop More, Live Better — Online Marketplace\",\n          \"have_title_duplicates\": true\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/contacts\",\n        \"attachments\": {\n          \"title\": \"BUYORA | Shop More, Live Better — Online Marketplace\",\n          \"have_title_duplicates\": true\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/shop\",\n        \"attachments\": {\n          \"title\": \"BUYORA | Shop More, Live Better — Online Marketplace\",\n          \"have_title_duplicates\": true\n        }\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "result": {
+          "breakdown": [
+            {
+              "url": "https://buyoramarketplace.com/index.php",
+              "attachments": {
+                "title": "BUYORA | Shop More, Live Better — Online Marketplace",
+                "have_title_duplicates": true
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/blog",
+              "attachments": {
+                "title": "BUYORA | Shop More, Live Better — Online Marketplace",
+                "have_title_duplicates": true
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/contacts",
+              "attachments": {
+                "title": "BUYORA | Shop More, Live Better — Online Marketplace",
+                "have_title_duplicates": true
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/shop",
+              "attachments": {
+                "title": "BUYORA | Shop More, Live Better — Online Marketplace",
+                "have_title_duplicates": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 1792625537538
+  },
+  "seo_non_friendly_url": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": {\n    \"breakdown\": [\n      {\n        \"url\": \"https://buyoramarketplace.com/admin\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/blog\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/contacts\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/glowhouse/makeup_kit_4\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/login\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/lumahome/home_decor_lamp_6\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/register\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/shop\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/backpack_5\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/men_s_running_shoes_2\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/smart_watch_3\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/technest/wireless_earbuds_1\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/glowhouse\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/lumahome\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/stepstyle\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/technest\",\n        \"attachments\": {\n          \"seo_friendly_url\": false\n        }\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "result": {
+          "breakdown": [
+            {
+              "url": "https://buyoramarketplace.com/admin",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/blog",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/contacts",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/glowhouse/makeup_kit_4",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/login",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/lumahome/home_decor_lamp_6",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/register",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/shop",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/backpack_5",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/men_s_running_shoes_2",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/smart_watch_3",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/technest/wireless_earbuds_1",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/glowhouse",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/lumahome",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/stepstyle",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/technest",
+              "attachments": {
+                "seo_friendly_url": false
+              }
+            }
+          ]
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 1792625537908
+  },
+  "title_short": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": {\n    \"breakdown\": [\n      {\n        \"url\": \"https://buyoramarketplace.com/admin\",\n        \"attachments\": {\n          \"title\": \"Administration - Login\",\n          \"title_length\": 22\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/login\",\n        \"attachments\": {\n          \"title\": \"User login | BUYORA\",\n          \"title_length\": 19\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/register\",\n        \"attachments\": {\n          \"title\": \"User registration | BUYORA\",\n          \"title_length\": 26\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/stepstyle/backpack_5\",\n        \"attachments\": {\n          \"title\": \"Backpack | StepStyle | BUYORA\",\n          \"title_length\": 29\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/glowhouse\",\n        \"attachments\": {\n          \"title\": \"GlowHouse | BUYORA\",\n          \"title_length\": 18\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/lumahome\",\n        \"attachments\": {\n          \"title\": \"LumaHome | BUYORA\",\n          \"title_length\": 17\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/stepstyle\",\n        \"attachments\": {\n          \"title\": \"StepStyle | BUYORA\",\n          \"title_length\": 18\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/index.php/vendor/view/technest\",\n        \"attachments\": {\n          \"title\": \"TechNest | BUYORA\",\n          \"title_length\": 17\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/forgotten-password\",\n        \"attachments\": {\n          \"title\": \"Password Recovery\",\n          \"title_length\": 17\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/login\",\n        \"attachments\": {\n          \"title\": \"User login\",\n          \"title_length\": 10\n        }\n      },\n      {\n        \"url\": \"https://buyoramarketplace.com/vendor/register\",\n        \"attachments\": {\n          \"title\": \"Register new user\",\n          \"title_length\": 17\n        }\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "result": {
+          "breakdown": [
+            {
+              "url": "https://buyoramarketplace.com/admin",
+              "attachments": {
+                "title": "Administration - Login",
+                "title_length": 22
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/login",
+              "attachments": {
+                "title": "User login | BUYORA",
+                "title_length": 19
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/register",
+              "attachments": {
+                "title": "User registration | BUYORA",
+                "title_length": 26
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/stepstyle/backpack_5",
+              "attachments": {
+                "title": "Backpack | StepStyle | BUYORA",
+                "title_length": 29
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/glowhouse",
+              "attachments": {
+                "title": "GlowHouse | BUYORA",
+                "title_length": 18
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/lumahome",
+              "attachments": {
+                "title": "LumaHome | BUYORA",
+                "title_length": 17
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/stepstyle",
+              "attachments": {
+                "title": "StepStyle | BUYORA",
+                "title_length": 18
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/index.php/vendor/view/technest",
+              "attachments": {
+                "title": "TechNest | BUYORA",
+                "title_length": 17
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/forgotten-password",
+              "attachments": {
+                "title": "Password Recovery",
+                "title_length": 17
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/login",
+              "attachments": {
+                "title": "User login",
+                "title_length": 10
+              }
+            },
+            {
+              "url": "https://buyoramarketplace.com/vendor/register",
+              "attachments": {
+                "title": "Register new user",
+                "title_length": 17
+              }
+            }
+          ]
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 1792625538276
+  },
+  "meta_description_empty": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"result\": {\n    \"breakdown\": [\n      {\n        \"url\": \"https://buyoramarketplace.com/admin\",\n        \"attachments\": {\n          \"meta_description_length\": 0\n        }\n      }\n    ]\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "result": {
+          "breakdown": [
+            {
+              "url": "https://buyoramarketplace.com/admin",
+              "attachments": {
+                "meta_description_length": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 1792625538631
+  }
+}

@@ -33,9 +33,9 @@ class Users extends MY_Controller
         }
         $head = array();
         $data = array();
-        $head['title'] = lang('user_login');
-        $head['description'] = lang('user_login');
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
+        $head['title'] = 'Customer & Merchant Sign In | BUYORA Marketplace';
+        $head['description'] = 'Sign in to your BUYORA account to manage orders, track live shipments, save favourite products, or manage your online merchant vendor store.';
+        $head['keywords'] = 'login, sign in, buyora account, customer portal, merchant login';
         $this->render('login', $head, $data);
     }
 
@@ -53,9 +53,9 @@ class Users extends MY_Controller
         }
         $head = array();
         $data = array();
-        $head['title'] = lang('user_register');
-        $head['description'] = lang('user_register');
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
+        $head['title'] = 'Create a Free Account | Join BUYORA Marketplace';
+        $head['description'] = 'Create your free account on BUYORA Marketplace. Shop thousands of verified products, enjoy exclusive deals, and fast delivery across Pakistan.';
+        $head['keywords'] = 'register, sign up, join buyora, create account, ecommerce account';
         $this->render('signup', $head, $data);
     }
 

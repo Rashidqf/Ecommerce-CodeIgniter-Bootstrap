@@ -41,7 +41,7 @@ $config['show_social_share_btns'] = true;
   | variable so that it is blank.
   |
  */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
   |--------------------------------------------------------------------------

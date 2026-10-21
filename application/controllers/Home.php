@@ -78,10 +78,11 @@ class Home extends MY_Controller
         $data = array();
         $head = array();
         $arrSeo = $this->Public_model->getSeo('shop');
-        $head['title'] = @$arrSeo['title'];
-        $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
-        $head['vendor_url'] = LANG_URL . '/shop';
+        $head['title'] = !empty($arrSeo['title']) ? $arrSeo['title'] : 'Online Shopping Catalog & All Products | BUYORA';
+        $head['description'] = !empty($arrSeo['description']) ? $arrSeo['description'] : 'Explore all product categories, top trending brands, and hot deals on BUYORA Marketplace. Enjoy easy checkout and fast delivery.';
+        $head['keywords'] = !empty($arrSeo['keywords']) ? $arrSeo['keywords'] : 'buyora shop, catalog, online shopping, all products, deals';
+        $head['canonical_url'] = base_url('shop');
+        $head['vendor_url'] = base_url('shop');
         $all_categories = $this->Public_model->getShopCategories();
         $data['home_categories'] = $this->getHomeCategories($all_categories);
         $data['countQuantities'] = $this->Public_model->getCountQuantities();

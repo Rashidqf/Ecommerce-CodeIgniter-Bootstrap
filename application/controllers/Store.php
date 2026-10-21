@@ -16,21 +16,23 @@ class Store extends MY_Controller
         $this->load->model('vendor/Vendorprofile_model');
     }
 
-    public function index($page, $vendor)
+    public function index($page = 0, $vendor = null)
     {
-        if ((int) $this->Home_admin_model->getValueStore('multiVendor') !== 1) {
-            show_404();
+        if (empty($vendor) || (int) $this->Home_admin_model->getValueStore('multiVendor') !== 1) {
+            redirect(base_url('shop'));
+            return;
         }
         $vendorInfo = $this->Vendorprofile_model->getVendorByUrlAddress($vendor);
         if ($vendorInfo == null || (int) $vendorInfo['status'] !== 1) {
-            show_404();
+            redirect(base_url('shop'));
+            return;
         }
         $data = array();
         $head = array();
-        $head['title'] = $vendorInfo['name'];
-        $head['description'] = lang('vendor_view') . $vendorInfo['name'];
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
-        $head['vendor_url'] = LANG_URL . '/vendor/view/' . rawurlencode($vendor);
+        $head['title'] = $vendorInfo['name'] . ' Official Store | Verified Seller on BUYORA';
+        $head['description'] = 'Shop authentic products from ' . $vendorInfo['name'] . ' on BUYORA Marketplace. Enjoy verified ratings, buyer protection, and fast delivery.';
+        $head['keywords'] = $vendorInfo['name'] . ', official store, buyora, buy online, marketplace';
+        $head['vendor_url'] = base_url('vendor/view/' . rawurlencode($vendor));
         $head['canonical_url'] = base_url('vendor/view/' . rawurlencode($vendor));
         $head['og_type'] = 'profile';
         $all_categories = $this->Public_model->getShopCategories();
@@ -82,8 +84,8 @@ class Store extends MY_Controller
         $data['storeProducts'] = $this->Public_model->getProducts(8, 0, array(), (int) $vendorInfo['id'], true);
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
-        $head['title'] = $data['product']['title'] . ' | ' . $vendorInfo['name'];
-        $head['vendor_url'] = LANG_URL . '/vendor/view/' . rawurlencode($vendorInfo['url']);
+        $head['title'] = $data['product']['title'] . ' | ' . $vendorInfo['name'] . ' — BUYORA';
+        $head['vendor_url'] = base_url('vendor/view/' . rawurlencode($vendorInfo['url']));
         $cleanDesc = trim(preg_replace('/\s+/', ' ', strip_tags($data['product']['description'])));
         $head['description'] = character_limiter($cleanDesc, 160);
         $head['keywords'] = str_replace(" ", ",", $data['product']['title']);
