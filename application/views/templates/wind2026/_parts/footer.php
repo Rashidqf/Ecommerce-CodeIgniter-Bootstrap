@@ -25,7 +25,7 @@
                 <?php if (!empty($footerCategories)) { ?>
                     <ul class="mt-4 space-y-2 text-sm">
                         <?php foreach ($footerCategories as $key => $categorie) { ?>
-                            <li><a class="go-category text-slate-300 hover:text-white" href="javascript:void(0);" data-categorie-id="<?= $key ?>"><?= htmlspecialchars($categorie, ENT_QUOTES, 'UTF-8') ?></a></li>
+                            <li><a class="go-category text-slate-300 hover:text-white" href="<?= base_url('category/' . $key . '/' . url_title($categorie, 'dash', true)) ?>" data-categorie-id="<?= $key ?>"><?= htmlspecialchars($categorie, ENT_QUOTES, 'UTF-8') ?></a></li>
                         <?php } ?>
                     </ul>
                 <?php } else { ?>

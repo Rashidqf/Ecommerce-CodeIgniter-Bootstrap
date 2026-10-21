@@ -725,14 +725,58 @@ class Public_model extends CI_Model
 
     public function sitemap()
     {
-        $query = $this->db->select('url')->get('products');
-        return $query;
+        return $this->sitemapProducts();
+    }
+
+    public function sitemapProducts()
+    {
+        $this->db->select('products.id, products.url, products.image, products.time, products.time_update, products.shop_categorie, products.vendor_id, products_translations.title, vendors.url as vendor_url');
+        $this->db->from('products');
+        $this->db->join('products_translations', 'products_translations.for_id = products.id AND products_translations.abbr = \'' . MY_LANGUAGE_ABBR . '\'', 'left');
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
+        $this->db->where('products.visibility', 1);
+        if ((int) $this->multiVendor === 1) {
+            $this->db->where('(products.vendor_id = 0 OR vendors.status = 1)', null, false);
+        }
+        $this->db->order_by('products.id', 'DESC');
+        return $this->db->get();
+    }
+
+    public function sitemapCategories()
+    {
+        $this->db->select('shop_categories.id, shop_categories.sub_for, shop_categories.image, shop_categories_translations.name');
+        $this->db->from('shop_categories');
+        $this->db->join('shop_categories_translations', 'shop_categories_translations.for_id = shop_categories.id', 'inner');
+        $this->db->where('shop_categories_translations.abbr', MY_LANGUAGE_ABBR);
+        $this->db->order_by('shop_categories.position', 'ASC');
+        return $this->db->get();
+    }
+
+    public function sitemapStores()
+    {
+        $this->db->select('id, name, url, created_at, updated_at');
+        $this->db->from('vendors');
+        $this->db->where('status', 1);
+        $this->db->order_by('id', 'ASC');
+        return $this->db->get();
+    }
+
+    public function sitemapPages()
+    {
+        $this->db->select('active_pages.id, active_pages.name, textual_pages_tanslations.name as title');
+        $this->db->from('active_pages');
+        $this->db->join('textual_pages_tanslations', 'textual_pages_tanslations.for_id = active_pages.id AND textual_pages_tanslations.abbr = \'' . MY_LANGUAGE_ABBR . '\'', 'left');
+        $this->db->where('active_pages.enabled', 1);
+        return $this->db->get();
     }
 
     public function sitemapBlog()
     {
-        $query = $this->db->select('url')->get('blog_posts');
-        return $query;
+        $this->db->select('blog_posts.id, blog_posts.url, blog_posts.image, blog_posts.time, blog_translations.title');
+        $this->db->from('blog_posts');
+        $this->db->join('blog_translations', 'blog_translations.for_id = blog_posts.id AND blog_translations.abbr = \'' . MY_LANGUAGE_ABBR . '\'', 'left');
+        $this->db->order_by('blog_posts.id', 'DESC');
+        return $this->db->get();
     }
 
     public function getUserOrdersHistoryCount($userId)

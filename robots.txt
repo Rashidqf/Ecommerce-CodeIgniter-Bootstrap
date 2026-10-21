@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /vendor/me
+Disallow: /vendor/finance
+Disallow: /vendor/orders
+Disallow: /vendor/products
+Disallow: /vendor/add
+Disallow: /vendor/edit
+Disallow: /myaccount
+Disallow: /checkout
+Disallow: /shopping-cart
+Disallow: /manageShoppingCart
+Disallow: /clearShoppingCart
+Disallow: /discountCodeChecker
+
+Sitemap: https://buyoramarketplace.com/sitemap.xml
+Sitemap: https://buyoramarketplace.com/sitemap-products.xml
+Sitemap: https://buyoramarketplace.com/sitemap-categories.xml
+Sitemap: https://buyoramarketplace.com/sitemap-stores.xml
+Sitemap: https://buyoramarketplace.com/sitemap-pages.xml
+Sitemap: https://buyoramarketplace.com/sitemap-blog.xml

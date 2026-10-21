@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 $children = (isset($page['children']) && !empty($page['children']));
                                 ?>
                                 <li>
-                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>">
+                                    <a href="<?= base_url('category/' . $page['id'] . '/' . url_title($page['name'], 'dash', true)) ?>" data-categorie-id="<?= $page['id'] ?>" class="go-category block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>">
                                         <?= htmlspecialchars($page['name'], ENT_QUOTES, 'UTF-8') ?>
                                     </a>
                                     <?php if ($children === true) {

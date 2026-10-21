@@ -23,6 +23,23 @@ class Home extends MY_Controller
         $head['keywords'] = !empty($head['title']) ? str_replace(" ", ",", $head['title']) : 'ecommerce,online shopping,marketplace,buyora';
         $all_categories = $this->Public_model->getShopCategories();
         $head['buyora_categories'] = $all_categories;
+
+        // Dynamic category SEO title and canonical URL
+        if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+            $catId = (int) $_GET['category'];
+            foreach ($all_categories as $cat) {
+                if ((int) $cat['id'] === $catId) {
+                    $catName = !empty($cat['name']) ? $cat['name'] : 'Category ' . $catId;
+                    $head['title'] = $catName . ' | BUYORA Marketplace';
+                    $head['description'] = 'Shop the best ' . $catName . ' deals on BUYORA. Verified sellers, secure checkout, and fast shipping.';
+                    $head['canonical_url'] = base_url('category/' . $catId . '/' . url_title($catName, 'dash', true));
+                    break;
+                }
+            }
+        }
+        if (empty($head['canonical_url'])) {
+            $head['canonical_url'] = LANG_URL;
+        }
         $data['home_categories'] = $this->getHomeCategories($all_categories);
         $data['all_categories'] = $all_categories;
         $data['countQuantities'] = $this->Public_model->getCountQuantities();
@@ -170,6 +187,10 @@ class Home extends MY_Controller
         if(isset($data['product']['image'])) {
             $head['image'] = base_url('/attachments/shop_images/' . $data['product']['image']);
         }
+        $head['canonical_url'] = !empty($data['product']['vendor_url'])
+            ? base_url($data['product']['vendor_url'] . '/' . $data['product']['url'])
+            : base_url($data['product']['url']);
+        $head['og_type'] = 'product';
         $this->render('buyora-product', $head, $data);
     }
 
@@ -205,49 +226,356 @@ class Home extends MY_Controller
         }
     }
 
+    public function category($id, $slug = '', $page = 0)
+    {
+        $_GET['category'] = (int) $id;
+        $this->index((int) $page);
+    }
+
     public function sitemap()
     {
-        header("Content-Type:text/xml");
-        echo '<?xml version="1.0" encoding="UTF-8"?>
-                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-        $products = $this->Public_model->sitemap();
+        $this->sitemapIndex();
+    }
+
+    public function sitemapIndex()
+    {
+        header("Content-Type: text/xml; charset=utf-8");
+        $today = date('c');
+
+        $sitemaps = array(
+            'sitemap-products.xml',
+            'sitemap-categories.xml',
+            'sitemap-stores.xml',
+            'sitemap-pages.xml',
+            'sitemap-blog.xml',
+        );
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+        foreach ($sitemaps as $sm) {
+            $xml .= "  <sitemap>\n";
+            $xml .= "    <loc>" . htmlspecialchars(base_url($sm), ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+            $xml .= "  </sitemap>\n";
+        }
+        $xml .= '</sitemapindex>';
+        echo $xml;
+    }
+
+    public function sitemapProducts()
+    {
+        header("Content-Type: text/xml; charset=utf-8");
+        $products = $this->Public_model->sitemapProducts();
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+        $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+
+        $today = date('Y-m-d');
+        if ($products && $products->num_rows() > 0) {
+            foreach ($products->result() as $row) {
+                $productUrl = !empty($row->vendor_url)
+                    ? base_url($row->vendor_url . '/' . $row->url)
+                    : base_url($row->url);
+
+                $lastmod = (!empty($row->time_update) && $row->time_update > 0)
+                    ? date('Y-m-d', (int) $row->time_update)
+                    : ((!empty($row->time) && $row->time > 0) ? date('Y-m-d', (int) $row->time) : $today);
+
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($productUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $lastmod . "</lastmod>\n";
+                $xml .= "    <changefreq>weekly</changefreq>\n";
+                $xml .= "    <priority>0.9</priority>\n";
+
+                if (!empty($row->image)) {
+                    $imgUrl = base_url('attachments/shop_images/' . $row->image);
+                    $imgTitle = !empty($row->title) ? $row->title : 'Product Image';
+                    $xml .= "    <image:image>\n";
+                    $xml .= "      <image:loc>" . htmlspecialchars($imgUrl, ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                    $xml .= "      <image:title>" . htmlspecialchars($imgTitle, ENT_XML1, 'UTF-8') . "</image:title>\n";
+                    $xml .= "    </image:image>\n";
+                }
+
+                $xml .= "  </url>\n";
+            }
+        }
+
+        $xml .= '</urlset>';
+        echo $xml;
+    }
+
+    public function sitemapCategories()
+    {
+        header("Content-Type: text/xml; charset=utf-8");
+        $categories = $this->Public_model->sitemapCategories();
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+        $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+
+        $today = date('Y-m-d');
+        if ($categories && $categories->num_rows() > 0) {
+            foreach ($categories->result() as $row) {
+                $slug = url_title($row->name, 'dash', true);
+                $catUrl = base_url('category/' . $row->id . ($slug ? '/' . $slug : ''));
+
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($catUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+                $xml .= "    <changefreq>daily</changefreq>\n";
+                $xml .= "    <priority>0.8</priority>\n";
+
+                if (!empty($row->image)) {
+                    $imgUrl = base_url('attachments/shop_images/' . $row->image);
+                    $xml .= "    <image:image>\n";
+                    $xml .= "      <image:loc>" . htmlspecialchars($imgUrl, ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                    $xml .= "      <image:title>" . htmlspecialchars($row->name, ENT_XML1, 'UTF-8') . "</image:title>\n";
+                    $xml .= "    </image:image>\n";
+                }
+
+                $xml .= "  </url>\n";
+            }
+        }
+
+        $xml .= '</urlset>';
+        echo $xml;
+    }
+
+    public function sitemapStores()
+    {
+        header("Content-Type: text/xml; charset=utf-8");
+        $stores = $this->Public_model->sitemapStores();
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        $today = date('Y-m-d');
+        if ($stores && $stores->num_rows() > 0) {
+            foreach ($stores->result() as $row) {
+                $storeUrl = base_url('vendor/view/' . $row->url);
+                $lastmod = !empty($row->updated_at)
+                    ? date('Y-m-d', strtotime($row->updated_at))
+                    : (!empty($row->created_at) ? date('Y-m-d', strtotime($row->created_at)) : $today);
+
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($storeUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $lastmod . "</lastmod>\n";
+                $xml .= "    <changefreq>weekly</changefreq>\n";
+                $xml .= "    <priority>0.8</priority>\n";
+                $xml .= "  </url>\n";
+            }
+        }
+
+        $xml .= '</urlset>';
+        echo $xml;
+    }
+
+    public function sitemapPages()
+    {
+        header("Content-Type: text/xml; charset=utf-8");
+        $pages = $this->Public_model->sitemapPages();
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        $today = date('Y-m-d');
+        // Core static pages
+        $staticPages = array(
+            array('url' => base_url(), 'freq' => 'daily', 'priority' => '1.0'),
+            array('url' => base_url('shop'), 'freq' => 'daily', 'priority' => '0.9'),
+            array('url' => base_url('contacts'), 'freq' => 'monthly', 'priority' => '0.6'),
+            array('url' => base_url('blog'), 'freq' => 'weekly', 'priority' => '0.7'),
+        );
+
+        foreach ($staticPages as $p) {
+            $xml .= "  <url>\n";
+            $xml .= "    <loc>" . htmlspecialchars($p['url'], ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+            $xml .= "    <changefreq>" . $p['freq'] . "</changefreq>\n";
+            $xml .= "    <priority>" . $p['priority'] . "</priority>\n";
+            $xml .= "  </url>\n";
+        }
+
+        if ($pages && $pages->num_rows() > 0) {
+            foreach ($pages->result() as $row) {
+                $pageUrl = base_url('page/' . $row->name);
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($pageUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+                $xml .= "    <changefreq>monthly</changefreq>\n";
+                $xml .= "    <priority>0.6</priority>\n";
+                $xml .= "  </url>\n";
+            }
+        }
+
+        $xml .= '</urlset>';
+        echo $xml;
+    }
+
+    public function sitemapBlog()
+    {
+        header("Content-Type: text/xml; charset=utf-8");
         $blogPosts = $this->Public_model->sitemapBlog();
 
-        foreach ($blogPosts->result() as $row1) {
-            echo '<url>
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+        $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
 
-      <loc>' . base_url('blog/' . $row1->url) . '</loc>
+        $today = date('Y-m-d');
+        if ($blogPosts && $blogPosts->num_rows() > 0) {
+            foreach ($blogPosts->result() as $row) {
+                $postUrl = base_url('blog/' . $row->url);
+                $lastmod = (!empty($row->time) && $row->time > 0) ? date('Y-m-d', (int) $row->time) : $today;
 
-      <changefreq>monthly</changefreq>
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($postUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $lastmod . "</lastmod>\n";
+                $xml .= "    <changefreq>weekly</changefreq>\n";
+                $xml .= "    <priority>0.7</priority>\n";
 
-      <priority>0.1</priority>
+                if (!empty($row->image)) {
+                    $imgUrl = base_url('attachments/blog_images/' . $row->image);
+                    $imgTitle = !empty($row->title) ? $row->title : 'Blog Post';
+                    $xml .= "    <image:image>\n";
+                    $xml .= "      <image:loc>" . htmlspecialchars($imgUrl, ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                    $xml .= "      <image:title>" . htmlspecialchars($imgTitle, ENT_XML1, 'UTF-8') . "</image:title>\n";
+                    $xml .= "    </image:image>\n";
+                }
 
-   </url>';
+                $xml .= "  </url>\n";
+            }
         }
 
-        echo '<url>
+        $xml .= '</urlset>';
+        echo $xml;
+    }
 
-        <loc>' . base_url('/kirilkirkov-ecommerce-ci-b3-hcheck') . '</loc>
+    public function sitemapAll()
+    {
+        header("Content-Type: text/xml; charset=utf-8");
+        $today = date('Y-m-d');
 
-        <changefreq>monthly</changefreq>
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+        $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
 
-        <priority>0.1</priority>
-
-        </url>';
-
-        foreach ($products->result() as $row) {
-            echo '<url>
-
-      <loc>' . base_url($row->url) . '</loc>
-
-      <changefreq>monthly</changefreq>
-
-      <priority>0.1</priority>
-
-   </url>';
+        // 1. Static Pages
+        $staticPages = array(
+            array('url' => base_url(), 'freq' => 'daily', 'priority' => '1.0'),
+            array('url' => base_url('shop'), 'freq' => 'daily', 'priority' => '0.9'),
+            array('url' => base_url('contacts'), 'freq' => 'monthly', 'priority' => '0.6'),
+            array('url' => base_url('blog'), 'freq' => 'weekly', 'priority' => '0.7'),
+        );
+        foreach ($staticPages as $p) {
+            $xml .= "  <url>\n";
+            $xml .= "    <loc>" . htmlspecialchars($p['url'], ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+            $xml .= "    <changefreq>" . $p['freq'] . "</changefreq>\n";
+            $xml .= "    <priority>" . $p['priority'] . "</priority>\n";
+            $xml .= "  </url>\n";
         }
 
-        echo '</urlset>';
+        // 2. Categories
+        $categories = $this->Public_model->sitemapCategories();
+        if ($categories && $categories->num_rows() > 0) {
+            foreach ($categories->result() as $row) {
+                $slug = url_title($row->name, 'dash', true);
+                $catUrl = base_url('category/' . $row->id . ($slug ? '/' . $slug : ''));
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($catUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+                $xml .= "    <changefreq>daily</changefreq>\n";
+                $xml .= "    <priority>0.8</priority>\n";
+                if (!empty($row->image)) {
+                    $xml .= "    <image:image>\n";
+                    $xml .= "      <image:loc>" . htmlspecialchars(base_url('attachments/shop_images/' . $row->image), ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                    $xml .= "      <image:title>" . htmlspecialchars($row->name, ENT_XML1, 'UTF-8') . "</image:title>\n";
+                    $xml .= "    </image:image>\n";
+                }
+                $xml .= "  </url>\n";
+            }
+        }
+
+        // 3. Stores
+        $stores = $this->Public_model->sitemapStores();
+        if ($stores && $stores->num_rows() > 0) {
+            foreach ($stores->result() as $row) {
+                $storeUrl = base_url('vendor/view/' . $row->url);
+                $lastmod = !empty($row->updated_at)
+                    ? date('Y-m-d', strtotime($row->updated_at))
+                    : (!empty($row->created_at) ? date('Y-m-d', strtotime($row->created_at)) : $today);
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($storeUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $lastmod . "</lastmod>\n";
+                $xml .= "    <changefreq>weekly</changefreq>\n";
+                $xml .= "    <priority>0.8</priority>\n";
+                $xml .= "  </url>\n";
+            }
+        }
+
+        // 4. Products
+        $products = $this->Public_model->sitemapProducts();
+        if ($products && $products->num_rows() > 0) {
+            foreach ($products->result() as $row) {
+                $productUrl = !empty($row->vendor_url)
+                    ? base_url($row->vendor_url . '/' . $row->url)
+                    : base_url($row->url);
+                $lastmod = (!empty($row->time_update) && $row->time_update > 0)
+                    ? date('Y-m-d', (int) $row->time_update)
+                    : ((!empty($row->time) && $row->time > 0) ? date('Y-m-d', (int) $row->time) : $today);
+
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($productUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $lastmod . "</lastmod>\n";
+                $xml .= "    <changefreq>weekly</changefreq>\n";
+                $xml .= "    <priority>0.9</priority>\n";
+                if (!empty($row->image)) {
+                    $xml .= "    <image:image>\n";
+                    $xml .= "      <image:loc>" . htmlspecialchars(base_url('attachments/shop_images/' . $row->image), ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                    $xml .= "      <image:title>" . htmlspecialchars(!empty($row->title) ? $row->title : 'Product Image', ENT_XML1, 'UTF-8') . "</image:title>\n";
+                    $xml .= "    </image:image>\n";
+                }
+                $xml .= "  </url>\n";
+            }
+        }
+
+        // 5. Blog
+        $blogPosts = $this->Public_model->sitemapBlog();
+        if ($blogPosts && $blogPosts->num_rows() > 0) {
+            foreach ($blogPosts->result() as $row) {
+                $postUrl = base_url('blog/' . $row->url);
+                $lastmod = (!empty($row->time) && $row->time > 0) ? date('Y-m-d', (int) $row->time) : $today;
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars($postUrl, ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $lastmod . "</lastmod>\n";
+                $xml .= "    <changefreq>weekly</changefreq>\n";
+                $xml .= "    <priority>0.7</priority>\n";
+                if (!empty($row->image)) {
+                    $xml .= "    <image:image>\n";
+                    $xml .= "      <image:loc>" . htmlspecialchars(base_url('attachments/blog_images/' . $row->image), ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                    $xml .= "      <image:title>" . htmlspecialchars(!empty($row->title) ? $row->title : 'Blog Post', ENT_XML1, 'UTF-8') . "</image:title>\n";
+                    $xml .= "    </image:image>\n";
+                }
+                $xml .= "  </url>\n";
+            }
+        }
+
+        // 6. Dynamic Pages
+        $pages = $this->Public_model->sitemapPages();
+        if ($pages && $pages->num_rows() > 0) {
+            foreach ($pages->result() as $row) {
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>" . htmlspecialchars(base_url('page/' . $row->name), ENT_XML1, 'UTF-8') . "</loc>\n";
+                $xml .= "    <lastmod>" . $today . "</lastmod>\n";
+                $xml .= "    <changefreq>monthly</changefreq>\n";
+                $xml .= "    <priority>0.6</priority>\n";
+                $xml .= "  </url>\n";
+            }
+        }
+
+        $xml .= '</urlset>';
+        echo $xml;
     }
 
     public function platform()

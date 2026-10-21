@@ -124,8 +124,23 @@ $route['(\w{2})/myaccount/(:num)'] = "Users/myaccount/$2";
 $route['logout'] = "Users/logout";
 $route['(\w{2})/logout'] = "Users/logout";
 
-$route['sitemap.xml'] = "home/sitemap";
-$route['kirilkirkov-ecommerce-ci-bs3-platform'] = "home/platform";
+// Dynamic XML Sitemaps for Search Engines
+$route['sitemap.xml'] = "home/sitemapIndex";
+$route['sitemap'] = "home/sitemapIndex";
+$route['sitemap-products.xml'] = "home/sitemapProducts";
+$route['sitemap-categories.xml'] = "home/sitemapCategories";
+$route['sitemap-stores.xml'] = "home/sitemapStores";
+$route['sitemap-pages.xml'] = "home/sitemapPages";
+$route['sitemap-blog.xml'] = "home/sitemapBlog";
+$route['sitemap-all.xml'] = "home/sitemapAll";
+
+// Clean Category SEO Routes
+$route['category/(:num)'] = "home/category/$1";
+$route['category/(:num)/(:any)'] = "home/category/$1/$2";
+$route['category/(:num)/(:any)/(:num)'] = "home/category/$1/$2/$3";
+$route['(\w{2})/category/(:num)'] = "home/category/$2";
+$route['(\w{2})/category/(:num)/(:any)'] = "home/category/$2/$3";
+$route['(\w{2})/category/(:num)/(:any)/(:num)'] = "home/category/$2/$3/$4";
 
 // Confirm link
 $route['confirm/(:any)'] = "home/confirmLink/$1";

@@ -93,7 +93,7 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
 
                 <div class="mt-5 flex flex-wrap items-center gap-2">
                     <div class="text-sm font-semibold text-slate-700"><?= lang('in_category') ?>:</div>
-                    <a href="javascript:void(0);" class="go-category inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" data-categorie-id="<?= $product['shop_categorie'] ?>">
+                    <a href="<?= base_url('category/' . $product['shop_categorie'] . '/' . url_title($product['categorie_name'] ?? 'category', 'dash', true)) ?>" class="go-category inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" data-categorie-id="<?= $product['shop_categorie'] ?>">
                         <?= $product['categorie_name'] ?>
                     </a>
                 </div>

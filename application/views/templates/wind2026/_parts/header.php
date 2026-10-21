@@ -4,13 +4,67 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <?php
+            $pageCanonical = !empty($canonical_url) ? $canonical_url : (!empty($head['canonical_url']) ? $head['canonical_url'] : current_url());
+            $pageImage = isset($image) && !is_null($image) ? $image : base_url('assets/img/site-overview.png');
+            $pageType = !empty($og_type) ? $og_type : 'website';
+        ?>
+        <link rel="canonical" href="<?= htmlspecialchars($pageCanonical, ENT_QUOTES, 'UTF-8') ?>" />
         <meta name="description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>" />
         <meta name="keywords" content="<?= htmlspecialchars($keywords ?? '', ENT_QUOTES, 'UTF-8') ?>" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+        <!-- Open Graph / Social Media -->
+        <meta property="og:site_name" content="BUYORA Marketplace" />
         <meta property="og:title" content="<?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?>" />
         <meta property="og:description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>" />
-        <meta property="og:url" content="<?= LANG_URL ?>" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="<?= isset($image) && !is_null($image) ? $image : base_url('assets/img/site-overview.png') ?>" />
+        <meta property="og:url" content="<?= htmlspecialchars($pageCanonical, ENT_QUOTES, 'UTF-8') ?>" />
+        <meta property="og:type" content="<?= htmlspecialchars($pageType, ENT_QUOTES, 'UTF-8') ?>" />
+        <meta property="og:image" content="<?= htmlspecialchars($pageImage, ENT_QUOTES, 'UTF-8') ?>" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="<?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?>" />
+        <meta name="twitter:description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>" />
+        <meta name="twitter:image" content="<?= htmlspecialchars($pageImage, ENT_QUOTES, 'UTF-8') ?>" />
+
+        <!-- JSON-LD Structured Data for Google Rich Results -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "BUYORA Marketplace",
+          "url": "<?= base_url() ?>",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "<?= base_url() ?>?search_in_title={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+        </script>
+        <?php if (!empty($product) && is_array($product) && isset($product['title'])) { ?>
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": <?= json_encode($product['title']) ?>,
+          "image": [<?= json_encode($pageImage) ?>],
+          "description": <?= json_encode(strip_tags($product['description'] ?? '')) ?>,
+          "sku": "BUYORA-<?= (int)$product['id'] ?>",
+          "offers": {
+            "@type": "Offer",
+            "url": <?= json_encode($pageCanonical) ?>,
+            "priceCurrency": "PKR",
+            "price": "<?= preg_replace('/[^0-9.]/', '', (string)($product['price'] ?? '0')) ?>",
+            "availability": "<?= (!isset($product['quantity']) || (int)$product['quantity'] > 0) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' ?>",
+            "seller": {
+              "@type": "Organization",
+              "name": <?= json_encode(!empty($product['vendor_name']) ? $product['vendor_name'] : 'BUYORA Marketplace') ?>
+            }
+          }
+        }
+        </script>
+        <?php } ?>
         <title><?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?></title>
         <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
         <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />

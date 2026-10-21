@@ -31,6 +31,8 @@ class Store extends MY_Controller
         $head['description'] = lang('vendor_view') . $vendorInfo['name'];
         $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
         $head['vendor_url'] = LANG_URL . '/vendor/view/' . rawurlencode($vendor);
+        $head['canonical_url'] = base_url('vendor/view/' . rawurlencode($vendor));
+        $head['og_type'] = 'profile';
         $all_categories = $this->Public_model->getShopCategories();
 
         /*
