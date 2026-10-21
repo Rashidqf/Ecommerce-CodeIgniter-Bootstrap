@@ -80,12 +80,13 @@ class Store extends MY_Controller
         $data['storeProducts'] = $this->Public_model->getProducts(8, 0, array(), (int) $vendorInfo['id'], true);
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
-        $head['title'] = $vendorInfo['name'] . ' - ' . $data['product']['title'];
+        $head['title'] = $data['product']['title'] . ' | ' . $vendorInfo['name'];
         $head['vendor_url'] = LANG_URL . '/vendor/view/' . rawurlencode($vendorInfo['url']);
-        $description = url_title(character_limiter(strip_tags($data['product']['description']), 130));
-        $description = str_replace("-", " ", $description) . '..';
-        $head['description'] = $description;
+        $cleanDesc = trim(preg_replace('/\s+/', ' ', strip_tags($data['product']['description'])));
+        $head['description'] = character_limiter($cleanDesc, 160);
         $head['keywords'] = str_replace(" ", ",", $data['product']['title']);
+        $head['image'] = !empty($data['product']['image']) ? $data['product']['image'] : null;
+        $head['og_type'] = 'product';
         $data['vendorInfo'] = $vendorInfo;
         $this->render('buyora-product', $head, $data);
     }

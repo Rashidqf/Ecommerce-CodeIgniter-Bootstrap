@@ -4,13 +4,95 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta name="keywords" content="<?= htmlspecialchars($keywords ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:title" content="<?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:url" content="<?= LANG_URL ?>">
-    <meta property="og:type" content="website">
-    <title><?= htmlspecialchars($title ?? 'BUYORA | Shop More, Live Better', ENT_QUOTES, 'UTF-8') ?></title>
+<?php
+$siteName = 'BUYORA Marketplace';
+$defaultTitle = 'BUYORA | Shop More, Live Better — Online Marketplace';
+$defaultDesc = 'Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.';
+$defaultKeywords = 'ecommerce, online shopping, buyora, marketplace, electronics, fashion, beauty, deals';
+
+$pageTitle = !empty($title) ? trim($title) : $defaultTitle;
+if (!empty($title) && stripos($title, 'BUYORA') === false) {
+    $metaTitle = $pageTitle . ' | BUYORA';
+} else {
+    $metaTitle = $pageTitle;
+}
+
+$pageDesc = !empty($description) ? trim(strip_tags($description)) : $defaultDesc;
+if (mb_strlen($pageDesc) > 165) {
+    $pageDesc = mb_substr($pageDesc, 0, 162) . '...';
+}
+
+$pageKeywords = !empty($keywords) ? trim($keywords) : $defaultKeywords;
+
+if (!empty($og_image)) {
+    $shareImage = (strpos($og_image, 'http://') === 0 || strpos($og_image, 'https://') === 0) ? $og_image : base_url($og_image);
+} elseif (!empty($image)) {
+    $shareImage = (strpos($image, 'http://') === 0 || strpos($image, 'https://') === 0) ? $image : base_url('attachments/shop_images/' . $image);
+} else {
+    $shareImage = base_url('assets/buyora/buyora-og.jpg');
+}
+
+$canonicalUrl = function_exists('current_url') ? current_url() : LANG_URL;
+if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
+    $canonicalUrl = rtrim(base_url(), '/') . '/';
+}
+?>
+    <!-- Primary SEO Meta Tags -->
+    <title><?= htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8') ?></title>
+    <meta name="title" content="<?= htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="keywords" content="<?= htmlspecialchars($pageKeywords, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="author" content="BUYORA Marketplace">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
+
+    <!-- Favicon & Mobile Icons -->
+    <link rel="shortcut icon" href="<?= base_url('favicon.ico') ?>" type="image/x-icon">
+    <link rel="icon" href="<?= base_url('favicon.ico') ?>" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('assets/buyora/favicon-32x32.png') ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/buyora/favicon-16x16.png') ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url('assets/buyora/apple-touch-icon.png') ?>">
+    <link rel="manifest" href="<?= base_url('site.webmanifest') ?>">
+    <meta name="theme-color" content="#10b981">
+    <meta name="msapplication-TileColor" content="#0f172a">
+
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="<?= !empty($og_type) ? htmlspecialchars($og_type, ENT_QUOTES, 'UTF-8') : 'website' ?>">
+    <meta property="og:site_name" content="<?= htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($shareImage, ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:image:secure_url" content="<?= htmlspecialchars($shareImage, ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="<?= htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="twitter:title" content="<?= htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($pageDesc, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($shareImage, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="twitter:image:alt" content="<?= htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8') ?>">
+
+    <!-- Schema.org JSON-LD Structured Data for Google SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "BUYORA Marketplace",
+      "url": "<?= rtrim(base_url(), '/') ?>/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "<?= rtrim(base_url(), '/') ?>/?search_in_title={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">

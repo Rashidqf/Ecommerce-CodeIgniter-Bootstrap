@@ -18,9 +18,9 @@ class Home extends MY_Controller
         $data = array();
         $head = array();
         $arrSeo = $this->Public_model->getSeo('home');
-        $head['title'] = @$arrSeo['title'];
-        $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
+        $head['title'] = !empty($arrSeo['title']) ? $arrSeo['title'] : 'BUYORA | Shop More, Live Better — Online Marketplace';
+        $head['description'] = !empty($arrSeo['description']) ? $arrSeo['description'] : 'Shop top electronics, fashion, beauty, home goods & more on BUYORA. Enjoy verified sellers, secure card payments, and fast delivery.';
+        $head['keywords'] = !empty($head['title']) ? str_replace(" ", ",", $head['title']) : 'ecommerce,online shopping,marketplace,buyora';
         $all_categories = $this->Public_model->getShopCategories();
         $head['buyora_categories'] = $all_categories;
         $data['home_categories'] = $this->getHomeCategories($all_categories);
