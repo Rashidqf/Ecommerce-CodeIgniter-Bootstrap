@@ -6,7 +6,7 @@ class Safepay
     public function environment()
     {
         $environment = getenv('SAFEPAY_ENVIRONMENT');
-        return $environment === 'production' ? 'production' : 'sandbox';
+        return ($environment === 'production' || $environment === 'live') ? 'production' : 'sandbox';
     }
 
     public function isConfigured()

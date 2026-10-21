@@ -73,12 +73,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+$dbHost = getenv('DB_HOST') ? getenv('DB_HOST') : 'localhost';
+$dbUser = getenv('DB_USERNAME') ? getenv('DB_USERNAME') : (getenv('DB_USER') ? getenv('DB_USER') : 'root');
+$dbPass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : (getenv('DB_PASS') !== false ? getenv('DB_PASS') : '');
+$dbName = getenv('DB_DATABASE') ? getenv('DB_DATABASE') : (getenv('DB_NAME') ? getenv('DB_NAME') : 'shop');
+
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'shop',
+	'hostname' => $dbHost,
+	'username' => $dbUser,
+	'password' => $dbPass,
+	'database' => $dbName,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
