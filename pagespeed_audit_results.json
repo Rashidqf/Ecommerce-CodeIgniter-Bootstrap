@@ -1,0 +1,83 @@
+{
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"done\": true,\n  \"report\": {\n    \"DESKTOP\": {\n      \"status\": \"ok\",\n      \"lab_metrics\": {\n        \"Total Blocking Time\": \"0 ms\",\n        \"First Contentful Paint\": \"814 ms\",\n        \"Largest Contentful Paint\": \"814 ms\",\n        \"Cumulative Layout Shift\": \"0.000\",\n        \"Speed Index\": \"2.2 s\",\n        \"Time to Interactive\": \"814 ms\"\n      },\n      \"opportunities\": [\n        {\n          \"opportunity\": \"Unused Css Rules\",\n          \"estimated_savings\": \"0 ms\",\n          \"size_reduction_kb\": 17\n        },\n        {\n          \"opportunity\": \"Unused Javascript\",\n          \"estimated_savings\": \"0 ms\",\n          \"size_reduction_kb\": 20\n        },\n        {\n          \"opportunity\": \"Redirects\",\n          \"estimated_savings\": \"190 ms\",\n          \"size_reduction_kb\": null\n        },\n        {\n          \"opportunity\": \"Unminified Css\",\n          \"estimated_savings\": \"0 ms\",\n          \"size_reduction_kb\": 2\n        }\n      ]\n    },\n    \"MOBILE\": {\n      \"status\": \"ok\",\n      \"lab_metrics\": {\n        \"Cumulative Layout Shift\": \"0.002\",\n        \"Total Blocking Time\": \"0 ms\",\n        \"First Contentful Paint\": \"2.8 s\",\n        \"Time to Interactive\": \"3.3 s\",\n        \"Speed Index\": \"6.2 s\",\n        \"Largest Contentful Paint\": \"3.2 s\"\n      },\n      \"opportunities\": [\n        {\n          \"opportunity\": \"Unminified Css\",\n          \"estimated_savings\": \"0 ms\",\n          \"size_reduction_kb\": 2\n        },\n        {\n          \"opportunity\": \"Unused Css Rules\",\n          \"estimated_savings\": \"0 ms\",\n          \"size_reduction_kb\": 17\n        },\n        {\n          \"opportunity\": \"Redirects\",\n          \"estimated_savings\": \"630 ms\",\n          \"size_reduction_kb\": null\n        },\n        {\n          \"opportunity\": \"Unused Javascript\",\n          \"estimated_savings\": \"190 ms\",\n          \"size_reduction_kb\": 20\n        }\n      ]\n    }\n  }\n}"
+      }
+    ],
+    "structuredContent": {
+      "done": true,
+      "report": {
+        "DESKTOP": {
+          "status": "ok",
+          "lab_metrics": {
+            "Total Blocking Time": "0 ms",
+            "First Contentful Paint": "814 ms",
+            "Largest Contentful Paint": "814 ms",
+            "Cumulative Layout Shift": "0.000",
+            "Speed Index": "2.2 s",
+            "Time to Interactive": "814 ms"
+          },
+          "opportunities": [
+            {
+              "opportunity": "Unused Css Rules",
+              "estimated_savings": "0 ms",
+              "size_reduction_kb": 17
+            },
+            {
+              "opportunity": "Unused Javascript",
+              "estimated_savings": "0 ms",
+              "size_reduction_kb": 20
+            },
+            {
+              "opportunity": "Redirects",
+              "estimated_savings": "190 ms",
+              "size_reduction_kb": null
+            },
+            {
+              "opportunity": "Unminified Css",
+              "estimated_savings": "0 ms",
+              "size_reduction_kb": 2
+            }
+          ]
+        },
+        "MOBILE": {
+          "status": "ok",
+          "lab_metrics": {
+            "Cumulative Layout Shift": "0.002",
+            "Total Blocking Time": "0 ms",
+            "First Contentful Paint": "2.8 s",
+            "Time to Interactive": "3.3 s",
+            "Speed Index": "6.2 s",
+            "Largest Contentful Paint": "3.2 s"
+          },
+          "opportunities": [
+            {
+              "opportunity": "Unminified Css",
+              "estimated_savings": "0 ms",
+              "size_reduction_kb": 2
+            },
+            {
+              "opportunity": "Unused Css Rules",
+              "estimated_savings": "0 ms",
+              "size_reduction_kb": 17
+            },
+            {
+              "opportunity": "Redirects",
+              "estimated_savings": "630 ms",
+              "size_reduction_kb": null
+            },
+            {
+              "opportunity": "Unused Javascript",
+              "estimated_savings": "190 ms",
+              "size_reduction_kb": 20
+            }
+          ]
+        }
+      }
+    }
+  },
+  "jsonrpc": "2.0",
+  "id": 1792627692926
+}
