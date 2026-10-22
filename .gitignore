@@ -2,4 +2,3 @@
 /application/logs/*
 /application/config/installed.lock
 .env
-.agents/mcp/*token*.json

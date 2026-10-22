@@ -1,0 +1,8 @@
+{
+  "token_type": "Bearer",
+  "access_token": "ubs_oauth2_BPfowWAGhiMqRVTCrR5FZOe1fMZjVF7E5SMCIA20mQ",
+  "expires_in": 172800,
+  "refresh_token": "ubs_oauth2_JuKM0sVZmPmZ5ItHbYRnw8NzsZYqtyXEyUUSqc5eKYN05DGZ",
+  "scope": "profile domain keywords serp backlinks site_audit content projects utility",
+  "saved_at": 1740000000000
+}
