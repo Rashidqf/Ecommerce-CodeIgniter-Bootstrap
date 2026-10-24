@@ -385,7 +385,7 @@ class Public_model extends CI_Model
     
     private function getOneProductForSerialize($id)
     {
-        $this->db->select('vendors.name as vendor_name, vendors.id as vendor_id, products.*, products_translations.price');
+        $this->db->select('vendors.name as vendor_name, vendors.id as vendor_id, products.*, products_translations.title, products_translations.price');
         $this->db->where('products.id', $id);
         $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'inner');

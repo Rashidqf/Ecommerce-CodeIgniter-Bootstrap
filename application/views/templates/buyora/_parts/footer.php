@@ -47,8 +47,8 @@
                     </div>
                     <div class="footer-column footer-contact">
                         <h2>Contact Us</h2>
-                        <a href="tel:<?= htmlspecialchars($footerContactPhone, ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-phone" aria-hidden="true"></i> <?= htmlspecialchars($footerContactPhone ?: '+92 300 1234567', ENT_QUOTES, 'UTF-8') ?></a>
-                        <a href="mailto:<?= htmlspecialchars($footerContactEmail, ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-envelope" aria-hidden="true"></i> <?= htmlspecialchars($footerContactEmail ?: 'info@buyora.com', ENT_QUOTES, 'UTF-8') ?></a>
+                        <a href="tel:<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?></a>
+                        <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
                         <span><i class="fa fa-map-marker" aria-hidden="true"></i> <?= htmlspecialchars($footerContactAddr ?: 'Karachi, Pakistan', ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
                 </div>

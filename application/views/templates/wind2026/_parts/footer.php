@@ -50,7 +50,7 @@
                             <div class="flex gap-2"><i class="fa fa-map-marker mt-0.5 w-4 text-slate-400" aria-hidden="true"></i><div><?= $footerContactAddr ?></div></div>
                         <?php } ?>
                         <?php if ($footerContactPhone != '') { ?>
-                            <div class="flex gap-2"><i class="fa fa-phone mt-0.5 w-4 text-slate-400" aria-hidden="true"></i><div><?= $footerContactPhone ?></div></div>
+                            <div class="flex gap-2"><i class="fa fa-phone mt-0.5 w-4 text-slate-400" aria-hidden="true"></i><div><a class="text-slate-300 hover:text-white" href="tel:<?= $footerContactPhone ?>"><?= $footerContactPhone ?></a></div></div>
                         <?php } ?>
                         <?php if ($footerContactEmail != '') { ?>
                             <div class="flex gap-2"><i class="fa fa-envelope mt-0.5 w-4 text-slate-400" aria-hidden="true"></i><a class="text-slate-300 hover:text-white" href="mailto:<?= $footerContactEmail ?>"><?= $footerContactEmail ?></a></div>

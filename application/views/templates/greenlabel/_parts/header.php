@@ -67,7 +67,12 @@
                         <?php
                         if ($footerContactPhone != '') {
                             ?>
-                            <p class="phone"><?= lang('call_us') . ' ' . $footerContactPhone ?></p>
+                            <p class="phone"><a href="tel:<?= $footerContactPhone ?>" style="color:inherit;text-decoration:none;"><?= lang('call_us') . ' ' . $footerContactPhone ?></a></p>
+                            <?php
+                        }
+                        if ($footerContactEmail != '') {
+                            ?>
+                            <p class="phone" style="margin-left:15px;"><a href="mailto:<?= $footerContactEmail ?>" style="color:inherit;text-decoration:none;"><i class="fa fa-envelope" aria-hidden="true"></i> <?= $footerContactEmail ?></a></p>
                             <?php
                         }
                         $num_langs = count($allLanguages);

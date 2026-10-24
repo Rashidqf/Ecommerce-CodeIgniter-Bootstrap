@@ -85,9 +85,13 @@
                             <?php
                             if ($footerContactPhone != '') {
                                 ?>
-                                <img src="<?= base_url('template/imgs/Phone-icon.png') ?>" alt="Call us">
+                                <a href="tel:<?= $footerContactPhone ?>" style="color:inherit;text-decoration:none;"><img src="<?= base_url('template/imgs/Phone-icon.png') ?>" alt="Call us"> <?= $footerContactPhone ?></a>
                                 <?php
-                                echo $footerContactPhone;
+                            }
+                            if ($footerContactEmail != '') {
+                                ?>
+                                <a href="mailto:<?= $footerContactEmail ?>" style="color:inherit;text-decoration:none;margin-left:15px;"><i class="fa fa-envelope" aria-hidden="true"></i> <?= $footerContactEmail ?></a>
+                                <?php
                             }
                             ?>
                         </div>

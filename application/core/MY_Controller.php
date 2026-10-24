@@ -164,6 +164,13 @@ class MY_Controller extends MX_Controller
             }
         }
         
+        if (empty($vars['footerContactPhone'])) {
+            $vars['footerContactPhone'] = '03088503190';
+        }
+        if (empty($vars['footerContactEmail'])) {
+            $vars['footerContactEmail'] = 'alitrader97@gmail.com';
+        }
+
         $vars['allLanguages'] = $this->getAllLangs();
         $vars['load'] = $this->loop;
         $vars['cookieLaw'] = $this->Public_model->getCookieLaw();

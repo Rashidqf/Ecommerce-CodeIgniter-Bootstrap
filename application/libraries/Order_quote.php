@@ -32,11 +32,15 @@ class Order_quote
 
     public static function paymentAllowed($type, $bankReady, $safepayReady)
     {
-        if ($type === 'Safepay') {
+        $normalized = strtolower(trim((string) $type));
+        if ($normalized === 'safepay' || $normalized === 'card') {
             return (bool) $safepayReady;
         }
-        if ($type === 'Bank') {
+        if ($normalized === 'bank') {
             return (bool) $bankReady;
+        }
+        if ($normalized === 'cashondelivery' || $normalized === 'cod') {
+            return true;
         }
         return false;
     }

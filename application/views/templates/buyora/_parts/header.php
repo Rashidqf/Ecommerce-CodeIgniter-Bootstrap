@@ -83,14 +83,31 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "BUYORA Marketplace",
-      "url": "<?= rtrim(base_url(), '/') ?>/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "<?= rtrim(base_url(), '/') ?>/?search_in_title={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "BUYORA Marketplace",
+          "url": "<?= rtrim(base_url(), '/') ?>/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "<?= rtrim(base_url(), '/') ?>/?search_in_title={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "BUYORA Marketplace",
+          "url": "<?= rtrim(base_url(), '/') ?>/",
+          "telephone": "<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>",
+          "email": "<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>",
+            "email": "<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>",
+            "contactType": "customer service"
+          }
+        }
+      ]
     }
     </script>
 
@@ -113,6 +130,8 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                 <div class="buyora-container utility-inner">
                     <span class="shipping-note"><i class="fa fa-truck" aria-hidden="true"></i> Free Shipping on Orders Above Rs. 2000</span>
                     <div class="utility-links">
+                        <a href="tel:<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>" class="utility-contact utility-phone" title="Call Helpline"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?></a>
+                        <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>" class="utility-contact utility-email" title="Email Support"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
                         <a href="<?= LANG_URL . '/checkout' ?>" rel="nofollow"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Order</a>
                         <a href="<?= LANG_URL . '/contacts' ?>"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Help</a>
                         <a href="<?= LANG_URL . '/login' ?>" rel="nofollow"><i class="fa fa-user" aria-hidden="true"></i> Login / Register</a>
@@ -174,5 +193,9 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                     <a class="nav-link" href="<?= base_url('category/' . (int) $navCategory['id'] . '/' . url_title($navCategory['name'], 'dash', true)) ?>"><?= htmlspecialchars($navCategory['name'], ENT_QUOTES, 'UTF-8') ?></a>
                 <?php } ?>
                 <a class="nav-link" href="<?= base_url('contacts') ?>">Contact</a>
+                <div class="mobile-nav-contact">
+                    <a href="tel:<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?></a>
+                    <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
+                </div>
                 </div>
             </nav>

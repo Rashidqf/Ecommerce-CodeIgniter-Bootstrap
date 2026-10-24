@@ -266,5 +266,24 @@ $route['api/product/(\w{2})/(:num)/get'] = 'Api/Products/one/$1/$2';
 $route['api/product/set'] = 'Api/Products/set';
 $route['api/product/(\w{2})/delete'] = 'Api/Products/productDel/$1';
 
+/*
+ | -------------------------------------------------------------------------
+ | Flutter Customer Mobile App API Routes
+ | -------------------------------------------------------------------------
+ */
+$route['api/config'] = 'Api/Customer/config';
+$route['api/home'] = 'Api/Customer/home';
+$route['api/categories'] = 'Api/Customer/categories';
+$route['api/categories/(:num)'] = 'Api/Customer/categoryDetail/$1';
+$route['api/products'] = 'Api/Customer/products';
+$route['api/product/(:num)'] = 'Api/Customer/product/$1';
+$route['api/discount/check'] = 'Api/Customer/discountCheck';
+$route['api/order/create'] = 'Api/Customer/orderCreate';
+$route['api/order/track/(:num)'] = 'Api/Customer/orderTrack/$1';
+$route['api/order/track'] = 'Api/Customer/orderTrack';
+$route['api/customer/register'] = 'Api/Customer/register';
+$route['api/customer/login'] = 'Api/Customer/login';
+$route['api/customer/orders/(:num)'] = 'Api/Customer/orders/$1';
+
 $route['404_override'] = 'home/handle404';
 $route['translate_uri_dashes'] = FALSE;

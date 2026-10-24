@@ -116,6 +116,27 @@ body.buyora-site {
     margin-right: 4px;
 }
 
+.utility-contact {
+    display: inline-flex;
+    align-items: center;
+}
+
+.mobile-nav-contact {
+    display: none;
+}
+
+@media (max-width: 991px) {
+    .utility-links .utility-email {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .utility-links .utility-phone {
+        display: none;
+    }
+}
+
 .buyora-header {
     height: 74px;
     border-bottom: 1px solid #edf0f3;
@@ -2101,6 +2122,33 @@ body.buyora-site {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         padding: 7px 0;
+    }
+
+    .mobile-nav-contact {
+        display: flex;
+        flex-direction: column;
+        grid-column: 1 / -1;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 10px 12px;
+        background: #f8fafc;
+        border-radius: 8px;
+        border: 1px solid var(--buyora-border);
+        font-size: 13px;
+    }
+
+    .mobile-nav-contact a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1e293b;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .mobile-nav-contact a i {
+        color: #10b981;
+        width: 16px;
     }
 
     .all-categories-menu {
