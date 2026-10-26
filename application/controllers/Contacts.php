@@ -35,7 +35,7 @@ class Contacts extends MY_Controller
 
     private function sendEmail()
     {
-        $myEmail = $this->Home_admin_model->getValueStore('contactsEmailTo');
+        $myEmail = $this->Home_admin_model->getValueStore('contactsEmailTo') ?: 'biolabtraders@gmail.com';
         if (filter_var($myEmail, FILTER_VALIDATE_EMAIL) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $this->load->library('email');
 

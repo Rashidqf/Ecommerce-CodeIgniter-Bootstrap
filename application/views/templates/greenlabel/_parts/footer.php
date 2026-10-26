@@ -37,7 +37,7 @@
                         <?php }if ($footerContactPhone != '') { ?>
                             <li>
                                 <span class="pull-left"><i class="fa fa-phone"></i></span> 
-                                <span class="pull-left f-cont-info"> <a href="tel:<?= $footerContactPhone ?>"><?= $footerContactPhone ?></a></span> 
+                                <span class="pull-left f-cont-info"> <a href="tel:<?= preg_replace('/[^0-9+]/', '', explode(',', $footerContactPhone)[0]) ?>"><?= $footerContactPhone ?></a></span> 
                             </li>
                         <?php } if ($footerContactEmail != '') { ?>
                             <li>

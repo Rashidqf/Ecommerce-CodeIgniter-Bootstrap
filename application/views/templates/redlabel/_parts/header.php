@@ -85,7 +85,7 @@
                             <?php
                             if ($footerContactPhone != '') {
                                 ?>
-                                <a href="tel:<?= $footerContactPhone ?>" style="color:inherit;text-decoration:none;"><img src="<?= base_url('template/imgs/Phone-icon.png') ?>" alt="Call us"> <?= $footerContactPhone ?></a>
+                                <a href="tel:<?= preg_replace('/[^0-9+]/', '', explode(',', $footerContactPhone)[0]) ?>" style="color:inherit;text-decoration:none;"><img src="<?= base_url('template/imgs/Phone-icon.png') ?>" alt="Call us"> <?= $footerContactPhone ?></a>
                                 <?php
                             }
                             if ($footerContactEmail != '') {

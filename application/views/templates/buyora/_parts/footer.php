@@ -47,9 +47,15 @@
                     </div>
                     <div class="footer-column footer-contact">
                         <h2>Contact Us</h2>
-                        <a href="tel:<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?></a>
-                        <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
-                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> <?= htmlspecialchars($footerContactAddr ?: 'Karachi, Pakistan', ENT_QUOTES, 'UTF-8') ?></span>
+                        <?php
+                        $footerPhones = array_filter(array_map('trim', explode(',', isset($footerContactPhone) && $footerContactPhone !== '' ? $footerContactPhone : '0333-6108869, 0308-8503190')));
+                        foreach ($footerPhones as $fp) {
+                            $cleanFp = preg_replace('/[^0-9+]/', '', $fp);
+                        ?>
+                            <a href="tel:<?= htmlspecialchars($cleanFp, ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($fp, ENT_QUOTES, 'UTF-8') ?></a>
+                        <?php } ?>
+                        <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
+                        <span><i class="fa fa-map-marker" aria-hidden="true"></i> <?= htmlspecialchars($footerContactAddr ?: 'Office No. 5, 1st Floor, Karim Centre, 16-Edward Road, Lahore, Pakistan', ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
                 </div>
                 <div class="footer-bottom">

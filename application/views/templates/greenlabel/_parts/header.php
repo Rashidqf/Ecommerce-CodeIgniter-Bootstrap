@@ -67,7 +67,7 @@
                         <?php
                         if ($footerContactPhone != '') {
                             ?>
-                            <p class="phone"><a href="tel:<?= $footerContactPhone ?>" style="color:inherit;text-decoration:none;"><?= lang('call_us') . ' ' . $footerContactPhone ?></a></p>
+                            <p class="phone"><a href="tel:<?= preg_replace('/[^0-9+]/', '', explode(',', $footerContactPhone)[0]) ?>" style="color:inherit;text-decoration:none;"><?= lang('call_us') . ' ' . $footerContactPhone ?></a></p>
                             <?php
                         }
                         if ($footerContactEmail != '') {

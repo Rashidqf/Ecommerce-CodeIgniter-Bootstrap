@@ -5,9 +5,19 @@
             <h1><?= htmlspecialchars(lang('contact_us'), ENT_QUOTES, 'UTF-8') ?></h1>
             <div class="buyora-copy"><?= isset($contactspage) ? html_entity_decode($contactspage) : '' ?></div>
             <p class="buyora-copy" style="line-height:1.7;color:#4b5563;">Have a question about an active order, seller inquiries, delivery timelines, or payment verification? Our dedicated BUYORA customer support team is available Monday through Saturday from 9:00 AM to 9:00 PM PKT to assist you with prompt, friendly, and reliable solutions.</p>
-            <p class="buyora-copy"><i class="fa fa-phone" aria-hidden="true"></i> <strong>Cell:</strong> <a href="tel:<?= htmlspecialchars(isset($footerContactPhone) && $footerContactPhone !== '' ? $footerContactPhone : '03088503190', ENT_QUOTES, 'UTF-8') ?>" style="color:inherit;text-decoration:none;font-weight:600;"><?= htmlspecialchars(isset($footerContactPhone) && $footerContactPhone !== '' ? $footerContactPhone : '03088503190', ENT_QUOTES, 'UTF-8') ?></a></p>
-            <p class="buyora-copy"><i class="fa fa-envelope" aria-hidden="true"></i> <strong>Email:</strong> <a href="mailto:<?= htmlspecialchars(isset($footerContactEmail) && $footerContactEmail !== '' ? $footerContactEmail : 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>" style="color:inherit;text-decoration:none;font-weight:600;"><?= htmlspecialchars(isset($footerContactEmail) && $footerContactEmail !== '' ? $footerContactEmail : 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?></a></p>
-            <p class="buyora-copy"><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Headquarters:</strong> <?= htmlspecialchars(isset($footerContactAddr) && $footerContactAddr !== '' ? $footerContactAddr : 'Karachi, Sindh, Pakistan', ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="buyora-copy"><i class="fa fa-phone" aria-hidden="true"></i> <strong>Cell:</strong> 
+            <?php
+            $contactPhones = array_filter(array_map('trim', explode(',', isset($footerContactPhone) && $footerContactPhone !== '' ? $footerContactPhone : '0333-6108869, 0308-8503190')));
+            $phoneLinks = array();
+            foreach ($contactPhones as $cp) {
+                $cleanCp = preg_replace('/[^0-9+]/', '', $cp);
+                $phoneLinks[] = '<a href="tel:' . htmlspecialchars($cleanCp, ENT_QUOTES, 'UTF-8') . '" style="color:inherit;text-decoration:none;font-weight:600;">' . htmlspecialchars($cp, ENT_QUOTES, 'UTF-8') . '</a>';
+            }
+            echo implode(', ', $phoneLinks);
+            ?>
+            </p>
+            <p class="buyora-copy"><i class="fa fa-envelope" aria-hidden="true"></i> <strong>Email:</strong> <a href="mailto:<?= htmlspecialchars(isset($footerContactEmail) && $footerContactEmail !== '' ? $footerContactEmail : 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?>" style="color:inherit;text-decoration:none;font-weight:600;"><?= htmlspecialchars(isset($footerContactEmail) && $footerContactEmail !== '' ? $footerContactEmail : 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?></a></p>
+            <p class="buyora-copy"><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Headquarters:</strong> <?= htmlspecialchars(isset($footerContactAddr) && $footerContactAddr !== '' ? $footerContactAddr : 'Office No. 5, 1st Floor, Karim Centre, 16-Edward Road, Lahore, Pakistan', ENT_QUOTES, 'UTF-8') ?></p>
             <div style="margin-top:20px;padding:16px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0;font-size:13px;line-height:1.6;color:#4b5563;">
                 <strong>Frequently Asked Support Topics:</strong>
                 <ul style="margin:8px 0 0 16px;padding:0;">

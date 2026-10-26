@@ -167,7 +167,7 @@
                         <?php } ?>
                         <div class="text-sm font-semibold text-slate-100/90 flex gap-4">
                             <?php if ($footerContactPhone != '') { ?>
-                                <a href="tel:<?= $footerContactPhone ?>" class="hover:text-white"><span class="mr-1"><i class="fa fa-phone"></i></span><?= $footerContactPhone ?></a>
+                                <a href="tel:<?= preg_replace('/[^0-9+]/', '', explode(',', $footerContactPhone)[0]) ?>" class="hover:text-white"><span class="mr-1"><i class="fa fa-phone"></i></span><?= $footerContactPhone ?></a>
                             <?php } ?>
                             <?php if ($footerContactEmail != '') { ?>
                                 <a href="mailto:<?= $footerContactEmail ?>" class="hover:text-white"><span class="mr-1"><i class="fa fa-envelope"></i></span><?= $footerContactEmail ?></a>

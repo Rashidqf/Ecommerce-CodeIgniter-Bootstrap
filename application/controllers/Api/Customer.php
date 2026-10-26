@@ -71,9 +71,9 @@ class Customer extends REST_Controller
      */
     public function config_get()
     {
-        $phone = $this->Home_admin_model->getValueStore('footerContactPhone') ?: '03088503190';
-        $email = $this->Home_admin_model->getValueStore('footerContactEmail') ?: 'alitrader97@gmail.com';
-        $address = $this->Home_admin_model->getValueStore('footerContactAddr') ?: 'Karachi, Pakistan';
+        $phone = $this->Home_admin_model->getValueStore('footerContactPhone') ?: '0333-6108869, 0308-8503190';
+        $email = $this->Home_admin_model->getValueStore('footerContactEmail') ?: 'biolabtraders@gmail.com';
+        $address = $this->Home_admin_model->getValueStore('footerContactAddr') ?: 'Office No. 5, 1st Floor, Karim Centre, 16-Edward Road, Lahore, Pakistan';
         $shippingAmount = (float) ($this->Home_admin_model->getValueStore('shippingAmount') ?: 0);
         $shippingThreshold = (float) ($this->Home_admin_model->getValueStore('shippingOrder') ?: 2000);
         $bankAccount = $this->Orders_model->getBankAccountSettings();

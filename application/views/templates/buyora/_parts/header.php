@@ -98,14 +98,28 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
           "@type": "Organization",
           "name": "BUYORA Marketplace",
           "url": "<?= rtrim(base_url(), '/') ?>/",
-          "telephone": "<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>",
-          "email": "<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>",
-            "email": "<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>",
-            "contactType": "customer service"
-          }
+          "telephone": "<?= htmlspecialchars($footerContactPhone ?: '0333-6108869, 0308-8503190', ENT_QUOTES, 'UTF-8') ?>",
+          "email": "<?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?>",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Office No. 5, 1st Floor, Karim Centre, 16-Edward Road",
+            "addressLocality": "Lahore",
+            "addressCountry": "PK"
+          },
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "0333-6108869",
+              "email": "<?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?>",
+              "contactType": "customer service"
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "0308-8503190",
+              "email": "<?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?>",
+              "contactType": "customer service"
+            }
+          ]
         }
       ]
     }
@@ -130,8 +144,18 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                 <div class="buyora-container utility-inner">
                     <span class="shipping-note"><i class="fa fa-truck" aria-hidden="true"></i> Free Shipping on Orders Above Rs. 2000</span>
                     <div class="utility-links">
-                        <a href="tel:<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>" class="utility-contact utility-phone" title="Call Helpline"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?></a>
-                        <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>" class="utility-contact utility-email" title="Email Support"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
+                        <?php
+                        $headerPhones = array_filter(array_map('trim', explode(',', isset($footerContactPhone) && $footerContactPhone !== '' ? $footerContactPhone : '0333-6108869, 0308-8503190')));
+                        ?>
+                        <span class="utility-contact utility-phone" title="Call Helpline"><i class="fa fa-phone" aria-hidden="true"></i> Cell.&nbsp;<?php
+                            $phoneLinkItems = array();
+                            foreach ($headerPhones as $hp) {
+                                $hpClean = preg_replace('/[^0-9+]/', '', $hp);
+                                $phoneLinkItems[] = '<a href="tel:' . htmlspecialchars($hpClean, ENT_QUOTES, 'UTF-8') . '" class="utility-phone-link">' . htmlspecialchars($hp, ENT_QUOTES, 'UTF-8') . '</a>';
+                            }
+                            echo implode(',&nbsp;', $phoneLinkItems);
+                        ?></span>
+                        <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?>" class="utility-contact utility-email" title="Email Support"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
                         <a href="<?= LANG_URL . '/checkout' ?>" rel="nofollow"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Order</a>
                         <a href="<?= LANG_URL . '/contacts' ?>"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Help</a>
                         <a href="<?= LANG_URL . '/login' ?>" rel="nofollow"><i class="fa fa-user" aria-hidden="true"></i> Login / Register</a>
@@ -194,8 +218,13 @@ if (empty($canonicalUrl) || $canonicalUrl === base_url()) {
                 <?php } ?>
                 <a class="nav-link" href="<?= base_url('contacts') ?>">Contact</a>
                 <div class="mobile-nav-contact">
-                    <a href="tel:<?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($footerContactPhone ?: '03088503190', ENT_QUOTES, 'UTF-8') ?></a>
-                    <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'alitrader97@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
+                    <?php
+                    $mobilePhones = isset($headerPhones) ? $headerPhones : array('0333-6108869', '0308-8503190');
+                    foreach ($mobilePhones as $mp) {
+                        $mpClean = preg_replace('/[^0-9+]/', '', $mp); ?>
+                        <a href="tel:<?= htmlspecialchars($mpClean, ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-phone" aria-hidden="true"></i> Cell. <?= htmlspecialchars($mp, ENT_QUOTES, 'UTF-8') ?></a>
+                    <?php } ?>
+                    <a href="mailto:<?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?>"><i class="fa fa-envelope" aria-hidden="true"></i> Email. <?= htmlspecialchars($footerContactEmail ?: 'biolabtraders@gmail.com', ENT_QUOTES, 'UTF-8') ?></a>
                 </div>
                 </div>
             </nav>

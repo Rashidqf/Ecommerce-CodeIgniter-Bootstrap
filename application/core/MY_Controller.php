@@ -165,10 +165,16 @@ class MY_Controller extends MX_Controller
         }
         
         if (empty($vars['footerContactPhone'])) {
-            $vars['footerContactPhone'] = '03088503190';
+            $vars['footerContactPhone'] = '0333-6108869, 0308-8503190';
         }
         if (empty($vars['footerContactEmail'])) {
-            $vars['footerContactEmail'] = 'alitrader97@gmail.com';
+            $vars['footerContactEmail'] = 'biolabtraders@gmail.com';
+        }
+        if (empty($vars['footerContactAddr'])) {
+            $vars['footerContactAddr'] = 'Office No. 5, 1st Floor, Karim Centre, 16-Edward Road, Lahore, Pakistan';
+        }
+        if (empty($vars['contactsEmailTo'])) {
+            $vars['contactsEmailTo'] = 'biolabtraders@gmail.com';
         }
 
         $vars['allLanguages'] = $this->getAllLangs();
