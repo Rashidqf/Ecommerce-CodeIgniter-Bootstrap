@@ -1,3 +1,10 @@
+<script>
+if (window.self !== window.top) {
+    try {
+        window.top.location.href = window.location.href;
+    } catch (e) {}
+}
+</script>
 <div class="buyora-public">
     <section class="buyora-panel">
         <div style="text-align: center; padding: 20px 0;">
