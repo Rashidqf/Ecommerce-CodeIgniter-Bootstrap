@@ -111,6 +111,12 @@ class Auth extends VENDOR_Controller
         if ($count_emails > 0) {
             $errors[] = lang('vendor_email_is_taken');
         }
+        if (!empty($_POST['name'])) {
+            $count_names = $this->db->where('name', trim($_POST['name']))->count_all_results('vendors');
+            if ($count_names > 0) {
+                $errors[] = 'Store name is already taken. Please choose another store name.';
+            }
+        }
         if (!empty($errors)) {
             $this->registerErrors = $errors;
             return false;
