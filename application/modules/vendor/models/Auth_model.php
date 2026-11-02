@@ -6,20 +6,33 @@ class Auth_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('url');
     }
 
     public function registerVendor($post, $status = 1)
     {
         $this->load->model('Vendorprofile_model');
         $this->Vendorprofile_model->ensureBankingColumns();
-        $input = array(
-            'email' => trim($post['u_email']),
-            'password' => password_hash($post['u_password'], PASSWORD_DEFAULT),
-            'status' => $status
-        );
-        if (!empty($post['name'])) {
-            $input['name'] = trim($post['name']);
+
+        $name = !empty($post['name']) ? trim($post['name']) : explode('@', trim($post['u_email']))[0];
+        $slug = preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace(' ', '-', $name)));
+        if ($slug === '' || $slug === '-') {
+            $slug = 'store-' . time();
         }
+        $url = $slug;
+        $counter = 1;
+        while ($this->db->where('url', $url)->count_all_results('vendors') > 0) {
+            $url = $slug . '-' . $counter;
+            $counter++;
+        }
+
+        $input = array(
+            'name'     => $name,
+            'url'      => $url,
+            'email'    => trim($post['u_email']),
+            'password' => password_hash($post['u_password'], PASSWORD_DEFAULT),
+            'status'   => $status
+        );
         if (!empty($post['bank_name'])) {
             $input['bank_name'] = trim($post['bank_name']);
         }
