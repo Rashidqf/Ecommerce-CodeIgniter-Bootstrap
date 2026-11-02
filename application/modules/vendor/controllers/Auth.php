@@ -38,8 +38,14 @@ class Auth extends VENDOR_Controller
                 $this->session->set_flashdata('login_error', lang('login_vendor_error'));
                 redirect(LANG_URL . '/vendor/login');
             } elseif ($vendor['status'] == 0) {
-                $this->session->set_flashdata('login_error', lang('vendor_pending_approval'));
-                redirect(LANG_URL . '/vendor/login');
+                // Auto-approve vendor if previously pending so they can access account without admin delay
+                $this->db->where('id', $vendor['id'])->update('vendors', array('status' => 1));
+                $remember_me = false;
+                if (isset($_POST['remember_me'])) {
+                    $remember_me = true;
+                }
+                $this->setLoginSession($_POST['u_email'], $remember_me);
+                redirect(LANG_URL . '/vendor/me');
             } else {
                 $remember_me = false;
                 if (isset($_POST['remember_me'])) {
@@ -76,6 +82,7 @@ class Auth extends VENDOR_Controller
                 $this->session->set_flashdata('login_error', lang('vendor_pending_approval'));
                 redirect(LANG_URL . '/vendor/login');
             } else {
+                $this->session->set_flashdata('update_vend_details', 'Welcome to BUYORA Marketplace! Your vendor account is active and ready.');
                 $this->setLoginSession($_POST['u_email'], false);
                 redirect(LANG_URL . '/vendor/me');
             }
@@ -108,9 +115,10 @@ class Auth extends VENDOR_Controller
             $this->registerErrors = $errors;
             return false;
         }
-        $status = $this->Home_admin_model->getValueStore('requireVendorApproval') == 1 ? 0 : 1;
+        // Auto-approve registered vendor immediately (no admin approval required)
+        $status = 1;
         $this->Auth_model->registerVendor($_POST, $status);
-        return $status == 1 ? true : 'pending';
+        return true;
     }
 
     public function forgotten()
