@@ -231,6 +231,20 @@ class Settings extends ADMIN_Controller
             $this->saveHistory('Option to open shopping cart after click add to cart button changed');
             redirect('admin/settings');
         }
+        if (isset($_POST['save_bankalfalah'])) {
+            $keys = array(
+                'alfalah_enabled', 'alfalah_environment', 'alfalah_merchant_id',
+                'alfalah_store_id', 'alfalah_channel_id', 'alfalah_merchant_username',
+                'alfalah_merchant_password', 'alfalah_key1', 'alfalah_key2', 'alfalah_merchant_hash'
+            );
+            foreach ($keys as $k) {
+                $val = isset($_POST[$k]) ? trim($_POST[$k]) : '';
+                $this->Home_admin_model->setValueStore($k, $val);
+            }
+            $this->session->set_flashdata('bankalfalah_msg', 'Bank Alfalah APG settings saved successfully');
+            $this->saveHistory('Updated Bank Alfalah APG Gateway settings');
+            redirect('admin/settings');
+        }
     }
 
     private function setCookieLaw($post)

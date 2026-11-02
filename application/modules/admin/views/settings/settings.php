@@ -522,5 +522,106 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background:#04265A; color:#fff;">
+                <i class="fa fa-university" aria-hidden="true"></i> Bank Alfalah — Alfa Payment Gateway (APG) Settings
+            </div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('bankalfalah_msg')) { ?>
+                    <div class="alert alert-success"><?= htmlspecialchars($this->session->flashdata('bankalfalah_msg'), ENT_QUOTES, 'UTF-8') ?></div>
+                <?php } ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="save_bankalfalah" value="1">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Gateway Status</label>
+                                <select class="form-control" name="alfalah_enabled">
+                                    <option value="1" <?= (isset($alfalah_enabled) && $alfalah_enabled == '1') ? 'selected' : '' ?>>Enabled</option>
+                                    <option value="0" <?= (!isset($alfalah_enabled) || $alfalah_enabled == '0') ? 'selected' : '' ?>>Disabled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Environment</label>
+                                <select class="form-control" name="alfalah_environment">
+                                    <option value="sandbox" <?= (!isset($alfalah_environment) || $alfalah_environment === 'sandbox') ? 'selected' : '' ?>>Sandbox / Testing</option>
+                                    <option value="live" <?= (isset($alfalah_environment) && ($alfalah_environment === 'live' || $alfalah_environment === 'production')) ? 'selected' : '' ?>>Live / Production</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Merchant ID</label>
+                                <input type="text" class="form-control" name="alfalah_merchant_id" value="<?= isset($alfalah_merchant_id) ? htmlspecialchars($alfalah_merchant_id, ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="e.g. 12345">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Store ID</label>
+                                <input type="text" class="form-control" name="alfalah_store_id" value="<?= isset($alfalah_store_id) ? htmlspecialchars($alfalah_store_id, ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="e.g. 012345">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Channel ID</label>
+                                <input type="text" class="form-control" name="alfalah_channel_id" value="<?= isset($alfalah_channel_id) && $alfalah_channel_id !== '' ? htmlspecialchars($alfalah_channel_id, ENT_QUOTES, 'UTF-8') : '1001' ?>" placeholder="1001 or Website">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Merchant Username</label>
+                                <input type="text" class="form-control" name="alfalah_merchant_username" value="<?= isset($alfalah_merchant_username) ? htmlspecialchars($alfalah_merchant_username, ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="API Username">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Merchant Password</label>
+                                <input type="password" class="form-control" name="alfalah_merchant_password" value="<?= isset($alfalah_merchant_password) ? htmlspecialchars($alfalah_merchant_password, ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="API Password">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label>Merchant Hash</label>
+                                <input type="text" class="form-control" name="alfalah_merchant_hash" value="<?= isset($alfalah_merchant_hash) ? htmlspecialchars($alfalah_merchant_hash, ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="Merchant Hash string">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Key 1 (Encryption / Hash Key)</label>
+                                <input type="text" class="form-control" name="alfalah_key1" value="<?= isset($alfalah_key1) ? htmlspecialchars($alfalah_key1, ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="Integration Key 1">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Key 2 (Decryption Key)</label>
+                                <input type="text" class="form-control" name="alfalah_key2" value="<?= isset($alfalah_key2) ? htmlspecialchars($alfalah_key2, ENT_QUOTES, 'UTF-8') : '' ?>" placeholder="Integration Key 2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info" style="margin-top: 15px; background: #f0fdf4; border-color: #bbf7d0; color: #166534;">
+                        <strong><i class="fa fa-info-circle"></i> Bank Alfalah Merchant Portal Configuration:</strong><br>
+                        Copy and paste these URLs into your <a href="https://merchants.bankalfalah.com/MerchantPortal/" target="_blank" rel="noopener noreferrer" style="text-decoration:underline; font-weight:600;">Bank Alfalah Merchant Portal</a> under Integration / Page Redirection:
+                        <ul style="margin-top: 8px; margin-bottom: 0;">
+                            <li><strong>Return / Redirect URL:</strong> <code><?= base_url('checkout/alfalah/return') ?></code></li>
+                            <li><strong>IPN / Webhook URL:</strong> <code><?= base_url('checkout/alfalah/webhook') ?></code></li>
+                            <li><strong>Cancel URL:</strong> <code><?= base_url('checkout/alfalah/cancel') ?></code></li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" style="background:#04265A; border-color:#04265A; padding: 8px 24px;">
+                        <i class="fa fa-save"></i> Save Bank Alfalah Settings
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="<?= base_url('assets/js/bootstrap-toggle.min.js') ?>"></script>

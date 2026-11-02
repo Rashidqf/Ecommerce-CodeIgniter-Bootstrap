@@ -31,8 +31,10 @@ class Checkout extends MY_Controller
             $paymentType = (string) $this->input->post('payment_type');
             $bankReady = $this->bankReady();
             $this->load->library('Safepay');
-            if (!Order_quote::paymentAllowed($paymentType, $bankReady, $this->safepay->isConfigured())) {
-                $errors[] = 'Choose Safepay or bank transfer. Cash on delivery and PayPal are not available.';
+            $this->load->library('BankAlfalah');
+            $alfalahReady = $this->bankalfalah->isEnabled() && $this->bankalfalah->isConfigured();
+            if (!Order_quote::paymentAllowed($paymentType, $bankReady, $this->safepay->isConfigured(), $alfalahReady)) {
+                $errors[] = 'Choose an available payment method: Bank Alfalah, Safepay or bank transfer.';
             }
             if (!empty($errors)) {
                 $this->session->set_flashdata('submit_error', $errors);
@@ -70,6 +72,9 @@ class Checkout extends MY_Controller
         $data['safepay_environment'] = $this->safepay->environment();
         $data['safepay_prepare_url'] = base_url('checkout/safepay/prepare');
         $data['safepay_start_url'] = base_url('checkout/safepay/start');
+        $this->load->library('BankAlfalah');
+        $data['alfalah_ready'] = $this->bankalfalah->isEnabled() && $this->bankalfalah->isConfigured();
+        $data['alfalah_environment'] = $this->bankalfalah->environment();
         $data['shippingAmount'] = $this->Home_admin_model->getValueStore('shippingAmount');
         $data['codeDiscounts'] = $this->Home_admin_model->getValueStore('codeDiscounts');
         $data['bestSellers'] = $this->Public_model->getbestSellers();
@@ -337,6 +342,26 @@ class Checkout extends MY_Controller
             $_SESSION['final_amount'] = Order_quote::formatMinor($quote['payable_minor']) . ' Rs.';
             redirect(LANG_URL . '/checkout/successbank');
         }
+        if (strtolower($_POST['payment_type']) === 'bankalfalah') {
+            $this->load->library('BankAlfalah');
+            $handshake = $this->bankalfalah->createHandshakeToken($this->orderId);
+            if (empty($handshake['ok']) || empty($handshake['auth_token'])) {
+                $err = !empty($handshake['error']) ? $handshake['error'] : 'Could not initialize Bank Alfalah gateway.';
+                $this->session->set_flashdata('submit_error', array($err));
+                redirect(LANG_URL . '/checkout');
+            }
+            $authToken = $handshake['auth_token'];
+            $this->Ledger_model->attachTracker((int) $payment['id'], $authToken);
+            $amountFormatted = Order_quote::formatMinor($quote['payable_minor']);
+            $redirectData = $this->bankalfalah->buildRedirectPayload($authToken, $this->orderId, $amountFormatted, $_POST);
+            $_SESSION['buyora_alfalah_redirect'] = array(
+                'gateway_url' => $this->bankalfalah->redirectUrl(),
+                'payload'     => $redirectData,
+                'order_id'    => $this->orderId,
+                'payment_id'  => (int) $payment['id']
+            );
+            redirect(LANG_URL . '/checkout/alfalah/redirect');
+        }
         // Hosted Safepay remains available as an explicit fallback from the checkout page.
         $this->load->library('Safepay');
         $session = $this->safepay->createSession((int) $payment['amount_minor'], $this->orderId);
@@ -601,4 +626,92 @@ class Checkout extends MY_Controller
         return '';
     }
 
+
+    public function alfalahRedirect()
+    {
+        if (empty($_SESSION['buyora_alfalah_redirect'])) {
+            redirect(LANG_URL . '/checkout');
+        }
+        $data = $_SESSION['buyora_alfalah_redirect'];
+        $head = array('title' => 'Connecting to Bank Alfalah...', 'description' => '', 'keywords' => '');
+        $this->load->view('templates/buyora/checkout_parts/alfalah_redirect', $data);
+    }
+
+    public function alfalahReturn()
+    {
+        $this->load->library('BankAlfalah');
+        $this->load->model('Ledger_model');
+        $response = !empty($_POST) ? $_POST : $_GET;
+        $orderId = $this->bankalfalah->getTransactionReference($response);
+        $authCode = $this->bankalfalah->getAuthCode($response);
+        $isSuccess = $this->bankalfalah->isPaymentSuccessful($response);
+        $payment = null;
+        if (!empty($orderId)) {
+            $payment = $this->db->where('order_number', (int) $orderId)->where('provider', 'bankalfalah')->order_by('id', 'DESC')->get('payment_transactions')->row_array();
+        }
+        if (empty($payment) && !empty($response['AuthToken'])) {
+            $payment = $this->Ledger_model->paymentByTracker(trim((string) $response['AuthToken']));
+        }
+        if ($isSuccess && !empty($payment)) {
+            $this->Ledger_model->recordVerifiedSale((int) $payment['id'], 'bankalfalah');
+            $this->Public_model->changePaypalOrderStatus((int) $payment['order_row_id'], 'paid');
+            $this->shoppingcart->clearShoppingCart();
+            $data = array(
+                'paid' => true,
+                'order_id' => $payment['order_number'],
+                'auth_code' => $authCode,
+                'amount' => number_format($payment['amount_minor'] / 100, 2),
+                'response_desc' => isset($response['ResponseDescription']) ? $response['ResponseDescription'] : 'Transaction approved'
+            );
+        } else {
+            if (!empty($payment)) {
+                $this->Ledger_model->markPaymentFailed((int) $payment['id']);
+            }
+            $data = array(
+                'paid' => false,
+                'order_id' => !empty($payment) ? $payment['order_number'] : $orderId,
+                'error' => isset($response['ResponseDescription']) ? $response['ResponseDescription'] : 'Transaction was not completed or declined.'
+            );
+        }
+        unset($_SESSION['buyora_alfalah_redirect']);
+        $head = array('title' => 'Bank Alfalah Payment Status', 'description' => '', 'keywords' => '');
+        $this->render('checkout_parts/alfalah_status', $head, $data);
+    }
+
+    public function alfalahCancel()
+    {
+        unset($_SESSION['buyora_alfalah_redirect']);
+        $head = array('title' => 'Payment Cancelled', 'description' => '', 'keywords' => '');
+        $this->render('checkout_parts/alfalah_cancel', $head, array());
+    }
+
+    public function alfalahWebhook()
+    {
+        $raw = file_get_contents('php://input');
+        $payload = json_decode($raw, true);
+        if (!is_array($payload)) {
+            parse_str($raw, $payload);
+        }
+        if (empty($payload)) {
+            $payload = $_POST;
+        }
+        $this->load->library('BankAlfalah');
+        $this->load->model('Ledger_model');
+        $orderId = $this->bankalfalah->getTransactionReference($payload);
+        $isSuccess = $this->bankalfalah->isPaymentSuccessful($payload);
+        $authToken = isset($payload['AuthToken']) ? trim((string) $payload['AuthToken']) : '';
+        $payment = null;
+        if (!empty($orderId)) {
+            $payment = $this->db->where('order_number', (int) $orderId)->where('provider', 'bankalfalah')->order_by('id', 'DESC')->get('payment_transactions')->row_array();
+        }
+        if (empty($payment) && $authToken !== '') {
+            $payment = $this->Ledger_model->paymentByTracker($authToken);
+        }
+        if (!empty($payment) && $isSuccess) {
+            $this->Ledger_model->recordVerifiedSale((int) $payment['id'], 'bankalfalah_webhook');
+            $this->Public_model->changePaypalOrderStatus((int) $payment['order_row_id'], 'paid');
+            return $this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode(array('status' => 'success')));
+        }
+        return $this->output->set_status_header(200)->set_content_type('application/json')->set_output(json_encode(array('status' => 'received')));
+    }
 }

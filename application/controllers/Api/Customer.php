@@ -79,6 +79,8 @@ class Customer extends REST_Controller
         $bankAccount = $this->Orders_model->getBankAccountSettings();
         $bankReady = !empty($bankAccount['iban']);
         $safepayReady = $this->safepay->isConfigured();
+        $this->load->library('BankAlfalah');
+        $alfalahReady = $this->bankalfalah->isEnabled() && $this->bankalfalah->isConfigured();
 
         $data = array(
             'app_name' => 'BUYORA Marketplace',
@@ -530,7 +532,7 @@ class Customer extends REST_Controller
         $this->Public_model->setVendorOrder($orderPost, $saved['order_id'], $quote['items']);
 
         // Create payment transaction
-        $paymentProvider = $normalizedPayment === 'Bank' ? 'bank' : ($normalizedPayment === 'Safepay' ? 'safepay' : 'cod');
+        $paymentProvider = strtolower($normalizedPayment) === 'bankalfalah' ? 'bankalfalah' : ($normalizedPayment === 'Bank' ? 'bank' : ($normalizedPayment === 'Safepay' ? 'safepay' : 'cod'));
         $payment = $this->Ledger_model->createPayment(
             $saved['id'],
             $saved['order_id'],
@@ -573,7 +575,8 @@ class Customer extends REST_Controller
             'total_amount' => $totalPayable,
             'currency' => 'PKR',
             'payment_type' => $normalizedPayment,
-            'safepay_details' => $safepayDetails
+            'safepay_details' => $safepayDetails,
+            'alfalah_details' => $alfalahDetails
         ), REST_Controller::HTTP_CREATED);
     }
 

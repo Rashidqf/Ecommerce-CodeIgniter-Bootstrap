@@ -65,6 +65,11 @@ $route['(\w{2})?/?checkout/safepay/start'] = 'checkout/safepayStart';
 $route['(\w{2})?/?checkout/safepay/return'] = 'checkout/safepayReturn';
 $route['(\w{2})?/?checkout/safepay/cancel'] = 'checkout/safepayCancel';
 $route['(\w{2})?/?checkout/safepay/webhook'] = 'checkout/safepayWebhook';
+$route['(\w{2})?/?checkout/alfalah/start'] = 'checkout/alfalahStart';
+$route['(\w{2})?/?checkout/alfalah/redirect'] = 'checkout/alfalahRedirect';
+$route['(\w{2})?/?checkout/alfalah/return'] = 'checkout/alfalahReturn';
+$route['(\w{2})?/?checkout/alfalah/cancel'] = 'checkout/alfalahCancel';
+$route['(\w{2})?/?checkout/alfalah/webhook'] = 'checkout/alfalahWebhook';
 
 // Ajax called. Functions for managing shopping cart
 $route['(\w{2})?/?manageShoppingCart'] = 'home/manageShoppingCart';

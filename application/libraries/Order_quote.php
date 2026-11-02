@@ -30,9 +30,12 @@ class Order_quote
         return (int) round($value * 100, 0, PHP_ROUND_HALF_UP);
     }
 
-    public static function paymentAllowed($type, $bankReady, $safepayReady)
+    public static function paymentAllowed($type, $bankReady, $safepayReady, $alfalahReady = false)
     {
         $normalized = strtolower(trim((string) $type));
+        if ($normalized === 'bankalfalah' || $normalized === 'alfalah' || $normalized === 'alfa') {
+            return (bool) $alfalahReady;
+        }
         if ($normalized === 'safepay' || $normalized === 'card') {
             return (bool) $safepayReady;
         }

@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $checkoutProducts = isset($cartItems['array']) && is_array($cartItems['array']) ? $cartItems['array'] : array();
 $safepayReady = !empty($safepay_ready);
 $safepayEnvironment = !empty($safepay_environment) ? $safepay_environment : 'sandbox';
+$alfalahReady = !empty($alfalah_ready);
 $bankReady = isset($bank_account['iban']) && $bank_account['iban'] != '';
 $parsedTotal = !empty($cartItems['finalSum']) ? (float) str_replace(array(' ', ','), '', $cartItems['finalSum']) : 0;
 $shippingShown = (int) $shippingAmount > 0 && (float) $shippingOrder > $parsedTotal;
@@ -38,10 +39,11 @@ $shippingShown = (int) $shippingAmount > 0 && (float) $shippingOrder > $parsedTo
                     <label class="buyora-field buyora-field-wide">
                         <span><?= htmlspecialchars(lang('choose_payment'), ENT_QUOTES, 'UTF-8') ?></span>
                         <select name="payment_type" id="buyora-payment-type">
+                            <?php if ($alfalahReady) { ?><option value="BankAlfalah" <?= !$safepayReady ? 'selected' : '' ?>>Bank Alfalah (Credit / Debit Card, Alfa Wallet, Bank Account)</option><?php } ?>
                             <?php if ($safepayReady) { ?><option value="Safepay" selected>Card (Visa / Mastercard)</option><?php } ?>
                             <?php if ($bankReady) { ?><option value="Bank"><?= htmlspecialchars(lang('bank_payment'), ENT_QUOTES, 'UTF-8') ?></option><?php } ?>
                         </select>
-                        <?php if (!$safepayReady) { ?><small>Safepay is not configured yet. Add the sandbox keys on the server.</small><?php } ?>
+                        <?php if (!$safepayReady && !$alfalahReady) { ?><small>Card gateways are not configured yet. Set up Bank Alfalah or Safepay keys in the Admin Panel.</small><?php } ?>
                     </label>
                     <label class="buyora-field"><span><?= htmlspecialchars(lang('first_name'), ENT_QUOTES, 'UTF-8') ?> *</span><input id="firstNameInput" name="first_name" type="text" autocomplete="given-name" value="<?= htmlspecialchars((string) (isset($_POST['first_name']) ? $_POST['first_name'] : ''), ENT_QUOTES, 'UTF-8') ?>" required></label>
                     <label class="buyora-field"><span><?= htmlspecialchars(lang('last_name'), ENT_QUOTES, 'UTF-8') ?> *</span><input id="lastNameInput" name="last_name" type="text" autocomplete="family-name" value="<?= htmlspecialchars((string) (isset($_POST['last_name']) ? $_POST['last_name'] : ''), ENT_QUOTES, 'UTF-8') ?>" required></label>
