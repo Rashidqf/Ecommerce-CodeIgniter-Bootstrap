@@ -159,23 +159,19 @@ $shippingShown = (int) $shippingAmount > 0 && (float) $shippingOrder > $parsedTo
             </div>
         </form>
 
-        <!-- In-Page Seamless 3DS Authentication Modal -->
-        <div id="buyora3dsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px); z-index: 99999; align-items: center; justify-content: center; padding: 20px;">
-            <div style="background: #ffffff; width: 100%; max-width: 540px; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-                <div style="background: #f8fafc; padding: 14px 20px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <img src="<?= base_url('assets/buyora/buyora-logo.png') ?>" alt="BUYORA" style="height: 24px;">
-                        <span style="font-size: 13px; font-weight: 700; color: #1e293b;">Bank Alfalah 3D-Secure</span>
-                    </div>
-                    <button type="button" id="close3dsModal" style="background: transparent; border: none; font-size: 20px; color: #94a3b8; cursor: pointer; line-height: 1;">&times;</button>
+        <!-- Seamless Bank Alfalah Secure Redirection Overlay -->
+        <div id="buyoraRedirectOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(8px); z-index: 999999; flex-direction: column; align-items: center; justify-content: center; color: #ffffff; text-align: center; padding: 24px;">
+            <div style="background: #ffffff; border-radius: 20px; padding: 36px 32px; max-width: 440px; width: 100%; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); color: #1e293b; display: flex; flex-direction: column; align-items: center; animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+                    <img src="<?= base_url('assets/buyora/buyora-logo.png') ?>" alt="BUYORA" style="height: 26px;">
+                    <span style="font-size: 16px; color: #cbd5e1;">|</span>
+                    <span style="font-weight: 800; color: #dc2626; font-size: 15px; letter-spacing: 0.5px;"><i class="fa fa-university" style="margin-right: 6px;"></i>BANK ALFALAH</span>
                 </div>
-                <div style="padding: 0; min-height: 480px; position: relative;">
-                    <div id="frameLoader" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ffffff; z-index: 1;">
-                        <div style="width: 44px; height: 44px; border: 4px solid #e2e8f0; border-top-color: #8b5cf6; border-radius: 50%; animation: modalSpin 0.8s linear infinite; margin-bottom: 16px;"></div>
-                        <span style="font-size: 14px; font-weight: 600; color: #334155;">Securing connection with Bank Alfalah...</span>
-                        <span style="font-size: 12px; color: #64748b; margin-top: 4px;">Please do not refresh or close this window</span>
-                    </div>
-                    <iframe id="buyora3dsFrame" name="buyora3dsFrame" style="width: 100%; height: 480px; border: none; display: block;" onload="document.getElementById('frameLoader').style.display='none';"></iframe>
+                <div style="width: 50px; height: 50px; border: 4px solid #f1f5f9; border-top-color: #8b5cf6; border-radius: 50%; animation: spinOverlay 0.8s linear infinite; margin-bottom: 20px;"></div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Connecting to Bank Alfalah</h3>
+                <p style="font-size: 13px; color: #64748b; line-height: 1.5; margin-bottom: 18px;">Transferring securely to the 3D-Secure card verification portal.<br>Please do not refresh or close this window.</p>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #059669; font-weight: 600; background: #ecfdf5; padding: 6px 14px; border-radius: 999px;">
+                    <i class="fa fa-shield"></i> 256-Bit SSL Encrypted Connection
                 </div>
             </div>
         </div>
@@ -185,7 +181,7 @@ $shippingShown = (int) $shippingAmount > 0 && (float) $shippingOrder > $parsedTo
                 from { transform: translateY(20px) scale(0.97); opacity: 0; }
                 to { transform: translateY(0) scale(1); opacity: 1; }
             }
-            @keyframes modalSpin {
+            @keyframes spinOverlay {
                 to { transform: rotate(360deg); }
             }
             .card-badge.active {
@@ -203,7 +199,7 @@ $shippingShown = (int) $shippingAmount > 0 && (float) $shippingOrder > $parsedTo
             var cardCvv = document.getElementById('card_cvv');
             var cardHolder = document.getElementById('card_holder');
             var modal = document.getElementById('buyora3dsModal');
-            var closeBtn = document.getElementById('close3dsModal');
+            // var closeBtn
             var btnCheckout = document.getElementById('buyora-checkout-btn');
             var btnText = document.getElementById('btn-text');
 
@@ -277,9 +273,10 @@ $shippingShown = (int) $shippingAmount > 0 && (float) $shippingOrder > $parsedTo
                 if (!ph) clientErrors.push('Phone number is required.');
                 if (!ad) clientErrors.push('Delivery address is required.');
                 if (!ci) clientErrors.push('City is required.');
-                if (cNum.length < 13) clientErrors.push('Please enter a valid card number.');
-                if (cExp.length < 5) clientErrors.push('Please enter expiry date as MM / YY.');
-                if (cCvv.length < 3) clientErrors.push('Please enter 3 or 4 digit CVV.');
+                // Card inputs are formatted on page; final tokenization occurs on Bank Alfalah 3DS portal
+                if (cNum.length > 0 && cNum.length < 13) clientErrors.push('Please enter a valid card number (16 digits).');
+                if (cExp.length > 0 && cExp.length < 5) clientErrors.push('Please enter expiry date as MM / YY.');
+                if (cCvv.length > 0 && cCvv.length < 3) clientErrors.push('Please enter 3 or 4 digit CVV.');
 
                 if (clientErrors.length > 0) {
                     errorsDiv.innerHTML = '<strong>Please correct the following:</strong>' + clientErrors.map(function(err){ return '<div>' + err + '</div>'; }).join('');
@@ -317,15 +314,15 @@ $shippingShown = (int) $shippingAmount > 0 && (float) $shippingOrder > $parsedTo
                         return;
                     }
 
-                    // Open Bank Alfalah in-page 3DS modal
-                    modal.style.display = 'flex';
-                    document.getElementById('frameLoader').style.display = 'flex';
+                    // Show Bank Alfalah security redirection overlay
+                    var overlay = document.getElementById('buyoraRedirectOverlay');
+                    if (overlay) overlay.style.display = 'flex';
 
-                    // Dynamically build and post hidden form targeting the iframe
+                    // Dynamically build and post form directly to Bank Alfalah portal
                     var hiddenForm = document.createElement('form');
                     hiddenForm.method = 'POST';
                     hiddenForm.action = data.gateway_url;
-                    hiddenForm.target = 'buyora3dsFrame';
+                    hiddenForm.target = '_self';
                     hiddenForm.style.display = 'none';
 
                     for (var key in data.payload) {
