@@ -56,12 +56,16 @@ class Checkout extends MY_Controller
                 $this->orderId = $saved['order_id'];
                 $this->setActivationLink();
                 $this->sendNotifications();
+                $provider = 'bankalfalah';
+                if ($paymentType === 'Bank') {
+                    $provider = 'bank';
+                }
                 $payment = $this->Ledger_model->createPayment(
                     $saved['id'],
                     $saved['order_id'],
-                    $paymentType === 'Bank' ? 'bank' : 'safepay',
+                    $provider,
                     $quote['payable_minor'],
-                    ($paymentType === 'Bank' ? 'bank:' : 'safepay:') . $saved['id']
+                    $provider . ':' . $saved['id']
                 );
                 $this->goToDestination($payment, $quote);
             }
@@ -664,7 +668,11 @@ class Checkout extends MY_Controller
         $isSuccess = $this->bankalfalah->isPaymentSuccessful($response);
         $payment = null;
         if (!empty($orderId)) {
-            $payment = $this->db->where('order_number', (int) $orderId)->where('provider', 'bankalfalah')->order_by('id', 'DESC')->get('payment_transactions')->row_array();
+            $payment = $this->db->where('order_number', (int) $orderId)->order_by('id', 'DESC')->get('payment_transactions')->row_array();
+            if (!empty($payment) && $payment['provider'] !== 'bankalfalah') {
+                $this->db->where('id', $payment['id'])->update('payment_transactions', array('provider' => 'bankalfalah'));
+                $payment['provider'] = 'bankalfalah';
+            }
         }
         if (empty($payment) && !empty($response['AuthToken'])) {
             $payment = $this->Ledger_model->paymentByTracker(trim((string) $response['AuthToken']));
@@ -719,7 +727,11 @@ class Checkout extends MY_Controller
         $authToken = isset($payload['AuthToken']) ? trim((string) $payload['AuthToken']) : '';
         $payment = null;
         if (!empty($orderId)) {
-            $payment = $this->db->where('order_number', (int) $orderId)->where('provider', 'bankalfalah')->order_by('id', 'DESC')->get('payment_transactions')->row_array();
+            $payment = $this->db->where('order_number', (int) $orderId)->order_by('id', 'DESC')->get('payment_transactions')->row_array();
+            if (!empty($payment) && $payment['provider'] !== 'bankalfalah') {
+                $this->db->where('id', $payment['id'])->update('payment_transactions', array('provider' => 'bankalfalah'));
+                $payment['provider'] = 'bankalfalah';
+            }
         }
         if (empty($payment) && $authToken !== '') {
             $payment = $this->Ledger_model->paymentByTracker($authToken);

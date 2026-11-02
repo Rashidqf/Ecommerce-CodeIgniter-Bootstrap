@@ -189,6 +189,12 @@ class Ledger_model extends CI_Model
                 'note' => 'Commission on order ' . (int) $payment['order_number'],
                 'admin_user' => $adminUser
             ));
+            // Deduct inventory stock for purchased product
+            if (!empty($item['product_id']) && (int) $item['quantity'] > 0) {
+                $this->db->set('quantity', 'GREATEST(0, quantity - ' . (int) $item['quantity'] . ')', false);
+                $this->db->where('id', (int) $item['product_id']);
+                $this->db->update('products');
+            }
         }
         $this->db->where('id', (int) $paymentId);
         $this->db->where_in('status', array('pending', 'failed'));
