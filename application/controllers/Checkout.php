@@ -52,6 +52,10 @@ class Checkout extends MY_Controller
                 $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
                 $_POST['user_id'] = isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 0;
                 $_POST['discountCode'] = $quote['discount_code'];
+                if (empty($_POST['id']) && !empty($_SESSION['shopping_cart'])) {
+                    $_POST['id'] = array_keys($_SESSION['shopping_cart']);
+                    $_POST['quantity'] = array_values($_SESSION['shopping_cart']);
+                }
                 $saved = $this->Public_model->setOrder($_POST);
                 if ($saved == false) {
                     log_message('error', 'Cant save order!!');
@@ -212,6 +216,10 @@ class Checkout extends MY_Controller
             $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
             $_POST['user_id'] = isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 0;
             $_POST['discountCode'] = $quote['discount_code'];
+                if (empty($_POST['id']) && !empty($_SESSION['shopping_cart'])) {
+                    $_POST['id'] = array_keys($_SESSION['shopping_cart']);
+                    $_POST['quantity'] = array_values($_SESSION['shopping_cart']);
+                }
             $saved = $this->Public_model->setOrder($_POST);
             if ($saved == false) {
                 return $this->jsonCheckoutError('Could not create the order. Try again.', 500);

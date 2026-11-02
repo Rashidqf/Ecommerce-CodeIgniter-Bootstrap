@@ -330,9 +330,15 @@ class Public_model extends CI_Model
 
         $i = 0;
         $post['products'] = array();
-        foreach ($post['id'] as $product) {
-            $post['products'][$product] = $post['quantity'][$i];
-            $i++;
+        if (empty($post['id']) && !empty($_SESSION['shopping_cart'])) {
+            $post['id'] = array_keys($_SESSION['shopping_cart']);
+            $post['quantity'] = array_values($_SESSION['shopping_cart']);
+        }
+        if (!empty($post['id']) && is_array($post['id'])) {
+            foreach ($post['id'] as $product) {
+                $post['products'][$product] = isset($post['quantity'][$i]) ? $post['quantity'][$i] : 1;
+                $i++;
+            }
         }
         unset($post['id'], $post['quantity']);
         $post['date'] = time();
