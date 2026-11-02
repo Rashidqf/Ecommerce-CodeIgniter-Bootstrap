@@ -655,8 +655,7 @@ class Checkout extends MY_Controller
                 'payload'     => $ssoPayload,
                 'order_id'    => $orderId
             );
-            $head = array('title' => 'Transferring to Bank Alfalah Secure Card Checkout...', 'description' => '', 'keywords' => '');
-            return $this->render('checkout_parts/alfalah_redirect', $head, $data);
+            return $this->load->view('templates/buyora/checkout_parts/alfalah_redirect', $data);
         }
 
         // Stage 2: Final Payment Return
