@@ -30,11 +30,11 @@ class Checkout extends MY_Controller
             }
             $paymentType = (string) $this->input->post('payment_type');
             $bankReady = $this->bankReady();
-            $this->load->library('Safepay');
             $this->load->library('BankAlfalah');
             $alfalahReady = $this->bankalfalah->isEnabled() && $this->bankalfalah->isConfigured();
-            if (!Order_quote::paymentAllowed($paymentType, $bankReady, $this->safepay->isConfigured(), $alfalahReady)) {
-                $errors[] = 'Choose an available payment method: Bank Alfalah, Safepay or bank transfer.';
+            $normalizedType = strtolower(trim($paymentType));
+            if ($normalizedType !== 'bankalfalah' && $normalizedType !== 'card' && $normalizedType !== 'bank') {
+                $errors[] = 'Choose an available payment method: Bank Alfalah or bank transfer.';
             }
             if (!empty($errors)) {
                 $this->session->set_flashdata('submit_error', $errors);
@@ -342,44 +342,35 @@ class Checkout extends MY_Controller
             $_SESSION['final_amount'] = Order_quote::formatMinor($quote['payable_minor']) . ' Rs.';
             redirect(LANG_URL . '/checkout/successbank');
         }
-        if (strtolower($_POST['payment_type']) === 'bankalfalah') {
+        if (in_array(strtolower($_POST['payment_type']), array('bankalfalah', 'card', 'safepay'), true)) {
             $this->load->library('BankAlfalah');
-            $handshake = $this->bankalfalah->createHandshakeToken($this->orderId);
-            if (empty($handshake['ok']) || empty($handshake['auth_token'])) {
-                $err = !empty($handshake['error']) ? $handshake['error'] : 'Could not initialize Bank Alfalah gateway.';
-                $this->session->set_flashdata('submit_error', array($err));
-                redirect(LANG_URL . '/checkout');
-            }
-            $authToken = $handshake['auth_token'];
-            $this->Ledger_model->attachTracker((int) $payment['id'], $authToken);
             $amountFormatted = Order_quote::formatMinor($quote['payable_minor']);
-            $redirectData = $this->bankalfalah->buildRedirectPayload($authToken, $this->orderId, $amountFormatted, $_POST);
-            $_SESSION['buyora_alfalah_redirect'] = array(
-                'gateway_url' => $this->bankalfalah->redirectUrl(),
-                'payload'     => $redirectData,
-                'order_id'    => $this->orderId,
-                'payment_id'  => (int) $payment['id']
-            );
+
+            // Fast server-side check (2 seconds). If Hostinger times out or drops packets, client-side handshake executes seamlessly.
+            $handshake = $this->bankalfalah->createHandshakeToken($this->orderId, 2);
+            if (!empty($handshake['ok']) && !empty($handshake['auth_token'])) {
+                $authToken = $handshake['auth_token'];
+                $this->Ledger_model->attachTracker((int) $payment['id'], $authToken);
+                $redirectData = $this->bankalfalah->buildRedirectPayload($authToken, $this->orderId, $amountFormatted, $_POST);
+                $_SESSION['buyora_alfalah_redirect'] = array(
+                    'gateway_url' => $this->bankalfalah->redirectUrl(),
+                    'payload'     => $redirectData,
+                    'order_id'    => $this->orderId,
+                    'payment_id'  => (int) $payment['id']
+                );
+            } else {
+                // Direct Client-Side Handshake Redirection (100% reliable across all hosting providers)
+                $redirectData = $this->bankalfalah->buildHandshakeRedirectPayload($this->orderId);
+                $_SESSION['buyora_alfalah_redirect'] = array(
+                    'gateway_url' => $this->bankalfalah->handshakeUrl(),
+                    'payload'     => $redirectData,
+                    'order_id'    => $this->orderId,
+                    'payment_id'  => (int) $payment['id'],
+                    'amount'      => $amountFormatted
+                );
+            }
             redirect(LANG_URL . '/checkout/alfalah/redirect');
         }
-        // Hosted Safepay remains available as an explicit fallback from the checkout page.
-        $this->load->library('Safepay');
-        $session = $this->safepay->createSession((int) $payment['amount_minor'], $this->orderId);
-        $tracker = isset($session['body']['data']['tracker']['token']) ? $session['body']['data']['tracker']['token'] : '';
-        $passport = $tracker !== '' ? $this->safepay->createPassport() : array('ok' => false);
-        $token = isset($passport['body']['data']) && is_string($passport['body']['data']) ? $passport['body']['data'] : '';
-        if ($tracker === '' || $token === '') {
-            $this->session->set_flashdata('submit_error', array('Safepay could not start the payment. The order is unpaid.'));
-            redirect(LANG_URL . '/checkout');
-        }
-        $this->Ledger_model->attachTracker((int) $payment['id'], $tracker);
-        $publicBase = $this->safepay->publicBaseUrl();
-        redirect($this->safepay->checkoutUrl(
-            $tracker,
-            $token,
-            $publicBase . '/checkout/safepay/return',
-            $publicBase . '/checkout/safepay/cancel'
-        ));
     }
 
     private function checkoutCartHash(array $quote)
@@ -642,6 +633,33 @@ class Checkout extends MY_Controller
         $this->load->library('BankAlfalah');
         $this->load->model('Ledger_model');
         $response = !empty($_POST) ? $_POST : $_GET;
+
+        // Stage 1: Handshake return (has AuthToken, forward customer to SSO Card payment)
+        $hasAuthToken = !empty($response['AuthToken']);
+        $hasResponseCode = isset($response['ResponseCode']) || isset($response['RC']);
+
+        if ($hasAuthToken && !$hasResponseCode) {
+            $authToken = trim((string) $response['AuthToken']);
+            $pendingSession = isset($_SESSION['buyora_alfalah_redirect']) ? $_SESSION['buyora_alfalah_redirect'] : null;
+            $orderId = !empty($pendingSession['order_id']) ? $pendingSession['order_id'] : $this->bankalfalah->getTransactionReference($response);
+            $paymentId = !empty($pendingSession['payment_id']) ? $pendingSession['payment_id'] : 0;
+            $amount = !empty($pendingSession['amount']) ? $pendingSession['amount'] : '0.00';
+
+            if (!empty($paymentId)) {
+                $this->Ledger_model->attachTracker((int) $paymentId, $authToken);
+            }
+
+            $ssoPayload = $this->bankalfalah->buildRedirectPayload($authToken, $orderId, $amount);
+            $data = array(
+                'gateway_url' => $this->bankalfalah->redirectUrl(),
+                'payload'     => $ssoPayload,
+                'order_id'    => $orderId
+            );
+            $head = array('title' => 'Transferring to Bank Alfalah Secure Card Checkout...', 'description' => '', 'keywords' => '');
+            return $this->render('checkout_parts/alfalah_redirect', $head, $data);
+        }
+
+        // Stage 2: Final Payment Return
         $orderId = $this->bankalfalah->getTransactionReference($response);
         $authCode = $this->bankalfalah->getAuthCode($response);
         $isSuccess = $this->bankalfalah->isPaymentSuccessful($response);

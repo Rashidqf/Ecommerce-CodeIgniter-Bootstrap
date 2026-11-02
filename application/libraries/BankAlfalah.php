@@ -7,11 +7,11 @@ class BankAlfalah
 
     // Bank Alfalah Alfa Payment Gateway (APG) Endpoints
     const SANDBOX_HANDSHAKE_URL = 'https://sandbox.bankalfalah.com/HS/HS/HS';
-    const SANDBOX_REDIRECT_URL  = 'https://sandbox.bankalfalah.com/Page/Page/Page';
+    const SANDBOX_REDIRECT_URL  = 'https://sandbox.bankalfalah.com/SSO/SSO/SSO';
     const SANDBOX_INQUIRY_URL   = 'https://sandbox.bankalfalah.com/api/v1/Order/Status';
 
     const LIVE_HANDSHAKE_URL    = 'https://payments.bankalfalah.com/HS/HS/HS';
-    const LIVE_REDIRECT_URL     = 'https://payments.bankalfalah.com/Page/Page/Page';
+    const LIVE_REDIRECT_URL     = 'https://payments.bankalfalah.com/SSO/SSO/SSO';
     const LIVE_INQUIRY_URL      = 'https://payments.bankalfalah.com/api/v1/Order/Status';
 
     public function __construct()
@@ -40,7 +40,7 @@ class BankAlfalah
         if ($stored !== null && $stored !== '') {
             return $stored === '1' || $stored === 1 || $stored === true;
         }
-        return true; // Enabled by default if configured
+        return true;
     }
 
     public function isConfigured()
@@ -175,14 +175,36 @@ class BankAlfalah
         $key1 = $this->key1();
         $key2 = $this->key2();
 
-        // Bank Alfalah AES-128-CBC encryption using Key 1 (Cipher Key) and Key 2 (IV)
         return openssl_encrypt($dataString, 'AES-128-CBC', $key1, 0, $key2);
     }
 
     /**
-     * Create Handshake Token from Bank Alfalah APG
+     * Build Direct Handshake Redirection Form (Client Browser direct submit)
+     * This avoids any server-to-server firewall/timeout issues on cloud hosting (Hostinger, AWS, etc.)
      */
-    public function createHandshakeToken($transactionRef)
+    public function buildHandshakeRedirectPayload($transactionRef)
+    {
+        $params = array(
+            'HS_ChannelId'                 => $this->channelId(),
+            'HS_IsRedirectionRequest'      => '1',
+            'HS_MerchantId'                => $this->merchantId(),
+            'HS_StoreId'                   => $this->storeId(),
+            'HS_ReturnURL'                 => $this->returnUrl(),
+            'HS_MerchantUsername'          => $this->merchantUsername(),
+            'HS_MerchantPassword'          => $this->merchantPassword(),
+            'HS_TransactionReferenceNumber'=> (string) $transactionRef,
+            'HS_MerchantHash'              => $this->merchantHash()
+        );
+
+        $params['HS_RequestHash'] = $this->generateRequestHash($params);
+        return $params;
+    }
+
+    /**
+     * Quick server-side handshake attempt with short timeout (default 3 seconds).
+     * If host is firewalled, immediately returns false so client-side redirect takes over.
+     */
+    public function createHandshakeToken($transactionRef, $timeoutSeconds = 3)
     {
         $params = array(
             'HS_ChannelId'                 => $this->channelId(),
@@ -202,7 +224,8 @@ class BankAlfalah
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_TIMEOUT, (int) $timeoutSeconds);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, (int) $timeoutSeconds);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded'
@@ -214,7 +237,7 @@ class BankAlfalah
         curl_close($ch);
 
         if ($curlError !== '') {
-            return array('ok' => false, 'error' => 'Connection to Bank Alfalah failed: ' . $curlError);
+            return array('ok' => false, 'error' => $curlError);
         }
 
         $decoded = json_decode($rawResponse, true);
@@ -231,11 +254,11 @@ class BankAlfalah
             return array('ok' => true, 'auth_token' => $parsed['AuthToken'], 'raw' => $parsed);
         }
 
-        return array('ok' => false, 'error' => 'Unexpected response from Bank Alfalah APG (' . $httpCode . ')', 'response' => $rawResponse);
+        return array('ok' => false, 'error' => 'Unexpected response (' . $httpCode . ')', 'response' => $rawResponse);
     }
 
     /**
-     * Build Hosted Checkout Redirection Form Data
+     * Build Hosted Card / SSO Redirection Form Data (POSTed to SSO/SSO/SSO)
      */
     public function buildRedirectPayload($authToken, $transactionRef, $amountFormatted, array $customer = array())
     {
@@ -244,17 +267,16 @@ class BankAlfalah
             'RequestHash'                => '',
             'ChannelId'                  => $this->channelId(),
             'Currency'                   => 'PKR',
-            'IsRedirectionRequest'       => '1',
+            'IsBIN'                      => '0',
+            'ReturnURL'                  => $this->returnUrl(),
             'MerchantId'                 => $this->merchantId(),
             'StoreId'                    => $this->storeId(),
             'MerchantUsername'           => $this->merchantUsername(),
             'MerchantPassword'           => $this->merchantPassword(),
             'MerchantHash'               => $this->merchantHash(),
-            'ReturnURL'                  => $this->returnUrl(),
+            'TransactionTypeId'          => '3', // 3 = Credit / Debit Card (Visa, Mastercard, PayPak)
             'TransactionAmount'          => number_format((float) $amountFormatted, 2, '.', ''),
-            'TransactionReferenceNumber' => (string) $transactionRef,
-            'OrderDate'                  => date('Y-m-d H:i:s'),
-            'OrderDescription'           => 'BUYORA Order ' . $transactionRef
+            'TransactionReferenceNumber' => (string) $transactionRef
         );
 
         if (!empty($customer['first_name'])) {
@@ -267,9 +289,7 @@ class BankAlfalah
             $payload['CustomerMobile'] = trim($customer['phone']);
         }
 
-        // Generate RequestHash for page redirect
         $payload['RequestHash'] = $this->generateRequestHash($payload);
-
         return $payload;
     }
 

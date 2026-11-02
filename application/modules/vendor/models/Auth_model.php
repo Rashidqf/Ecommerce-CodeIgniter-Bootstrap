@@ -10,11 +10,28 @@ class Auth_model extends CI_Model
 
     public function registerVendor($post, $status = 1)
     {
+        $this->load->model('Vendorprofile_model');
+        $this->Vendorprofile_model->ensureBankingColumns();
         $input = array(
             'email' => trim($post['u_email']),
             'password' => password_hash($post['u_password'], PASSWORD_DEFAULT),
             'status' => $status
         );
+        if (!empty($post['name'])) {
+            $input['name'] = trim($post['name']);
+        }
+        if (!empty($post['bank_name'])) {
+            $input['bank_name'] = trim($post['bank_name']);
+        }
+        if (!empty($post['account_title'])) {
+            $input['account_title'] = trim($post['account_title']);
+        }
+        if (!empty($post['iban'])) {
+            $input['iban'] = strtoupper(substr(preg_replace('/[^a-zA-Z0-9]/', '', $post['iban']), 0, 34));
+        }
+        if (!empty($post['raast_id'])) {
+            $input['raast_id'] = trim($post['raast_id']);
+        }
         if (!$this->db->insert('vendors', $input)) {
             log_message('error', print_r($this->db->error(), true));
             show_error(lang('database_error'));

@@ -389,6 +389,19 @@ class Ledger_model extends CI_Model
 
     public function vendorBalances()
     {
+        $fields = $this->db->list_fields('vendors');
+        $hasBank = in_array('bank_name', $fields, true);
+
+        if ($hasBank) {
+            return $this->db->query(
+                'SELECT vendors.id, vendors.name, vendors.email, vendors.bank_name, vendors.account_title, vendors.account_number, vendors.iban, vendors.raast_id, vendors.cnic, COALESCE(SUM(vendor_ledger.amount_minor), 0) AS balance
+                 FROM vendors
+                 LEFT JOIN vendor_ledger ON vendor_ledger.vendor_id = vendors.id
+                 GROUP BY vendors.id, vendors.name, vendors.email, vendors.bank_name, vendors.account_title, vendors.account_number, vendors.iban, vendors.raast_id, vendors.cnic
+                 ORDER BY vendors.name ASC'
+            )->result_array();
+        }
+
         return $this->db->query(
             'SELECT vendors.id, vendors.name, COALESCE(SUM(vendor_ledger.amount_minor), 0) AS balance
              FROM vendors

@@ -29,6 +29,9 @@ class VENDOR_Controller extends MX_Controller
         if (isset($_POST['saveVendorDetails'])) {
             $this->saveNewVendorDetails();
         }
+        if (isset($_POST['saveBankingDetails'])) {
+            $this->saveBankingDetails();
+        }
     }
 
     protected function loginCheck()
@@ -100,6 +103,15 @@ class VENDOR_Controller extends MX_Controller
             $this->session->set_flashdata('update_vend_err', $errors);
         }
         redirect(LANG_URL . '/vendor/me');
+    }
+
+    private function saveBankingDetails()
+    {
+        $this->load->model('Vendorprofile_model');
+        $this->Vendorprofile_model->saveVendorBankingDetails($this->vendor_id, $_POST);
+        $this->session->set_flashdata('update_vend_details', 'Payout and bank account details updated successfully.');
+        $redirectUrl = isset($_POST['return_url']) && $_POST['return_url'] !== '' ? $_POST['return_url'] : (LANG_URL . '/vendor/me');
+        redirect($redirectUrl);
     }
 
 }

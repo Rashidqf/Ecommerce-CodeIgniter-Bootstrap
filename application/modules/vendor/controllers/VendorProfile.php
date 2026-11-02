@@ -19,13 +19,15 @@ class VendorProfile extends VENDOR_Controller
 
     public function index()
     {
-
         $data = array();
         $head = array();
         $head['title'] = lang('vendor_dashboard');
         $head['description'] = lang('vendor_home_page');
         $head['keywords'] = '';
         $data['ordersByMonth'] = $this->Vendorprofile_model->getOrdersByMonth($this->vendor_id);
+        $data['banking'] = $this->Vendorprofile_model->getVendorBankingDetails($this->vendor_id);
+        $this->load->model('Ledger_model');
+        $data['summary'] = $this->Ledger_model->vendorSummary($this->vendor_id);
         $this->load->view('_parts/header', $head);
         $this->load->view('home', $data);
         $this->load->view('_parts/footer');
