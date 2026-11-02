@@ -65,24 +65,31 @@ class Vendorprofile_model extends CI_Model
 
     public function ensureBankingColumns()
     {
-        $fields = $this->db->list_fields('vendors');
-        if (!in_array('bank_name', $fields, true)) {
-            $this->db->query("ALTER TABLE `vendors` ADD COLUMN `bank_name` VARCHAR(100) NULL");
-        }
-        if (!in_array('account_title', $fields, true)) {
-            $this->db->query("ALTER TABLE `vendors` ADD COLUMN `account_title` VARCHAR(150) NULL");
-        }
-        if (!in_array('account_number', $fields, true)) {
-            $this->db->query("ALTER TABLE `vendors` ADD COLUMN `account_number` VARCHAR(50) NULL");
-        }
-        if (!in_array('iban', $fields, true)) {
-            $this->db->query("ALTER TABLE `vendors` ADD COLUMN `iban` VARCHAR(34) NULL");
-        }
-        if (!in_array('raast_id', $fields, true)) {
-            $this->db->query("ALTER TABLE `vendors` ADD COLUMN `raast_id` VARCHAR(50) NULL");
-        }
-        if (!in_array('cnic', $fields, true)) {
-            $this->db->query("ALTER TABLE `vendors` ADD COLUMN `cnic` VARCHAR(20) NULL");
+        try {
+            $fields = $this->db->list_fields('vendors');
+            if (empty($fields) || !is_array($fields)) {
+                return;
+            }
+            if (!in_array('bank_name', $fields, true)) {
+                @$this->db->query("ALTER TABLE `vendors` ADD COLUMN `bank_name` VARCHAR(100) NULL");
+            }
+            if (!in_array('account_title', $fields, true)) {
+                @$this->db->query("ALTER TABLE `vendors` ADD COLUMN `account_title` VARCHAR(150) NULL");
+            }
+            if (!in_array('account_number', $fields, true)) {
+                @$this->db->query("ALTER TABLE `vendors` ADD COLUMN `account_number` VARCHAR(50) NULL");
+            }
+            if (!in_array('iban', $fields, true)) {
+                @$this->db->query("ALTER TABLE `vendors` ADD COLUMN `iban` VARCHAR(34) NULL");
+            }
+            if (!in_array('raast_id', $fields, true)) {
+                @$this->db->query("ALTER TABLE `vendors` ADD COLUMN `raast_id` VARCHAR(50) NULL");
+            }
+            if (!in_array('cnic', $fields, true)) {
+                @$this->db->query("ALTER TABLE `vendors` ADD COLUMN `cnic` VARCHAR(20) NULL");
+            }
+        } catch (\Throwable $e) {
+            log_message('error', 'ensureBankingColumns error: ' . $e->getMessage());
         }
     }
 

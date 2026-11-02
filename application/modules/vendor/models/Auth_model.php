@@ -12,7 +12,7 @@ class Auth_model extends CI_Model
     public function registerVendor($post, $status = 1)
     {
         $this->load->model('Vendorprofile_model');
-        $this->Vendorprofile_model->ensureBankingColumns();
+        @$this->Vendorprofile_model->ensureBankingColumns();
 
         $name = !empty($post['name']) ? trim($post['name']) : explode('@', trim($post['u_email']))[0];
         $slug = preg_replace('/[^a-z0-9\-]/', '', strtolower(str_replace(' ', '-', $name)));
@@ -33,21 +33,28 @@ class Auth_model extends CI_Model
             'password' => password_hash($post['u_password'], PASSWORD_DEFAULT),
             'status'   => $status
         );
-        if (!empty($post['bank_name'])) {
+
+        $fields = $this->db->list_fields('vendors');
+        if (in_array('bank_name', $fields, true) && !empty($post['bank_name'])) {
             $input['bank_name'] = trim($post['bank_name']);
         }
-        if (!empty($post['account_title'])) {
+        if (in_array('account_title', $fields, true) && !empty($post['account_title'])) {
             $input['account_title'] = trim($post['account_title']);
         }
-        if (!empty($post['iban'])) {
+        if (in_array('iban', $fields, true) && !empty($post['iban'])) {
             $input['iban'] = strtoupper(substr(preg_replace('/[^a-zA-Z0-9]/', '', $post['iban']), 0, 34));
         }
-        if (!empty($post['raast_id'])) {
+        if (in_array('raast_id', $fields, true) && !empty($post['raast_id'])) {
             $input['raast_id'] = trim($post['raast_id']);
         }
+        if (in_array('cnic', $fields, true) && !empty($post['cnic'])) {
+            $input['cnic'] = trim($post['cnic']);
+        }
+
         if (!$this->db->insert('vendors', $input)) {
-            log_message('error', print_r($this->db->error(), true));
-            show_error(lang('database_error'));
+            $err = $this->db->error();
+            log_message('error', print_r($err, true));
+            show_error('Database Insert Error: ' . json_encode($err) . ' Data: ' . json_encode($input));
         }
     }
 
