@@ -36,15 +36,7 @@ class Checkout extends MY_Controller
             if ($normalizedType !== 'bankalfalah' && $normalizedType !== 'card' && $normalizedType !== 'bank') {
                 $errors[] = 'Choose an available payment method: Bank Alfalah or bank transfer.';
             }
-            $isAjax = $this->input->is_ajax_request() || !empty($_POST['is_ajax']);
             if (!empty($errors)) {
-                if ($isAjax) {
-                    while (ob_get_level() > 0) ob_end_clean();
-                    return $this->output->set_content_type('application/json')->set_output(json_encode(array(
-                        'ok' => false,
-                        'errors' => $errors
-                    )));
-                }
                 $this->session->set_flashdata('submit_error', $errors);
             } else {
                 $_POST['payment_type'] = $paymentType;
@@ -52,20 +44,9 @@ class Checkout extends MY_Controller
                 $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
                 $_POST['user_id'] = isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 0;
                 $_POST['discountCode'] = $quote['discount_code'];
-                if (empty($_POST['id']) && !empty($_SESSION['shopping_cart'])) {
-                    $_POST['id'] = array_keys($_SESSION['shopping_cart']);
-                    $_POST['quantity'] = array_values($_SESSION['shopping_cart']);
-                }
                 $saved = $this->Public_model->setOrder($_POST);
                 if ($saved == false) {
                     log_message('error', 'Cant save order!!');
-                    if ($isAjax) {
-                        while (ob_get_level() > 0) ob_end_clean();
-                        return $this->output->set_content_type('application/json')->set_output(json_encode(array(
-                            'ok' => false,
-                            'errors' => array('Could not save order. Please try again.')
-                        )));
-                    }
                     $this->session->set_flashdata('order_error', true);
                     redirect(LANG_URL . '/checkout/order-error');
                 }
@@ -86,40 +67,6 @@ class Checkout extends MY_Controller
                     $quote['payable_minor'],
                     $provider . ':' . $saved['id']
                 );
-
-                if ($isAjax) {
-                    if ($paymentType === 'Bank') {
-                        $this->shoppingcart->clearShoppingCart();
-                        $this->session->set_flashdata('success_order', true);
-                        $_SESSION['order_id'] = $this->orderId;
-                        $_SESSION['final_amount'] = Order_quote::formatMinor($quote['payable_minor']) . ' Rs.';
-                        while (ob_get_level() > 0) ob_end_clean();
-                        return $this->output->set_content_type('application/json')->set_output(json_encode(array(
-                            'ok' => true,
-                            'redirect_url' => base_url('checkout/successbank')
-                        )));
-                    }
-
-                    $amountFormatted = Order_quote::formatMinor($quote['payable_minor']);
-                    $redirectData = $this->bankalfalah->buildHandshakeRedirectPayload($this->orderId);
-                    $_SESSION['buyora_alfalah_redirect'] = array(
-                        'gateway_url' => $this->bankalfalah->handshakeUrl(),
-                        'payload'     => $redirectData,
-                        'order_id'    => $this->orderId,
-                        'payment_id'  => (int) $payment['id'],
-                        'amount'      => $amountFormatted
-                    );
-                    while (ob_get_level() > 0) ob_end_clean();
-                    return $this->output->set_content_type('application/json')->set_output(json_encode(array(
-                        'ok'          => true,
-                        'order_id'    => $this->orderId,
-                        'payment_id'  => (int) $payment['id'],
-                        'gateway_url' => $this->bankalfalah->handshakeUrl(),
-                        'payload'     => $redirectData,
-                        'amount'      => $amountFormatted
-                    )));
-                }
-
                 $this->goToDestination($payment, $quote);
             }
         }
@@ -216,10 +163,6 @@ class Checkout extends MY_Controller
             $_POST['clean_referrer'] = cleanReferral($_POST['referrer']);
             $_POST['user_id'] = isset($_SESSION['logged_user']) ? $_SESSION['logged_user'] : 0;
             $_POST['discountCode'] = $quote['discount_code'];
-                if (empty($_POST['id']) && !empty($_SESSION['shopping_cart'])) {
-                    $_POST['id'] = array_keys($_SESSION['shopping_cart']);
-                    $_POST['quantity'] = array_values($_SESSION['shopping_cart']);
-                }
             $saved = $this->Public_model->setOrder($_POST);
             if ($saved == false) {
                 return $this->jsonCheckoutError('Could not create the order. Try again.', 500);
@@ -306,7 +249,7 @@ class Checkout extends MY_Controller
         return $this->jsonCheckoutOk($payload);
     }
 
-    private function embeddedPayload($tracker, $token, $amountMinor, $orderId)
+    private function embeddedPayload($tra   zcker, $token, $amountMinor, $orderId)
     {
         $this->load->library('Safepay');
         $this->load->library('Order_quote');

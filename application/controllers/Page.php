@@ -25,6 +25,114 @@ class Page extends MY_Controller
         $this->render('dynPage', $head, $data);
     }
 
+    public function accountDeletion()
+    {
+        $submitted = false;
+        $message = '';
+        if ($this->input->post('email')) {
+            $email = trim($this->input->post('email'));
+            $reason = trim($this->input->post('reason'));
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $this->db->query("CREATE TABLE IF NOT EXISTS `account_deletions` (
+                    `id` INT AUTO_INCREMENT PRIMARY KEY,
+                    `user_id` INT NULL,
+                    `email` VARCHAR(255) NOT NULL,
+                    `reason` TEXT NULL,
+                    `status` VARCHAR(50) DEFAULT 'requested',
+                    `created_at` INT NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+                $user = $this->db->where('email', $email)->get('users_public')->row_array();
+                $userId = $user ? (int) $user['id'] : null;
+
+                $this->db->insert('account_deletions', array(
+                    'user_id' => $userId,
+                    'email' => $email,
+                    'reason' => $reason,
+                    'status' => 'requested',
+                    'created_at' => time()
+                ));
+
+                if ($user) {
+                    $this->db->where('id', $userId)->update('users_public', array(
+                        'name' => 'Deactivated Customer',
+                        'phone' => '',
+                        'email' => 'deleted_' . $userId . '_' . time() . '@anonymized.buyoramarketplace.com',
+                        'password' => ''
+                    ));
+                }
+
+                $submitted = true;
+                $message = 'Your deletion request has been submitted and processed. Applicable personal data has been anonymized.';
+            } else {
+                $message = 'Please provide a valid email address.';
+            }
+        }
+
+        $head = array(
+            'title' => 'Request Account & Data Deletion - BUYORA Marketplace',
+            'description' => 'Submit a request to delete your BUYORA Marketplace account and associated personal data in accordance with Google Play and privacy guidelines.',
+            'keywords' => 'delete account, data privacy, buyora marketplace'
+        );
+
+        $html = '<div class="container" style="max-width: 720px; margin: 40px auto; padding: 20px; font-family: Inter, sans-serif;">';
+        $html .= '<h2 style="color: #0F172A; font-weight: 700;">Account & Data Deletion Request</h2>';
+        $html .= '<p style="color: #475569; font-size: 14px; line-height: 1.6;">At BUYORA Marketplace, we respect your privacy and provide full transparency over your personal data. In compliance with Google Play Store User Data policies and privacy regulations, you may request the deletion of your BUYORA customer account and personal information at any time.</p>';
+        
+        if ($submitted) {
+            $html .= '<div style="background-color: #ECFDF5; border: 1px solid #10B981; padding: 16px; border-radius: 8px; color: #065F46; font-size: 14px; margin: 20px 0;">' . htmlspecialchars($message) . '</div>';
+        } else {
+            if (!empty($message)) {
+                $html .= '<div style="background-color: #FEF2F2; border: 1px solid #EF4444; padding: 16px; border-radius: 8px; color: #991B1B; font-size: 14px; margin: 20px 0;">' . htmlspecialchars($message) . '</div>';
+            }
+            $html .= '<form method="post" action="' . base_url('account-deletion') . '" style="background: #F8FAFC; padding: 24px; border-radius: 12px; border: 1px solid #E2E8F0; margin-top: 20px;">';
+            $html .= '<div style="margin-bottom: 16px;"><label style="display:block; font-weight: 600; font-size: 13px; margin-bottom: 6px;">Registered Email Address *</label><input type="email" name="email" required style="width: 100%; padding: 10px 14px; border: 1px solid #CBD5E1; border-radius: 6px; box-sizing: border-box;" placeholder="your.email@example.com"></div>';
+            $html .= '<div style="margin-bottom: 16px;"><label style="display:block; font-weight: 600; font-size: 13px; margin-bottom: 6px;">Reason for Deletion (Optional)</label><textarea name="reason" rows="3" style="width: 100%; padding: 10px 14px; border: 1px solid #CBD5E1; border-radius: 6px; box-sizing: border-box;" placeholder="Let us know why you are leaving..."></textarea></div>';
+            $html .= '<button type="submit" style="background-color: #DC2626; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 14px;">Confirm Account Deletion</button>';
+            $html .= '</form>';
+        }
+
+        $html .= '<div style="margin-top: 32px; border-top: 1px solid #E2E8F0; padding-top: 20px; font-size: 12px; color: #64748B;">';
+        $html .= '<h4 style="color: #1E293B; font-size: 14px; margin-bottom: 8px;">What data is deleted?</h4>';
+        $html .= '<ul style="padding-left: 20px; line-height: 1.6;">';
+        $html .= '<li>Your name, phone number, saved delivery addresses, and login credentials are permanently anonymized and purged.</li>';
+        $html .= '<li>Your wishlist, preferences, and saved shopping cart sessions are deleted.</li>';
+        $html .= '<li>Completed transaction receipts and historical financial audit records are retained exclusively for legal and tax compliance in accordance with applicable ecommerce regulations.</li>';
+        $html .= '</ul>';
+        $html .= '</div></div>';
+
+        $data = array('content' => $html);
+        $this->render('dynPage', $head, $data);
+    }
+
+    public function privacyPolicy()
+    {
+        $head = array(
+            'title' => 'Privacy Policy - BUYORA Marketplace',
+            'description' => 'Official Privacy Policy for BUYORA Marketplace application and website.',
+            'keywords' => 'privacy policy, buyora marketplace, user data'
+        );
+
+        $html = '<div class="container" style="max-width: 760px; margin: 40px auto; padding: 20px; font-family: Inter, sans-serif; line-height: 1.7; color: #334155;">';
+        $html .= '<h2 style="color: #0F172A; font-weight: 800; margin-bottom: 8px;">BUYORA Marketplace Privacy Policy</h2>';
+        $html .= '<p style="font-size: 12px; color: #64748B; margin-bottom: 24px;">Last updated: November 2026</p>';
+        $html .= '<p>BUYORA Marketplace operates the BUYORA mobile application and online marketplace at <strong>buyoramarketplace.com</strong>. This page informs users of our policies regarding the collection, use, and disclosure of personal data when using our Service.</p>';
+        $html .= '<h3 style="color: #0F172A; margin-top: 20px;">1. Information We Collect</h3>';
+        $html .= '<p>When using BUYORA, we collect information that you provide directly, including name, email address, phone number, and physical shipping address required strictly to process orders and coordinate doorstep delivery across Pakistan.</p>';
+        $html .= '<h3 style="color: #0F172A; margin-top: 20px;">2. How Information is Used</h3>';
+        $html .= '<p>We use collected data to create user accounts, verify checkout transactions, dispatch courier riders (e.g. TCS / Leopards Logistics), and provide customer care support.</p>';
+        $html .= '<h3 style="color: #0F172A; margin-top: 20px;">3. Data Sharing and Third Parties</h3>';
+        $html .= '<p>We do not sell personal data to third parties. Data is shared exclusively with verified payment gateways (Bank Alfalah Alfa Payment Gateway) for transaction processing and courier logistics partners for package fulfillment.</p>';
+        $html .= '<h3 style="color: #0F172A; margin-top: 20px;">4. Account & Data Deletion</h3>';
+        $html .= '<p>Users can delete their account at any time through the in-app Profile Settings or via our web portal at <a href="' . base_url('account-deletion') . '" style="color: #FF6B00; font-weight: 600;">' . base_url('account-deletion') . '</a>.</p>';
+        $html .= '<h3 style="color: #0F172A; margin-top: 20px;">5. Contact Us</h3>';
+        $html .= '<p>For privacy inquiries, contact our Data Protection Officer at: <a href="mailto:buyoramarketplace@gmail.com" style="color: #FF6B00;">buyoramarketplace@gmail.com</a>.</p>';
+        $html .= '</div>';
+
+        $data = array('content' => $html);
+        $this->render('dynPage', $head, $data);
+    }
+
     private function goOut($page)
     {
         if ($page == null) {

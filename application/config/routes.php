@@ -288,7 +288,13 @@ $route['api/order/track/(:num)'] = 'Api/Customer/orderTrack/$1';
 $route['api/order/track'] = 'Api/Customer/orderTrack';
 $route['api/customer/register'] = 'Api/Customer/register';
 $route['api/customer/login'] = 'Api/Customer/login';
+$route['api/customer/forgot-password'] = 'Api/Customer/forgotPassword';
+$route['api/customer/reset-password'] = 'Api/Customer/resetPassword';
+$route['api/customer/delete-account'] = 'Api/Customer/deleteAccount';
 $route['api/customer/orders/(:num)'] = 'Api/Customer/orders/$1';
+
+$route['account-deletion'] = 'Page/accountDeletion';
+$route['privacy-policy'] = 'Page/privacyPolicy';
 
 $route['404_override'] = 'home/handle404';
 $route['translate_uri_dashes'] = FALSE;

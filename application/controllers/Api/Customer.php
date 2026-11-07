@@ -844,6 +844,220 @@ class Customer extends REST_Controller
     }
 
     /**
+     * 12. POST /api/customer/forgot-password
+     * Request 6-digit verification code to reset password.
+     * Request body: { "email": "user@example.com" }
+     */
+    public function forgotPassword_post()
+    {
+        $payload = $this->getPayload();
+        $email = isset($payload['email']) ? trim((string) $payload['email']) : '';
+
+        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->response(array('status' => false, 'message' => 'Please provide a valid email address.'), REST_Controller::HTTP_BAD_REQUEST);
+            return;
+        }
+
+        $user = $this->db->where('email', $email)->get('users_public')->row_array();
+        if (!$user) {
+            $this->response(array('status' => false, 'message' => 'No account found with this email address.'), REST_Controller::HTTP_NOT_FOUND);
+            return;
+        }
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `password_resets` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `email` VARCHAR(255) NOT NULL,
+            `code` VARCHAR(10) NOT NULL,
+            `created_at` INT NOT NULL,
+            INDEX (`email`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+        $code = (string) mt_rand(100000, 999999);
+
+        // Delete any existing codes for this email
+        $this->db->where('email', $email)->delete('password_resets');
+
+        // Store new code with timestamp
+        $this->db->insert('password_resets', array(
+            'email' => $email,
+            'code' => $code,
+            'created_at' => time()
+        ));
+
+        $customerName = !empty($user['name']) ? $user['name'] : 'Customer';
+        $subject = 'BUYORA Marketplace - Password Reset Code: ' . $code;
+        $html = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #E2E8F0; border-radius: 8px;">';
+        $html .= '<h2 style="color: #0F172A; margin-top: 0;">BUYORA Marketplace</h2>';
+        $html .= '<p>Hello ' . htmlspecialchars($customerName) . ',</p>';
+        $html .= '<p>We received a request to reset your BUYORA account password. Use the verification code below to complete the reset process:</p>';
+        $html .= '<div style="background: #F1F5F9; padding: 18px; text-align: center; border-radius: 6px; margin: 24px 0;">';
+        $html .= '<span style="font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #FF6B00;">' . $code . '</span>';
+        $html .= '</div>';
+        $html .= '<p style="font-size: 13px; color: #64748B;">This code will expire in 15 minutes. If you did not request a password reset, please ignore this email or contact support.</p>';
+        $html .= '<p style="margin-top: 30px; font-size: 12px; color: #94A3B8; border-top: 1px solid #E2E8F0; padding-top: 12px;">BUYORA Marketplace • Shop More. Live Better.</p>';
+        $html .= '</div>';
+
+        $sent = $this->sendSmtpEmail($email, $subject, $html);
+
+        $this->response(array(
+            'status' => true,
+            'message' => 'Password reset verification code has been sent to ' . $email . '.',
+            'email_sent' => $sent
+        ), REST_Controller::HTTP_OK);
+    }
+
+    /**
+     * 13. POST /api/customer/reset-password
+     * Verify 6-digit code and set new password.
+     * Request body: { "email": "...", "code": "123456", "new_password": "..." }
+     */
+    public function resetPassword_post()
+    {
+        $payload = $this->getPayload();
+        $email = isset($payload['email']) ? trim((string) $payload['email']) : '';
+        $code = isset($payload['code']) ? trim((string) $payload['code']) : '';
+        $newPassword = isset($payload['new_password']) ? trim((string) $payload['new_password']) : '';
+
+        if ($email === '' || $code === '' || $newPassword === '') {
+            $this->response(array('status' => false, 'message' => 'Email, verification code, and new password are required.'), REST_Controller::HTTP_BAD_REQUEST);
+            return;
+        }
+
+        if (strlen($newPassword) < 6) {
+            $this->response(array('status' => false, 'message' => 'New password must be at least 6 characters long.'), REST_Controller::HTTP_BAD_REQUEST);
+            return;
+        }
+
+        $reset = $this->db->where('email', $email)
+            ->where('code', $code)
+            ->order_by('id', 'DESC')
+            ->get('password_resets')
+            ->row_array();
+
+        if (!$reset) {
+            $this->response(array('status' => false, 'message' => 'Invalid verification code.'), REST_Controller::HTTP_BAD_REQUEST);
+            return;
+        }
+
+        // Check expiration (15 minutes = 900 seconds)
+        if ((time() - (int) $reset['created_at']) > 900) {
+            $this->response(array('status' => false, 'message' => 'Verification code has expired. Please request a new code.'), REST_Controller::HTTP_BAD_REQUEST);
+            return;
+        }
+
+        // Update user password in users_public
+        $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+        $this->db->where('email', $email)->update('users_public', array('password' => $hashed));
+
+        // Delete used reset code
+        $this->db->where('email', $email)->delete('password_resets');
+
+        $this->response(array(
+            'status' => true,
+            'message' => 'Password has been updated successfully! You can now sign in with your new password.'
+        ), REST_Controller::HTTP_OK);
+    }
+
+    /**
+     * 14. POST /api/customer/delete-account
+     * In-app Google Play compliant account deletion.
+     * Request body: { "user_id": 123, "password": "...", "reason": "..." }
+     */
+    public function deleteAccount_post()
+    {
+        $payload = $this->getPayload();
+        $userId = isset($payload['user_id']) ? (int) $payload['user_id'] : 0;
+        $password = isset($payload['password']) ? trim((string) $payload['password']) : '';
+        $reason = isset($payload['reason']) ? trim((string) $payload['reason']) : '';
+
+        if ($userId <= 0) {
+            $this->response(array('status' => false, 'message' => 'User ID is required.'), REST_Controller::HTTP_BAD_REQUEST);
+            return;
+        }
+
+        $user = $this->db->where('id', $userId)->get('users_public')->row_array();
+        if (!$user) {
+            $this->response(array('status' => false, 'message' => 'User not found.'), REST_Controller::HTTP_NOT_FOUND);
+            return;
+        }
+
+        // Verify password
+        if (!password_verify($password, $user['password'])) {
+            $this->response(array('status' => false, 'message' => 'Incorrect password. Account deletion cancelled.'), REST_Controller::HTTP_UNAUTHORIZED);
+            return;
+        }
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `account_deletions` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `user_id` INT NULL,
+            `email` VARCHAR(255) NOT NULL,
+            `reason` TEXT NULL,
+            `status` VARCHAR(50) DEFAULT 'requested',
+            `created_at` INT NOT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+        // Record deletion log
+        $this->db->insert('account_deletions', array(
+            'user_id' => $userId,
+            'email' => $user['email'],
+            'reason' => $reason,
+            'status' => 'completed',
+            'created_at' => time()
+        ));
+
+        // Anonymize user personal data in users_public
+        $anonymizedEmail = 'deleted_' . $userId . '_' . time() . '@anonymized.buyoramarketplace.com';
+        $this->db->where('id', $userId)->update('users_public', array(
+            'name' => 'Deactivated Customer',
+            'phone' => '',
+            'email' => $anonymizedEmail,
+            'password' => ''
+        ));
+
+        $this->response(array(
+            'status' => true,
+            'message' => 'Your BUYORA account and personal details have been permanently deleted.'
+        ), REST_Controller::HTTP_OK);
+    }
+
+    /**
+     * Send email using Gmail SMTP credentials
+     */
+    private function sendSmtpEmail($to, $subject, $htmlMessage)
+    {
+        $this->load->library('email');
+
+        $smtpHost = getenv('MAIL_HOST') ?: 'smtp.gmail.com';
+        if (strpos($smtpHost, 'ssl://') === false && (getenv('MAIL_ENCRYPTION') === 'ssl' || getenv('MAIL_PORT') == '465')) {
+            $smtpHost = 'ssl://' . $smtpHost;
+        }
+
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => $smtpHost,
+            'smtp_port' => (int) (getenv('MAIL_PORT') ?: 465),
+            'smtp_user' => getenv('MAIL_USERNAME') ?: 'rashidkg01@gmail.com',
+            'smtp_pass' => getenv('MAIL_PASSWORD') ?: 'xzmjwtenzasmkgzv',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n",
+            'crlf' => "\r\n",
+            'wordwrap' => TRUE
+        );
+
+        $this->email->initialize($config);
+        $fromEmail = getenv('MAIL_FROM_ADDRESS') ?: 'rashidkg01@gmail.com';
+        $fromName = getenv('MAIL_FROM_NAME') ?: 'BUYORA Marketplace';
+
+        $this->email->from($fromEmail, $fromName);
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($htmlMessage);
+
+        return @$this->email->send();
+    }
+
+    /**
      * Helper to format a product for Flutter listing
      */
     private function formatProductSummary(array $p)
