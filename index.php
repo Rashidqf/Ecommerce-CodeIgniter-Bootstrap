@@ -89,7 +89,7 @@ if (is_file($buyoraEnvFile)) {
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', getenv('CI_ENV') ?: (getenv('ENVIRONMENT') ?: 'production'));
 
 /*
  *---------------------------------------------------------------

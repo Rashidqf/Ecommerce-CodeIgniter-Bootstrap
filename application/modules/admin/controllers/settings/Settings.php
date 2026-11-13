@@ -245,6 +245,23 @@ class Settings extends ADMIN_Controller
             $this->saveHistory('Updated Bank Alfalah APG Gateway settings');
             redirect('admin/settings');
         }
+        if (isset($_POST['save_app_version'])) {
+            $latestVersion = isset($_POST['app_latest_version']) && trim($_POST['app_latest_version']) !== '' ? trim($_POST['app_latest_version']) : '1.0.0';
+            $minVersion = isset($_POST['app_min_supported_version']) && trim($_POST['app_min_supported_version']) !== '' ? trim($_POST['app_min_supported_version']) : '1.0.0';
+            $forceUpdate = isset($_POST['app_force_update']) && $_POST['app_force_update'] == '1' ? '1' : '0';
+            $updateMessage = isset($_POST['app_update_message']) ? trim($_POST['app_update_message']) : '';
+            $playStoreUrl = isset($_POST['app_play_store_url']) ? trim($_POST['app_play_store_url']) : '';
+
+            $this->Home_admin_model->setValueStore('app_latest_version', $latestVersion);
+            $this->Home_admin_model->setValueStore('app_min_supported_version', $minVersion);
+            $this->Home_admin_model->setValueStore('app_force_update', $forceUpdate);
+            $this->Home_admin_model->setValueStore('app_update_message', $updateMessage);
+            $this->Home_admin_model->setValueStore('app_play_store_url', $playStoreUrl);
+
+            $this->session->set_flashdata('app_version_msg', 'Mobile App Version Control settings updated successfully!');
+            $this->saveHistory('Updated Mobile App Version Control settings (Latest: ' . $latestVersion . ', Min: ' . $minVersion . ', Force: ' . $forceUpdate . ')');
+            redirect('admin/settings');
+        }
     }
 
     private function setCookieLaw($post)

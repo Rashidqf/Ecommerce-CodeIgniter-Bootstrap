@@ -1,4 +1,4 @@
-<link href="<?= base_url('assets/css/bootstrap-toggle.min.css') ?>" rel="stylesheet">
+ï»¿<link href="<?= base_url('assets/css/bootstrap-toggle.min.css') ?>" rel="stylesheet">
 <script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>
 <h1><img src="<?= base_url('assets/imgs/settings-page.png') ?>" class="header-img" style="margin-top:-3px;">Settings</h1>
 <hr>
@@ -525,7 +525,7 @@
     <div class="col-sm-12">
         <div class="panel panel-primary">
             <div class="panel-heading" style="background:#04265A; color:#fff;">
-                <i class="fa fa-university" aria-hidden="true"></i> Bank Alfalah — Alfa Payment Gateway (APG) Settings
+                <i class="fa fa-university" aria-hidden="true"></i> Bank Alfalah ï¿½ Alfa Payment Gateway (APG) Settings
             </div>
             <div class="panel-body">
                 <?php if ($this->session->flashdata('bankalfalah_msg')) { ?>
@@ -618,6 +618,105 @@
 
                     <button class="btn btn-primary" type="submit" style="background:#04265A; border-color:#04265A; padding: 8px 24px;">
                         <i class="fa fa-save"></i> Save Bank Alfalah Settings
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buyora Mobile App Remote Version Control -->
+    <div class="col-sm-12">
+        <div class="panel panel-primary col-h" style="border-color: #C8460A; margin-top: 25px;">
+            <div class="panel-heading" style="background-color: #C8460A; border-color: #C8460A; color: white;">
+                <h3 class="panel-title" style="font-weight: 700; font-size: 16px;">
+                    <i class="fa fa-android"></i> &nbsp;Buyora Mobile App Remote Version Control
+                </h3>
+            </div>
+            <div class="panel-body">
+                <?php if ($this->session->flashdata('app_version_msg')) { ?>
+                    <div class="alert alert-success">
+                        <i class="fa fa-check-circle"></i> <?= $this->session->flashdata('app_version_msg') ?>
+                    </div>
+                <?php } ?>
+
+                <p class="text-muted" style="margin-bottom: 20px;">
+                    Configure and control Android &amp; iOS mobile application updates remotely in real-time. Changes take effect instantly on all mobile devices without requiring another store release.
+                </p>
+
+                <form method="POST" action="">
+                    <input type="hidden" name="save_app_version" value="1">
+                    
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label style="font-weight:600;"><i class="fa fa-tag"></i> Latest / Current App Version *</label>
+                                <input type="text" class="form-control" name="app_latest_version" 
+                                    value="<?= isset($app_latest_version) && $app_latest_version !== '' ? htmlspecialchars($app_latest_version, ENT_QUOTES, 'UTF-8') : '1.0.0' ?>" 
+                                    placeholder="e.g. 1.0.0" required>
+                                <span class="help-block" style="font-size:11px;">The latest version published on Google Play.</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label style="font-weight:600;"><i class="fa fa-shield"></i> Minimum Supported Version *</label>
+                                <input type="text" class="form-control" name="app_min_supported_version" 
+                                    value="<?= isset($app_min_supported_version) && $app_min_supported_version !== '' ? htmlspecialchars($app_min_supported_version, ENT_QUOTES, 'UTF-8') : '1.0.0' ?>" 
+                                    placeholder="e.g. 1.0.0" required>
+                                <span class="help-block" style="font-size:11px;">Users on versions below this are completely blocked by a mandatory update screen.</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label style="font-weight:600;"><i class="fa fa-exclamation-triangle"></i> Force Update (Immediate Lockout)</label>
+                                <div>
+                                    <input type="checkbox" name="app_force_update" value="1" 
+                                        data-toggle="toggle" data-on="FORCE (True)" data-off="OPTIONAL (False)" 
+                                        data-onstyle="danger" data-offstyle="default"
+                                        <?= (isset($app_force_update) && $app_force_update == '1') ? 'checked' : '' ?>>
+                                </div>
+                                <span class="help-block" style="font-size:11px;">If ON, all users on versions older than Latest Version are forced to update.</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <label style="font-weight:600;"><i class="fa fa-external-link"></i> Google Play Store URL *</label>
+                                <input type="url" class="form-control" name="app_play_store_url" 
+                                    value="<?= isset($app_play_store_url) && $app_play_store_url !== '' ? htmlspecialchars($app_play_store_url, ENT_QUOTES, 'UTF-8') : 'https://play.google.com/store/apps/details?id=com.buyora.marketplace.buyora' ?>" 
+                                    placeholder="https://play.google.com/store/apps/details?id=..." required>
+                                <span class="help-block" style="font-size:11px;">Target destination when user taps "Update Now".</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="font-weight:600;"><i class="fa fa-commenting-o"></i> Custom Update Message (Prompted in Mobile App) *</label>
+                                <textarea class="form-control" rows="3" name="app_update_message" required placeholder="Describe what is new or why users must update..."><?= isset($app_update_message) && $app_update_message !== '' ? htmlspecialchars($app_update_message, ENT_QUOTES, 'UTF-8') : 'A new version of Buyora is available with performance improvements, bug fixes, and enhanced shopping features. Please update now to continue.' ?></textarea>
+                                <span class="help-block" style="font-size:11px;">This text is shown on the blocking update screen and the optional update dialog.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-info" style="margin-bottom: 15px; background: #fff7ed; border-color: #ffedd5; color: #9a3412;">
+                                <strong><i class="fa fa-lightbulb-o"></i> How Remote Version Control Behaves in Buyora Mobile App:</strong>
+                                <ul style="margin-top: 6px; margin-bottom: 0; padding-left: 20px;">
+                                    <li><strong>Installed Version &lt; Minimum Supported Version:</strong> Blocks the entire app with a non-dismissible mandatory update screen. Back navigation is completely disabled.</li>
+                                    <li><strong>Installed Version &lt; Latest Version (and Force Update is OFF):</strong> Shows an optional update dialog with "Update Now" and "Later" buttons. Normal usage allowed if dismissed.</li>
+                                    <li><strong>Installed Version &lt; Latest Version (and Force Update is ON):</strong> Blocks the app with the mandatory update screen until updated.</li>
+                                    <li><strong>Installed Version &gt;= Latest Version:</strong> Normal app usage, no prompts.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" style="background:#C8460A; border-color:#C8460A; padding: 8px 26px; font-weight:700;">
+                        <i class="fa fa-save"></i> Save Mobile App Version Settings
                     </button>
                 </form>
             </div>

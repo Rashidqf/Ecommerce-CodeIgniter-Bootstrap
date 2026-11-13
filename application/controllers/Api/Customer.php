@@ -72,7 +72,7 @@ class Customer extends REST_Controller
     public function config_get()
     {
         $phone = $this->Home_admin_model->getValueStore('footerContactPhone') ?: '0333-6108869, 0308-8503190';
-        $email = $this->Home_admin_model->getValueStore('footerContactEmail') ?: 'biolabtraders@gmail.com';
+        $email = $this->Home_admin_model->getValueStore('footerContactEmail') ?: 'buyoramarketplace@gmail.com';
         $address = $this->Home_admin_model->getValueStore('footerContactAddr') ?: 'Office No. 5, 1st Floor, Karim Centre, 16-Edward Road, Lahore, Pakistan';
         $shippingAmount = (float) ($this->Home_admin_model->getValueStore('shippingAmount') ?: 0);
         $shippingThreshold = (float) ($this->Home_admin_model->getValueStore('shippingOrder') ?: 2000);
@@ -81,6 +81,14 @@ class Customer extends REST_Controller
         $safepayReady = $this->safepay->isConfigured();
         $this->load->library('BankAlfalah');
         $alfalahReady = $this->bankalfalah->isEnabled() && $this->bankalfalah->isConfigured();
+
+        $latestVersion = $this->Home_admin_model->getValueStore('app_latest_version') ?: '1.0.0';
+        $minSupportedVersion = $this->Home_admin_model->getValueStore('app_min_supported_version') ?: '1.0.0';
+        $forceUpdate = ($this->Home_admin_model->getValueStore('app_force_update') == '1');
+        $updateMessage = $this->Home_admin_model->getValueStore('app_update_message') ?: 
+            'A new version of Buyora is available with performance improvements, bug fixes, and enhanced shopping features. Please update now to continue.';
+        $playStoreUrl = $this->Home_admin_model->getValueStore('app_play_store_url') ?: 
+            'https://play.google.com/store/apps/details?id=com.buyora.marketplace.buyora';
 
         $data = array(
             'app_name' => 'BUYORA Marketplace',
@@ -100,6 +108,13 @@ class Customer extends REST_Controller
                 'standard_fee' => $shippingAmount,
                 'free_shipping_threshold' => $shippingThreshold,
                 'shipping_note' => 'Free Shipping on orders above Rs. ' . number_format($shippingThreshold, 0)
+            ),
+            'app_version' => array(
+                'latest_version' => $latestVersion,
+                'min_supported_version' => $minSupportedVersion,
+                'force_update' => $forceUpdate,
+                'update_message' => $updateMessage,
+                'play_store_url' => $playStoreUrl
             ),
             'payment_methods' => array(
                 array(
@@ -1103,4 +1118,76 @@ class Customer extends REST_Controller
          }
          return 'Product #' . $productId;
      }
+
+    /**
+     * 15. GET/POST /api/version/check
+     * Remote App Version Control Check
+     */
+    public function versionCheck_get()
+    {
+        $this->processVersionCheck();
+    }
+
+    public function versionCheck_post()
+    {
+        $this->processVersionCheck();
+    }
+
+    private function processVersionCheck()
+    {
+        $payload = $this->getPayload();
+        $clientVersion = isset($payload['version']) ? trim($payload['version']) : ($this->input->get_post('version') ?: '');
+        $platform = isset($payload['platform']) ? strtolower(trim($payload['platform'])) : strtolower($this->input->get_post('platform') ?: 'android');
+
+        $latestVersion = $this->Home_admin_model->getValueStore('app_latest_version') ?: '1.0.0';
+        $minSupportedVersion = $this->Home_admin_model->getValueStore('app_min_supported_version') ?: '1.0.0';
+        $forceUpdate = ($this->Home_admin_model->getValueStore('app_force_update') == '1');
+        $updateMessage = $this->Home_admin_model->getValueStore('app_update_message') ?: 
+            'A new version of Buyora is available with performance improvements, bug fixes, and enhanced shopping features. Please update now to continue.';
+        $playStoreUrl = $this->Home_admin_model->getValueStore('app_play_store_url') ?: 
+            'https://play.google.com/store/apps/details?id=com.buyora.marketplace.buyora';
+
+        // Version evaluation
+        $isBelowMin = false;
+        $isBelowLatest = false;
+        if (!empty($clientVersion)) {
+            $normalizedClient = $this->normalizeVersion($clientVersion);
+            $normalizedMin = $this->normalizeVersion($minSupportedVersion);
+            $normalizedLatest = $this->normalizeVersion($latestVersion);
+
+            $isBelowMin = version_compare($normalizedClient, $normalizedMin, '<');
+            $isBelowLatest = version_compare($normalizedClient, $normalizedLatest, '<');
+        }
+
+        // Force update applies if version is strictly below minimum supported, OR if global forceUpdate flag is set while below latest
+        $isUpdateRequired = $isBelowMin || ($forceUpdate && $isBelowLatest);
+        $isUpdateAvailable = $isBelowLatest;
+
+        $response = array(
+            'status' => true,
+            'data' => array(
+                'client_version' => $clientVersion,
+                'platform' => $platform,
+                'latest_version' => $latestVersion,
+                'min_supported_version' => $minSupportedVersion,
+                'force_update' => $forceUpdate,
+                'update_message' => $updateMessage,
+                'play_store_url' => $playStoreUrl,
+                'is_update_available' => $isUpdateAvailable,
+                'is_update_required' => $isUpdateRequired
+            )
+        );
+
+        $this->response($response, REST_Controller::HTTP_OK);
+    }
+
+    /**
+     * Clean version string (e.g. "1.0.0+1" -> "1.0.0.1" for standard PHP version_compare)
+     */
+    private function normalizeVersion($version)
+    {
+        $clean = preg_replace('/[^0-9\.]/', '.', str_replace('+', '.', trim($version)));
+        $clean = preg_replace('/\.+/', '.', $clean);
+        return trim($clean, '.');
+    }
 }

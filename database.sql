@@ -337,7 +337,12 @@ INSERT INTO `value_store` (`id`, `thekey`, `value`) VALUES
 (33, 'moreInfoBtn', ''),
 (34, 'refreshAfterAddToCart', 0),
 (35, 'requireVendorApproval', '0'),
-(36, 'requireProductApproval', '0');
+(36, 'requireProductApproval', '0'),
+(37, 'app_latest_version', '1.0.0'),
+(38, 'app_min_supported_version', '1.0.0'),
+(39, 'app_force_update', '0'),
+(40, 'app_update_message', 'A new version of Buyora is available with performance improvements, bug fixes, and enhanced shopping features. Please update now to continue.'),
+(41, 'app_play_store_url', 'https://play.google.com/store/apps/details?id=com.buyora.marketplace.buyora');
 
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
