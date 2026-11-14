@@ -265,6 +265,8 @@ class Customer extends REST_Controller
     public function products_get()
     {
         $categoryId = $this->input->get('category_id');
+        $vendorId = $this->input->get('vendor_id');
+        $vendorName = trim((string) $this->input->get('vendor'));
         $search = trim((string) $this->input->get('search'));
         $sort = strtolower(trim((string) $this->input->get('sort')));
         $page = max(1, (int) $this->input->get('page'));
@@ -279,6 +281,14 @@ class Customer extends REST_Controller
 
         if ($categoryId !== null && $categoryId !== '' && ctype_digit((string) $categoryId)) {
             $this->db->where('products.shop_categorie', (int) $categoryId);
+        }
+
+        if ($vendorId !== null && $vendorId !== '' && ctype_digit((string) $vendorId)) {
+            $this->db->where('products.vendor_id', (int) $vendorId);
+        }
+
+        if ($vendorName !== '') {
+            $this->db->like('vendors.name', $vendorName);
         }
 
         if ($search !== '') {
